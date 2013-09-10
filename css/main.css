@@ -9,7 +9,7 @@ body h3{margin-top:20px;font-size:22px;}
 .description{border-color:#f0978b;font-style:italic;}
 .instagram{border:1px solid #999999;width:330px;display:inline-block;margin:5px;}.instagram .image img{width:100%;vertical-align:top;}
 .instagram .text{border-top:1px solid #999999;background-color:#fff;padding:5px;font-family:'Noto Serif',serif;font-size:14px;}
-#menu{margin-top:20px;margin-bottom:25px;text-align:center;font-family:'Chewy',cursive;font-size:38px;color:#888;}#menu a{text-decoration:none;}
+#menu{margin-top:20px;margin-bottom:25px;text-align:center;font-family:'Chewy',cursive;font-size:38px;color:#888;width: 100%;}#menu a{text-decoration:none;}
 .title-font{font-family:'Chewy',cursive;}
 .text-font{font-family:'Noto Serif',serif;}
 .link-color-0 a:hover{color:#f0978b;}
