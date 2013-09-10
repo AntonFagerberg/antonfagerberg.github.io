@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Instagram API Scala</title>
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/syntax.css">
+    </head>
+    <body>
+      <div id="gradient">&nbsp;</div>
+      <div id="header">&nbsp;</div>
+
+      <div id="menu">
+        <span class="link-color-0">
+            <a href="/">
+                Home
+            </a>
+        </span>
+        |
+        <span class="link-color-1">
+            <a href="/projects">
+                Projects
+            </a>
+        </span>
+        |
+        <span class="link-color-2">
+            <a href="/experiments">
+                Experiments
+            </a>
+        </span>
+        |
+        <span class="link-color-3">
+            <a href="/cv">
+                CV (Swedish)
+            </a>
+        </span>
+        |
+        <span class="link-color-5">
+            <a href="/work">
+                Work
+            </a>
+        </span>
+        |
+        <span class="link-color-0">
+            <a href="/contact">
+                Contact
+            </a>
+        </span>
+      </div>
+
+      <div class="item">
+	<h1>Instagram API Scala</h1>
+	<p>This is an Scala implementation of the Instagram API. It uses scalaj-http to send HTTP-requests and lift-json to parse the JSON response as case classes.</p>
+
+<p>You need to register an application for Instagram and get a client id (and later an access token for full access) before you can use this API. </p>
+
+<p>First register on: <a href="http://instagram.com/developer">instagram.com/developer</a> to get the required variables - then use this API to receive an access token if you wish.</p>
+
+<p>A Response object is returned from all methods and it contains:</p>
+
+<ul>
+<li>Data - the stuff you actually want. This is the JSON response parsed as a corresponding object.</li>
+<li>Pagination - if a large result set is retrieved, this object contains what you need to fetch the next &quot;page&quot; with information. You can pass the relevant pieces of this information to the same method as called before as optional parameters.</li>
+<li>Meta - contains the status from Instagram (like 200 OK, 400 error). Internal errors such as parsing or socket errors will be stored in this meta object as well.</li>
+</ul>
+
+<h2>Installation &amp; Demo</h2>
+
+<p>You can use SBT to download the required dependencies and run the Demo-file:</p>
+
+<div class="highlight"><pre><code class="scala"><span class="n">sbt</span> <span class="n">run</span>
+</code></pre></div>
+
+<p>The demo-file contains all implemented methods but you need to uncomment some of them to try them (to avoid spamming the Instagram servers). You need to get a client id (and optionally an access token) before running the examples.</p>
+
+<h2>Adding to your project</h2>
+
+<p>Simply run:</p>
+
+<div class="highlight"><pre><code class="scala"><span class="n">sbt</span> <span class="k">package</span>
+</code></pre></div>
+
+<p>To create a Jar-file. However, you need to add the dependencies below to your project manually!</p>
+
+<h3>Dependencies</h3>
+
+<p>The current dependencies I use are:</p>
+
+<div class="highlight"><pre><code class="scala"><span class="s">&quot;net.liftweb&quot;</span> <span class="o">%%</span> <span class="s">&quot;lift-json&quot;</span> <span class="o">%</span> <span class="s">&quot;2.5-M4&quot;</span>
+<span class="s">&quot;org.scalaj&quot;</span> <span class="o">%%</span> <span class="s">&quot;scalaj-http&quot;</span> <span class="o">%</span> <span class="s">&quot;0.3.7&quot;</span>
+</code></pre></div>
+
+<h2>Implementation status</h2>
+
+<h3>Implemented</h3>
+
+<ul>
+<li>Get basic information about a user.</li>
+<li>Search for a user by name.</li>
+<li>Get information about a media object.</li>
+<li>See the authenticated user&#39;s feed.</li>
+<li>Get the most recent media published by a user.</li>
+<li>See the authenticated user&#39;s list of liked media.</li>
+<li>Get the list of users this user follows.</li>
+<li>Get the list of users this user is followed by.</li>
+<li>Get a list of currently popular media.</li>
+<li>Get a full list of comments on a media.</li>
+<li>Get a list of users who have liked this media.</li>
+<li>Get information about a tag object.</li>
+<li>Get a list of recently tagged media.</li>
+<li>Search for tags by name.</li>
+<li>Get information about a location.</li>
+<li>Search for a location by geographic coordinate.</li>
+<li>Get a list of media objects from a given location.</li>
+<li>Token support.</li>
+<li>Client ID support.</li>
+<li>Pagination.</li>
+<li>OAuth 2.0 authentication.</li>
+<li>Get information about a relationship to another user.</li>
+<li>Modify the relationship with target user.</li>
+<li>List the users who have requested to follow.</li>
+<li>Set a like on this media by the current user.</li>
+<li>Remove a like on this media by the current user.</li>
+<li>Remove a comment.</li>
+<li>Search for media in a given area. The default time span is set to 5 days. The time span must not exceed 7 days. Defaults time stamps cover the last 5 days.</li>
+<li>Create a comment on a media. Please email apidevelopers[at]instagram.com for access.</li>
+</ul>
+
+<h3>Not yet implemented</h3>
+
+<ul>
+<li>Subscriptions.</li>
+</ul>
+
+<h2>Example usage</h2>
+
+<div class="highlight"><pre><code class="scala"><span class="c1">//    You need to request these variables from Instagram: www.instagram.com/developer</span>
+<span class="k">val</span> <span class="n">clientId</span> <span class="k">=</span> <span class="s">&quot;client-id&quot;</span>
+<span class="k">val</span> <span class="n">clientSecret</span> <span class="k">=</span> <span class="s">&quot;client-secret&quot;</span>
+<span class="k">val</span> <span class="n">redirectURI</span> <span class="k">=</span> <span class="s">&quot;redirect-URI&quot;</span>
+
+<span class="c1">//    Client-Side (Implicit) Authentication</span>
+<span class="c1">//    Get a URL to call. This URL will return the TOKEN in the URI after the #-symbol (and you&#39;re done)..</span>
+<span class="n">println</span><span class="o">(</span><span class="nc">Authenticator</span><span class="o">.</span><span class="n">tokenURL</span><span class="o">(</span><span class="n">clientId</span><span class="o">,</span> <span class="n">redirectURI</span><span class="o">))</span>
+<span class="c1">//    You can append scopes by doing println(Authenticator.tokenURL(clientId, redirectURI, comments = true, relationships = true, likes = true))</span>
+
+<span class="c1">//    Server-side (Explicit) Flow</span>
+<span class="c1">//    Step 1: Get a URL to call. This URL will return the CODE to use in step 2 in the URI as a parameter code.</span>
+<span class="n">println</span><span class="o">(</span><span class="nc">Authenticator</span><span class="o">.</span><span class="n">codeURL</span><span class="o">(</span><span class="n">clientId</span><span class="o">,</span> <span class="n">redirectURI</span><span class="o">))</span>
+<span class="c1">//    You can append scopes by doing println(Authenticator.codeURL(clientId, redirectURI, comments = true, relationships = true, likes = true))</span>
+<span class="c1">//    Step 2: Request a token for the code requested in step 1 (the code is valid one time only).</span>
+<span class="c1">//    This will return Either a Authentication object with access token and user information or a Meta object on failure.</span>
+<span class="n">println</span><span class="o">(</span><span class="nc">Authenticator</span><span class="o">.</span><span class="n">requestToken</span><span class="o">(</span><span class="n">clientId</span><span class="o">,</span> <span class="n">clientSecret</span><span class="o">,</span> <span class="n">redirectURI</span><span class="o">,</span> <span class="n">code</span> <span class="k">=</span> <span class="s">&quot;the-code-from-step-1&quot;</span><span class="o">))</span>
+
+<span class="c1">//    Put either Left(&quot;accessToken&quot;) or Right(&quot;clientId&quot;) with values from com.antonfagerberg.instagram.Instagram here.</span>
+<span class="c1">//    Note that not all features are available without an access token.</span>
+
+<span class="k">val</span> <span class="n">instagram</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Instagram</span><span class="o">(</span><span class="n">accessTokenOrClientId</span> <span class="k">=</span> <span class="nc">Left</span><span class="o">(</span><span class="s">&quot;Put-access-token-here&quot;</span><span class="o">))</span>
+
+<span class="n">println</span><span class="o">(</span><span class="s">&quot;Here is some stuff you can do (when you have a valid Access Token or Client Id):&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Get basic information about a name: ${instagram.userInfo(&quot;</span><span class="mi">12895238</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Search for a name by name: ${instagram.userSearch(&quot;</span><span class="nc">AntonFagerberg</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Get the list of users this user follows: ${instagram.follows(&quot;</span><span class="mi">12895238</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Get the list of users this user is followed by: ${instagram.followedBy(&quot;</span><span class="mi">12895238</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;See the authenticated user&#39;s feed: ${instagram.feed()}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Get the most recent media published by a user: ${instagram.mediaRecent(&quot;</span><span class="mi">12895238</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;See the authenticated user&#39;s list of liked media: ${instagram.liked()}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Get information about a media object: ${instagram.media(&quot;</span><span class="mi">452194471682227494</span><span class="n">_12895238</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Get a list of currently popular media: ${instagram.popular}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Get a full list of comments on a media: ${instagram.comments(&quot;</span><span class="mi">452194471682227494</span><span class="n">_12895238</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Get a list of users who have liked this media: ${instagram.likes(&quot;</span><span class="mi">452194471682227494</span><span class="n">_12895238</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Get information about a tag object: ${instagram.tagInformation(&quot;</span><span class="n">hipster</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Get information about a tag object: ${instagram.tagSearch(&quot;</span><span class="n">snowy</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Get a list of recently tagged media: ${instagram.tagRecent(&quot;</span><span class="n">beer</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Get information about a location: ${instagram.location(&quot;</span><span class="mi">1</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Get a list of media objects from a given location: ${instagram.locationMedia(&quot;</span><span class="mi">1</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Search for a location by geographic coordinate: ${instagram.locationSearch(Some(&quot;</span><span class="mf">48.858844</span><span class="s">&quot; -&gt; &quot;</span><span class="mf">2.294351</span><span class="s">&quot;))}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Like an image: ${instagram.like(&quot;</span><span class="mi">457326401520123505</span><span class="n">_12895238</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Unlike an image: ${instagram.unlike(&quot;</span><span class="mi">457326401520123505</span><span class="n">_12895238</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Relationship to a user: ${instagram.relationship(&quot;</span><span class="mi">12895238</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Follow a user: ${instagram.relationshipFollow(&quot;</span><span class="mi">12895238</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Unfollow a user: ${instagram.relationshipUnfollow(&quot;</span><span class="mi">12895238</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Block a user: ${instagram.relationshipBlock(&quot;</span><span class="mi">12895238</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Unblock a user: ${instagram.relationshipUnblock(&quot;</span><span class="mi">12895238</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Approve a user: ${instagram.relationshipApprove(&quot;</span><span class="mi">12895238</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Deny a user: ${instagram.relationshipDeny(&quot;</span><span class="mi">12895238</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Relationship requests: ${instagram.relationshipRequests}&quot;</span><span class="o">)</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">instagram</span><span class="o">.</span><span class="n">comment</span><span class="o">(</span><span class="s">&quot;media-id&quot;</span><span class="o">,</span> <span class="s">&quot;test! :D&quot;</span><span class="o">))</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">instagram</span><span class="o">.</span><span class="n">commentDelete</span><span class="o">(</span><span class="s">&quot;media-id&quot;</span><span class="o">,</span> <span class="s">&quot;comment-id&quot;</span><span class="o">))</span>
+
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Search for images near a coordinate: ${instagram.mediaSearch(&quot;</span><span class="mf">48.858844</span><span class="s">&quot; -&gt; &quot;</span><span class="mf">2.294351</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
+</code></pre></div>
+
+<h2>Download</h2>
+
+<p><a href="https://github.com/AntonFagerberg/InstagramScalaAPI">github.com/AntonFagerberg/InstagramScalaAPI</a></p>
+
+<h2>License</h2>
+
+<p>Copyright 2013 Anton Fagerberg (http://www.antonfagerberg.com).</p>
+
+<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
+
+<p>http://www.apache.org/licenses/LICENSE-2.0</p>
+
+<p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
+
+<p>For more information and examples, visit the project on GitHub.</p>
+
+	<span class="notice">14 May 2013</span>
+</div>
+
+      <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-40700896-1', 'antonfagerberg.com');
+            ga('send', 'pageview');
+        </script>
+    </body>
+</html>

@@ -1,0 +1,19 @@
+@import url(http://fonts.googleapis.com/css?family=Chewy|Noto+Serif);
+body{margin:0;background-color:#ececec;}body a{color:#000;}body a:hover{color:#4094aa;}
+body h1,body h2,body h3{font-family:'Noto Serif',cursive;font-size:48px;line-height:1;margin:0;font-weight:normal;}body h1 a,body h2 a,body h3 a{text-decoration:none;}
+body h2{margin-top:20px;font-size:32px;}
+body h3{margin-top:20px;font-size:22px;}
+#gradient{background:url('../images/gradient.png');background-position:center;height:10px;}
+#header{background:url('../images/header.png');height:150px;width:800px;margin:0 auto;}
+.item,.description{border-left:2px solid #f9d28b;padding-left:20px;padding-right:20px;width:700px;margin:0 auto;margin-bottom:25px;font-family:'Noto Serif',serif;font-size:16px;line-height:1.8;}.item .notice,.description .notice{font-size:14px;color:#555555;}.item .notice a,.description .notice a{color:#555555;text-decoration:none;}.item .notice a:hover,.description .notice a:hover{color:#4094aa;}
+.description{border-color:#f0978b;font-style:italic;}
+.instagram{border:1px solid #999999;width:330px;display:inline-block;margin:5px;}.instagram .image img{width:100%;vertical-align:top;}
+.instagram .text{border-top:1px solid #999999;background-color:#fff;padding:5px;font-family:'Noto Serif',serif;font-size:14px;}
+#menu{margin-top:20px;margin-bottom:25px;text-align:center;font-family:'Chewy',cursive;font-size:38px;color:#888;}#menu a{text-decoration:none;}
+.title-font{font-family:'Chewy',cursive;}
+.text-font{font-family:'Noto Serif',serif;}
+.link-color-0 a:hover{color:#f0978b;}
+.link-color-1 a:hover{color:#f9d28b;}
+.link-color-2 a:hover{color:#d9d594;}
+.link-color-3 a:hover{color:#9cab8b;}
+.link-color-4 a:hover{color:#4094aa;}
