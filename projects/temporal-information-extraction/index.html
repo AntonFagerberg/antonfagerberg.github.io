@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Temporal Information Extraction</title>
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/syntax.css">
+    </head>
+    <body>
+      <div id="gradient">&nbsp;</div>
+      <div id="header">&nbsp;</div>
+
+      <div id="menu">
+        <span class="link-color-0">
+            <a href="/">
+                Home
+            </a>
+        </span>
+        |
+        <span class="link-color-1">
+            <a href="/projects">
+                Projects
+            </a>
+        </span>
+        |
+        <span class="link-color-2">
+            <a href="/experiments">
+                Experiments
+            </a>
+        </span>
+        |
+        <span class="link-color-3">
+            <a href="/cv">
+                CV
+            </a>
+        </span>
+        |
+        <span class="link-color-5">
+            <a href="/work">
+                Work
+            </a>
+        </span>
+        |
+        <span class="link-color-0">
+            <a href="/contact">
+                Contact
+            </a>
+        </span>
+      </div>
+
+      <div class="item">
+	<h1>Temporal Information Extraction</h1>
+	<p>This project uses mainly regular expressions with some additional tweaking functions to extract temporal information (dates, durations, time, etc) from news articles or any other text.</p>
+
+<p>Everything here should be viewed as a proof on concept. To code is not pretty and it is only targeted against the SemEval-2010 conference competition and not to be used in a real product.</p>
+
+<p><img src="/images/projects/temporal.png" alt="screenshot"></p>
+
+<p>The code was evaluated against SemEval-2010 with the following results:</p>
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nb">true </span>positives:   672
+<span class="nb">true </span>negatives:   51280
+<span class="nb">false </span>positives:  53
+<span class="nb">false </span>negatives:  1445
+
+attribute <span class="nb">type</span>: +382.0 -16.0
+attribute value: +350.0 -48.0
+
+precision   0.93
+recall      0.32
+f1-measure  0.47
+accuracy    0.97
+
+attribute <span class="nb">type       </span>0.96 
+attribute value      0.88 
+</code></pre></div>
+<p>Due to time constraints, the recall did not reach higher than 1/3 but could be improved greatly if I had more time to work on it.</p>
+
+<h3>Source code</h3>
+
+<p><a href="https://github.com/AntonFagerberg/Temporal-Information-Extraction">github.com/AntonFagerberg/Temporal-Information-Extraction</a></p>
+
+<h3>Demo</h3>
+
+<p>A demo exists written in Play Framework which can be downloaded here:</p>
+
+<p><a href="https://github.com/AntonFagerberg/Temporal-Information-Extraction-Demo">github.com/AntonFagerberg/Temporal-Information-Extraction-Demo</a></p>
+
+	<span class="notice">29 Nov 2013</span>
+</div>
+
+      <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-40700896-1', 'antonfagerberg.com');
+            ga('send', 'pageview');
+        </script>
+    </body>
+</html>
