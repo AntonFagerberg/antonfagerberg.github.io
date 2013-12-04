@@ -58,24 +58,43 @@
 
 <p><img src="/images/projects/temporal.png" alt="screenshot"></p>
 
-<p>The code was evaluated against SemEval-2010 with the following results:</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nb">true </span>positives:   672
-<span class="nb">true </span>negatives:   51280
-<span class="nb">false </span>positives:  53
-<span class="nb">false </span>negatives:  1445
+<p>The code was evaluated against SemEval-2010.</p>
 
-attribute <span class="nb">type</span>: +382.0 -16.0
-attribute value: +350.0 -48.0
+<p>Test set:</p>
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nb">true </span>positives:   165
+<span class="nb">true </span>negatives:   9336
+<span class="nb">false </span>positives:  8
+<span class="nb">false </span>negatives:  104
 
-precision   0.93
-recall      0.32
-f1-measure  0.47
-accuracy    0.97
+attribute <span class="nb">type</span>: +94.0 -4.0
+attribute value: +86.0 -12.0
 
-attribute <span class="nb">type       </span>0.96 
-attribute value      0.88 
+precision   0.95
+recall      0.61
+f1-measure  0.75
+accuracy    0.99
+
+attribute <span class="nb">type       </span>0.96
+attribute value      0.88
 </code></pre></div>
-<p>Due to time constraints, the recall did not reach higher than 1/3 but could be improved greatly if I had more time to work on it.</p>
+<p>Training set:</p>
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nb">true </span>positives:   1053
+<span class="nb">true </span>negatives:   51246
+<span class="nb">false </span>positives:  87
+<span class="nb">false </span>negatives:  1064
+
+attribute <span class="nb">type</span>: +546.0 -17.0
+attribute value: +494.0 -69.0
+
+precision   0.92
+recall      0.50
+f1-measure  0.65
+accuracy    0.98
+
+attribute <span class="nb">type       </span>0.97
+attribute value      0.88
+</code></pre></div>
+<p>Due to time constraints, I decided to quit when reaching 50% - but I believe that this could be greatly improved if I had more time to work on it. This is only a proof of concept but my belief is that this could work very good given enough time and dedication.</p>
 
 <h3>Source code</h3>
 
@@ -83,7 +102,11 @@ attribute value      0.88
 
 <h3>Demo</h3>
 
-<p>A demo exists written in Play Framework which can be downloaded here:</p>
+<p>A demo exists written in Play Framework can be tested here:</p>
+
+<p><a href="http://tempex.antonfagerberg.com/">tempex.antonfagerberg.com/</a></p>
+
+<p>And the source is available here:</p>
 
 <p><a href="https://github.com/AntonFagerberg/Temporal-Information-Extraction-Demo">github.com/AntonFagerberg/Temporal-Information-Extraction-Demo</a></p>
 
