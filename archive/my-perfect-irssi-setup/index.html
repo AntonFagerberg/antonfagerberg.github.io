@@ -74,8 +74,7 @@
 
 <p>To install everything we need type:</p>
 
-<div class="highlight"><pre><code class="bash">sudo apt-get install irssi bitlbee screen bitlbee-plugin-otr libtime-duration-perl libnotify-bin irssi-plugin-otr
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">sudo apt-get install irssi bitlbee screen bitlbee-plugin-otr libtime-duration-perl libnotify-bin irssi-plugin-otr</code></pre></div>
 
 <p>This will install the latest version of Irssi, BitlBee 3 and Screen. It is important that you have Backports or you will not get Bitlbee 3 (this statement is probably deprecated). You need screen for the nicklist-script and it is totally awesome on its own so you should learn to use it anyway.</p>
 
@@ -89,33 +88,28 @@
 
 <p>First of all you should set your nickname:</p>
 
-<div class="highlight"><pre><code class="bash">/nick my-cool-nickname
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">/nick my-cool-nickname</code></pre></div>
 
 <p>If you want to connect to a IRC-server you can use either /server or /connect. Using /server will kill the old connection (if you have one) but using /connect will establish a new parallel connection so that you can have several active connection.</p>
 
 <p>If you want to auto connect and join channels on start up you can use:</p>
 
 <div class="highlight"><pre><code class="bash">/server ADD -auto -network NetworkName irc.host.com 6667
-/channel ADD -auto <span class="c">#channel NetworkName password</span>
-</code></pre></div>
+/channel ADD -auto <span class="c">#channel NetworkName password</span></code></pre></div>
 
 <p>To switch between servers press CTRL + X. To switch between windows / channels press ALT + number or use:</p>
 
-<div class="highlight"><pre><code class="bash">/window number
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">/window number</code></pre></div>
 
 <p>To use the ALT-combination on numbers higher than 10 (which uses key 0) you can use the letters below the numbers on a qwerty-keyboard. ALT+Q = 11, ALT+W = 12 and so forth.</p>
 
 <p>To close a window use:</p>
 
-<div class="highlight"><pre><code class="bash">/wc
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">/wc</code></pre></div>
 
 <p>When you have customized Irssi as you wanted it, execute:</p>
 
-<div class="highlight"><pre><code class="bash">/save
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">/save</code></pre></div>
 
 <p>This will save all your settings and apply the current theme.</p>
 
@@ -127,8 +121,7 @@
 
 <p>Irssi scripts are written i Perl and are usually located in ~/.irssi/scripts/. To load a script you can use the /script command:</p>
 
-<div class="highlight"><pre><code class="bash">/script load mycoolscript.pl
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">/script load mycoolscript.pl</code></pre></div>
 
 <p>Or you can auto-load the scripts so you don&#8217;t have to use the script command every time you start Irssi. You can do this by putting the .pl-file in a folder called autorun in the scripts folder ~/.irssi/scripts/autorun/.</p>
 
@@ -143,8 +136,7 @@
 
 <p>To load a theme (located in ~/.irssi/), use:</p>
 
-<div class="highlight"><pre><code class="bash">/set theme xchat
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">/set theme xchat</code></pre></div>
 
 <p>Replace xchat with the name of your theme of choice.</p>
 
@@ -158,56 +150,48 @@
 
 <p>This guide uses BitlBee 3.0.1 which you can install in Ubuntu Maverick or greater by executing:</p>
 
-<div class="highlight"><pre><code class="bash">sudo apt-get install bitlbee
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">sudo apt-get install bitlbee</code></pre></div>
 
 <p>You can control the BitlBee service from your terminal:</p>
 
-<div class="highlight"><pre><code class="bash">sudo service bitlbee <span class="o">{</span>start<span class="p">|</span>stop<span class="p">|</span>restart<span class="p">|</span>force-reload<span class="o">}</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">sudo service bitlbee <span class="o">{</span>start<span class="p">|</span>stop<span class="p">|</span>restart<span class="p">|</span>force-reload<span class="o">}</span></code></pre></div>
 
 <p>The config file is located at /etc/bitlbee/bitlbee.conf . Look it up and customize it for your own needs. You need to restart the service if you make any changes to the configuration file.</p>
 
 <p>When you are ready to connect to your BitlBee server (and if you haven&#8217;t changed any configurations) execute the following in Irssi:</p>
 
-<div class="highlight"><pre><code class="bash">/connect localhost
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">/connect localhost</code></pre></div>
 
 <p>Once you are connected you should get a channel called BitlBee. This is where your contacts will be located and where you execute all your BitlBee commands. The first thing you should do is to go to the channel and register a new account.</p>
 
 <p>Do this by typing this in the BitlBee channel:</p>
 
-<div class="highlight"><pre><code class="bash">register <span class="o">(</span>password<span class="o">)</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">register <span class="o">(</span>password<span class="o">)</span></code></pre></div>
 
 <p>Make sure that you have the nickname which you want to use and note that we want to send command to the Bitlbee-channel and not to Irssi so make sure you don&#8217;t have a / in front of any commands to Bitlbee.</p>
 
 <p>The next time you return to Bitlbee you&#8217;ll use:</p>
 
-<div class="highlight"><pre><code class="bash">identify <span class="o">(</span>password<span class="o">)</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">identify <span class="o">(</span>password<span class="o">)</span></code></pre></div>
 
 <p>To load all of your accounts.</p>
 
 <p>What we need to do now is to add one of your IM-accounts to Bitlbee. The syntax for this is:</p>
 
 <div class="highlight"><pre><code class="bash">account add <span class="o">(</span>protocol<span class="o">)</span> <span class="o">(</span>username<span class="o">)</span>
-/OPER
-</code></pre></div>
+/OPER</code></pre></div>
 
 <p>Note that we used the Irssi command /OPER to hide the password instead of typing it directly to BitlBee.</p>
 
 <p>To list all of your accounts:</p>
 
-<div class="highlight"><pre><code class="bash">account list
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">account list</code></pre></div>
 
 <p>All accounts are numbered and these numbers are used when modifying and connecting etc.</p>
 
 <p>To bring an account online use.</p>
 
-<div class="highlight"><pre><code class="bash">account <span class="o">(</span>number<span class="o">)</span> on
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">account <span class="o">(</span>number<span class="o">)</span> on</code></pre></div>
 
 <p>If you do not provide any account number all of your accounts will be connected.</p>
 
@@ -215,13 +199,11 @@
 
 <div class="highlight"><pre><code class="bash"><span class="nb">help </span>account
 <span class="nb">help </span>account add
-<span class="nb">help </span>account add msn
-</code></pre></div>
+<span class="nb">help </span>account add msn</code></pre></div>
 
 <p>You might want want to stript out html-tags from the incoming messages since our client is text based. Do this with the following Bitlbee-command:</p>
 
-<div class="highlight"><pre><code class="bash"><span class="nb">set </span>strip_html <span class="nb">true</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="bash"><span class="nb">set </span>strip_html <span class="nb">true</span></code></pre></div>
 
 <p>I will guide you how to use Twitter and Google Talk in Bitlbee. You should have no problem adding other accounts the same way.</p>
 
@@ -229,8 +211,7 @@
 
 <div class="highlight"><pre><code class="bash">account add jabber <span class="o">(</span>email<span class="o">)</span>
 /OPER
-account <span class="o">(</span>number<span class="o">)</span> <span class="nb">set </span>server talk.google.com:5223:ssl
-</code></pre></div>
+account <span class="o">(</span>number<span class="o">)</span> <span class="nb">set </span>server talk.google.com:5223:ssl</code></pre></div>
 
 <p>The account is now ready to be brought online!</p>
 
@@ -241,15 +222,13 @@ account <span class="o">(</span>number<span class="o">)</span> <span class="nb">
 <p>Firstly do as normal:</p>
 
 <div class="highlight"><pre><code class="bash">account add twitter <span class="o">(</span>username<span class="o">)</span>
-/OPER
-</code></pre></div>
+/OPER</code></pre></div>
 
 <p>The new &#8220;twitter user&#8221; will send ju a PM. With a link for the OAuth authentication. Open the link in your browser, sign in and press Allow. Get the numeric code and send it back to the twitter user in the same window.</p>
 
 <p>You should now be signed in to your twitter account. If you like you can rename this or any other user:</p>
 
-<div class="highlight"><pre><code class="bash">rename twitter_username twitter
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">rename twitter_username twitter</code></pre></div>
 
 <p>Once signed in a new channel will be open which displays all tweets from your contacts.  Send a message in this channel to post a status update to Twitter.</p>
 
@@ -259,13 +238,11 @@ account <span class="o">(</span>number<span class="o">)</span> <span class="nb">
 
 <p>You have to start Irssi inside a Gnu Screen session for it to work. You can do this directly from the console by typing:</p>
 
-<div class="highlight"><pre><code class="bash">screen irssi
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">screen irssi</code></pre></div>
 
 <p>You must specify the script to use Screen from inside Irssi:</p>
 
-<div class="highlight"><pre><code class="bash">/nicklist screen
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">/nicklist screen</code></pre></div>
 
 <p>Download: <a href="http://scripts.irssi.org/scripts/nicklist.pl">scripts.irssi.org/scripts/nicklist.pl</a></p>
 
@@ -289,8 +266,7 @@ account <span class="o">(</span>number<span class="o">)</span> <span class="nb">
 
 <div class="highlight"><pre><code class="bash">/window new split
 /window name hilight
-/window size 4
-</code></pre></div>
+/window size 4</code></pre></div>
 
 <p>Download: <a href="http://scripts.irssi.org/scripts/hilightwin.pl">scripts.irssi.org/scripts/hilightwin.pl</a></p>
 
@@ -304,8 +280,7 @@ account <span class="o">(</span>number<span class="o">)</span> <span class="nb">
 
 <p>This is my configuration which I&#8217;ve stoled from the link below:</p>
 
-<div class="highlight"><pre><code class="bash">/set awl_display_key <span class="nv">$Q</span>%K<span class="p">|</span>%n<span class="nv">$H$C$S</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">/set awl_display_key <span class="nv">$Q</span>%K<span class="p">|</span>%n<span class="nv">$H$C$S</span></code></pre></div>
 
 <p>Download: <a href="http://anti.teamidiot.de/static/nei/*/Code/Irssi/adv_windowlist.pl">anti.teamidiot.de/static/nei/*/Code/Irssi/adv_windowlist.pl</a></p>
 
@@ -319,8 +294,7 @@ account <span class="o">(</span>number<span class="o">)</span> <span class="nb">
 
 <div class="highlight"><pre><code class="bash">/set screen_away_active ON
 /set screen_away_message
-/set screen_away_nick
-</code></pre></div>
+/set screen_away_nick</code></pre></div>
 
 <p>Download: <a href="http://scripts.irssi.org/scripts/screen_away.pl">scripts.irssi.org/scripts/screen_away.pl</a></p>
 
@@ -330,13 +304,11 @@ account <span class="o">(</span>number<span class="o">)</span> <span class="nb">
 
 <p>You will need the Perl library time-duration. Ubuntu users can use:</p>
 
-<div class="highlight"><pre><code class="bash">sudo apt-get install libtime-duration-perl
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">sudo apt-get install libtime-duration-perl</code></pre></div>
 
 <p>And to activate it in Irssi:</p>
 
-<div class="highlight"><pre><code class="bash">/set bitlbee_autoreply_duration ON
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">/set bitlbee_autoreply_duration ON</code></pre></div>
 
 <p>Download: <a href="https://github.com/msparks/irssiscripts/raw/master/bitlbee_autoreply.pl">github.com/msparks/irssiscripts/raw/master/bitlbee_autoreply.pl</a></p>
 
@@ -354,18 +326,15 @@ account <span class="o">(</span>number<span class="o">)</span> <span class="nb">
 
 <p>Installation for Ubuntu users:</p>
 
-<div class="highlight"><pre><code class="bash">sudo apt-get install bitlbee-plugin-otr irssi-plugin-otr
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">sudo apt-get install bitlbee-plugin-otr irssi-plugin-otr</code></pre></div>
 
 <p>You need to load the OTR module inside Irssi:</p>
 
-<div class="highlight"><pre><code class="bash">/LOAD otr
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">/LOAD otr</code></pre></div>
 
 <p>If you wish to do it automatically add this to or create the file ~/.irssi/startup:</p>
 
-<div class="highlight"><pre><code class="bash">LOAD otr
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">LOAD otr</code></pre></div>
 
 <p>Note that we do not use forward-slash in this file.</p>
 
@@ -406,20 +375,17 @@ otr_ignore
 otr_finishonunload
   If <span class="nb">true </span>running OTR sessions are finished on /unload and /quit.
 otr_createqueries
-  If <span class="nb">true </span>queries are automatically created <span class="k">for </span>OTR log messages.
-</code></pre></div>
+  If <span class="nb">true </span>queries are automatically created <span class="k">for </span>OTR log messages.</code></pre></div>
 
 <p>OTR for BitlBee is loaded automatically when installing the Ubuntu package. Use the help command in BitlBee to get information about how to use it:</p>
 
-<div class="highlight"><pre><code class="bash"><span class="nb">help </span>otr
-</code></pre></div>
+<div class="highlight"><pre><code class="bash"><span class="nb">help </span>otr</code></pre></div>
 
 <h3>Notifications</h3>
 
 <p>This script provides notifications when you get hilighted via libnotify. In Ubuntu you need to install libnotify-bin:</p>
 
-<div class="highlight"><pre><code class="bash">sudo apt-get install libnotify-bin
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">sudo apt-get install libnotify-bin</code></pre></div>
 
 <p>It works with SSH and GNU Screen but remember to forward X when using SSH with the -X switch.</p>
 
@@ -435,13 +401,11 @@ otr_createqueries
 
 <p>Set your username:</p>
 
-<div class="highlight"><pre><code class="bash">/set lastfm_user
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">/set lastfm_user</code></pre></div>
 
 <p>And show what&#8217;s playing:</p>
 
-<div class="highlight"><pre><code class="bash">/np
-</code></pre></div>
+<div class="highlight"><pre><code class="bash">/np</code></pre></div>
 
 <p>Download: <a href="http://scripts.irssi.org/scripts/lastfm.pl">scripts.irssi.org/scripts/lastfm.pl</a></p>
 

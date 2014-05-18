@@ -65,8 +65,7 @@
 
 <p>You can use SBT to download the required dependencies and run the Demo-file:</p>
 
-<div class="highlight"><pre><code class="scala"><span class="n">sbt</span> <span class="n">run</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="scala"><span class="n">sbt</span> <span class="n">run</span></code></pre></div>
 
 <p>The demo-file contains all implemented methods but you need to uncomment some of them to try them (to avoid spamming the Instagram servers). You need to get a client id (and optionally an access token) before running the examples.</p>
 
@@ -74,8 +73,7 @@
 
 <p>Simply run:</p>
 
-<div class="highlight"><pre><code class="scala"><span class="n">sbt</span> <span class="k">package</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="scala"><span class="n">sbt</span> <span class="k">package</span></code></pre></div>
 
 <p>To create a Jar-file. However, you need to add the dependencies below to your project manually!</p>
 
@@ -84,8 +82,7 @@
 <p>The current dependencies I use are:</p>
 
 <div class="highlight"><pre><code class="scala"><span class="s">&quot;net.liftweb&quot;</span> <span class="o">%%</span> <span class="s">&quot;lift-json&quot;</span> <span class="o">%</span> <span class="s">&quot;2.5-M4&quot;</span>
-<span class="s">&quot;org.scalaj&quot;</span> <span class="o">%%</span> <span class="s">&quot;scalaj-http&quot;</span> <span class="o">%</span> <span class="s">&quot;0.3.7&quot;</span>
-</code></pre></div>
+<span class="s">&quot;org.scalaj&quot;</span> <span class="o">%%</span> <span class="s">&quot;scalaj-http&quot;</span> <span class="o">%</span> <span class="s">&quot;0.3.7&quot;</span></code></pre></div>
 
 <h2>Implementation status</h2>
 
@@ -214,8 +211,7 @@
 
 <span class="n">println</span><span class="o">(</span><span class="n">instagram</span><span class="o">.</span><span class="n">commentDelete</span><span class="o">(</span><span class="s">&quot;media-id&quot;</span><span class="o">,</span> <span class="s">&quot;comment-id&quot;</span><span class="o">))</span>
 
-<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Search for images near a coordinate: ${instagram.mediaSearch(&quot;</span><span class="mf">48.858844</span><span class="s">&quot; -&gt; &quot;</span><span class="mf">2.294351</span><span class="s">&quot;)}&quot;</span><span class="o">)</span>
-</code></pre></div>
+<span class="n">println</span><span class="o">(</span><span class="n">s</span><span class="s">&quot;Search for images near a coordinate: ${instagram.mediaSearch(&quot;</span><span class="mf">48.858844</span><span class="s">&quot; -&gt; &quot;</span><span class="mf">2.294351</span><span class="s">&quot;)}&quot;</span><span class="o">)</span></code></pre></div>
 
 <h2>Download</h2>
 

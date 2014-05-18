@@ -51,7 +51,7 @@
 The only thing this application does is that it downloads files linked in RSS (XML) feeds if the titles are matched against some regular expression.</p>
 
 <h3>Example configuration</h3>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="c"># Names of all enabled feeds.</span>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Names of all enabled feeds.</span>
 <span class="nv">names</span> <span class="o">=</span> <span class="o">[</span> <span class="s2">&quot;coolfeeds&quot;</span>, <span class="s2">&quot;hotfeeds&quot;</span> <span class="o">]</span>
 
 <span class="c"># Display thrown exceptions (such as failing urls).</span>
@@ -77,21 +77,21 @@ hotfeeds.saveFolder <span class="o">=</span> <span class="s2">&quot;/my/hot/stuf
 <h3>Build</h3>
 
 <p>To build a &quot;fat&quot; self-contained executable, use the SBT assembly provided in this project.</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash">sbt assembly
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sbt assembly
 </code></pre></div>
 <p>This will generate a self-contained JAR-file, see command output for the location where it is saved.</p>
 
 <h3>Run</h3>
 
 <p>If assembly has been used to create the JAR-file, you can execute the file with either Java or Scala:</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash">scala dlerss.jar
-</code></pre></div><div class="highlight"><pre><code class="bash language-bash" data-lang="bash">java -jar dlerss.jar
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">scala dlerss.jar
+</code></pre></div><div class="highlight"><pre><code class="language-bash" data-lang="bash">java -jar dlerss.jar
 </code></pre></div>
 <p>By default, dlerss will look for a configuration file in the current directory called &quot;application.conf&quot;. To specify another configuration file, simply specify it as the first argument:</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash">scala Dlerss.jar ../folder/bad-ass.conf
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">scala Dlerss.jar ../folder/bad-ass.conf
 </code></pre></div>
 <h3>Dependencies</h3>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="s2">&quot;com.typesafe&quot;</span> % <span class="s2">&quot;config&quot;</span> % <span class="s2">&quot;1.0.2&quot;</span>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="s2">&quot;com.typesafe&quot;</span> % <span class="s2">&quot;config&quot;</span> % <span class="s2">&quot;1.0.2&quot;</span>
 </code></pre></div>
 <h3>Regular Expressions</h3>
 
