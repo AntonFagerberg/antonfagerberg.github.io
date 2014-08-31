@@ -1,56 +1,48 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Dlerss - RSS Downloader</title>
-        <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="/css/main.css">
-        <link rel="stylesheet" href="/css/syntax.css">
-    </head>
-    <body>
-      <div id="gradient">&nbsp;</div>
-      <div id="header">&nbsp;</div>
 
-      <div id="menu">
-        <span class="link-color-0">
-            <a href="/">
-                Home
-            </a>
-        </span>
-        |
-        <span class="link-color-4">
-            <a href="/projects">
-                Projects
-            </a>
-        </span>
-        |
-        <span class="link-color-1">
-            <a href="/work">
-                Work
-            </a>
-        </span>
-        |
-        <span class="link-color-2">
-            <a href="/cv">
-                CV
-            </a>
-        </span>
-        
-        |
-        <span class="link-color-3">
-            <a href="/contact">
-                Contact
-            </a>
-        </span>
-      </div>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-      <div class="item">
+    <title>Dlerss - RSS Downloader</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://www.antonfagerberg.com/projects/dlerss/">
+</head>
+
+
+  <body>
+
+    <div id="gradient"></div>
+<div id="logo">
+  <a href="/">Anton<br>Fagerberg</a>
+</div>
+
+<div id="menu">
+  <a href="/">Home</a>
+  <span class="grayBar">|</span>
+  <a href="/projects">Projects</a>
+  <span class="grayBar">|</span>
+  <a href="/work">Work</a>
+  <span class="grayBar">|</span>
+  <a href="/cv">CV</a>
+  <span class="grayBar">|</span>
+  <a href="/contact">Contact</a>
+</div>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post full">
 	<h1>Dlerss - RSS Downloader</h1>
 	<p>This project is inspired by RSSDler (<a href="https://code.google.com/p/rssdler/">code.google.com/p/rssdler</a>), but this project does not have as many features.
 The only thing this application does is that it downloads files linked in RSS (XML) feeds if the titles are matched against some regular expression.</p>
 
-<h3>Example configuration</h3>
+<h3 id="example-configuration">Example configuration</h3>
+
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Names of all enabled feeds.</span>
 <span class="nv">names</span> <span class="o">=</span> <span class="o">[</span> <span class="s2">&quot;coolfeeds&quot;</span>, <span class="s2">&quot;hotfeeds&quot;</span> <span class="o">]</span>
 
@@ -72,57 +64,101 @@ hotfeeds.url <span class="o">=</span> <span class="s2">&quot;https://...&quot;</
 hotfeeds.scanTime <span class="o">=</span> 5
 hotfeeds.regexTrue <span class="o">=</span> <span class="s2">&quot;(KittyNews S\\d{2}E\\d{2}|DogTimes Season [1-5])&quot;</span>
 hotfeeds.regexFalse <span class="o">=</span> <span class="s2">&quot;Fluffy&quot;</span>
-hotfeeds.saveFolder <span class="o">=</span> <span class="s2">&quot;/my/hot/stuff&quot;</span>
-</code></pre></div>
-<h3>Build</h3>
+hotfeeds.saveFolder <span class="o">=</span> <span class="s2">&quot;/my/hot/stuff&quot;</span></code></pre></div>
 
-<p>To build a &quot;fat&quot; self-contained executable, use the SBT assembly provided in this project.</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">sbt assembly
-</code></pre></div>
+<h3 id="build">Build</h3>
+<p>To build a “fat” self-contained executable, use the SBT assembly provided in this project.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sbt assembly</code></pre></div>
+
 <p>This will generate a self-contained JAR-file, see command output for the location where it is saved.</p>
 
-<h3>Run</h3>
-
+<h3 id="run">Run</h3>
 <p>If assembly has been used to create the JAR-file, you can execute the file with either Java or Scala:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">scala dlerss.jar
-</code></pre></div><div class="highlight"><pre><code class="language-bash" data-lang="bash">java -jar dlerss.jar
-</code></pre></div>
-<p>By default, dlerss will look for a configuration file in the current directory called &quot;application.conf&quot;. To specify another configuration file, simply specify it as the first argument:</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">scala Dlerss.jar ../folder/bad-ass.conf
-</code></pre></div>
-<h3>Dependencies</h3>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="s2">&quot;com.typesafe&quot;</span> % <span class="s2">&quot;config&quot;</span> % <span class="s2">&quot;1.0.2&quot;</span>
-</code></pre></div>
-<h3>Regular Expressions</h3>
 
-<p>This is a good site to learn more: <a href="http://www.tutorialspoint.com/scala/scala_regular_expressions.htm">tutorialspoint.com/scala/scala<em>regular</em>expressions.htm</a>
-Note that to match for example digits, you have to use \\d with double back slashes to not mess up the string in the configuration file.</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">scala dlerss.jar</code></pre></div>
 
-<h3>Source code</h3>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">java -jar dlerss.jar</code></pre></div>
+
+<p>By default, dlerss will look for a configuration file in the current directory called “application.conf”. To specify another configuration file, simply specify it as the first argument:</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">scala Dlerss.jar ../folder/bad-ass.conf</code></pre></div>
+
+<h3 id="dependencies">Dependencies</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="s2">&quot;com.typesafe&quot;</span> % <span class="s2">&quot;config&quot;</span> % <span class="s2">&quot;1.0.2&quot;</span></code></pre></div>
+
+<h3 id="regular-expressions">Regular Expressions</h3>
+<p>This is a good site to learn more:</p>
+
+<p><a href="http://www.tutorialspoint.com/scala/scala_regular_expressions.htm">tutorialspoint.com/scala/scala_regular_expressions.htm</a></p>
+
+<p>Note that to match for example digits, you have to use \\d with double back slashes to not mess up the string in the configuration file.</p>
+
+<h3 id="source-code">Source code</h3>
 
 <p><a href="https://github.com/AntonFagerberg/Dlerss">github.com/AntonFagerberg/Dlerss</a></p>
 
-<h3>License</h3>
-
+<h3 id="license">License</h3>
 <p>Copyright 2013 Anton Fagerberg (http://www.antonfagerberg.com).</p>
 
-<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
+<p>Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
 
 <p>http://www.apache.org/licenses/LICENSE-2.0</p>
 
-<p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
+<p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an “AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
 
 	<!--<span class="notice">28 Nov 2013</span>-->
 </div>
 
-      <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      </div>
+    </div>
 
-            ga('create', 'UA-40700896-1', 'antonfagerberg.com');
-            ga('send', 'pageview');
-        </script>
-    </body>
+    <!-- <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Anton Fagerberg</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>Anton Fagerberg</li>
+          <li><a href="mailto:anton@antonfagerberg.com">anton@antonfagerberg.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+
+          
+          <li>
+            <a href="https://twitter.com/antonfagerberg">
+              <span class="icon  icon--twitter">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809
+                  c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/>
+                </svg>
+              </span>
+
+              <span class="username">antonfagerberg</span>
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text"></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer> -->
+
+
+  </body>
+
 </html>

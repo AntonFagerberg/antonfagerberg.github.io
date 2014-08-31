@@ -1,128 +1,121 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Instagram API Scala</title>
-        <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="/css/main.css">
-        <link rel="stylesheet" href="/css/syntax.css">
-    </head>
-    <body>
-      <div id="gradient">&nbsp;</div>
-      <div id="header">&nbsp;</div>
 
-      <div id="menu">
-        <span class="link-color-0">
-            <a href="/">
-                Home
-            </a>
-        </span>
-        |
-        <span class="link-color-4">
-            <a href="/projects">
-                Projects
-            </a>
-        </span>
-        |
-        <span class="link-color-1">
-            <a href="/work">
-                Work
-            </a>
-        </span>
-        |
-        <span class="link-color-2">
-            <a href="/cv">
-                CV
-            </a>
-        </span>
-        
-        |
-        <span class="link-color-3">
-            <a href="/contact">
-                Contact
-            </a>
-        </span>
-      </div>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-      <div class="item">
+    <title>Instagram API Scala</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://www.antonfagerberg.com/projects/instagram-api-scala/">
+</head>
+
+
+  <body>
+
+    <div id="gradient"></div>
+<div id="logo">
+  <a href="/">Anton<br>Fagerberg</a>
+</div>
+
+<div id="menu">
+  <a href="/">Home</a>
+  <span class="grayBar">|</span>
+  <a href="/projects">Projects</a>
+  <span class="grayBar">|</span>
+  <a href="/work">Work</a>
+  <span class="grayBar">|</span>
+  <a href="/cv">CV</a>
+  <span class="grayBar">|</span>
+  <a href="/contact">Contact</a>
+</div>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post full">
 	<h1>Instagram API Scala</h1>
-	<p>This is an Scala implementation of the Instagram API. It uses scalaj-http to send HTTP-requests and lift-json to parse the JSON response to case classes.</p>
+	<p>This is an Scala implementation of the Instagram API.</p>
 
-<p>You need to register an application for Instagram and get a client id (and later an access token for full access) before you can use this API. First register on: http://instagram.com/developer to get the required client id and secret - then use this API to receive an access token.</p>
+<p>This project uses scalaj-http to send HTTP-requests and lift-json to parse the JSON response to case classes.</p>
 
-<p>A Response object is returned from all methods and it contains:
- * Data - the stuff you actually want. This is the JSON response parsed to a corresponding object.
- * Pagination - if a large result set is retrieved, this object contains what you need to fetch the next &quot;batch&quot; of information. You can pass the relevant pieces of this information to the same method as called before as optional parameters.
- * Meta - contains the status from Instagram (like 200 OK, 400 error). Internal errors such as parsing or socket errors will be stored in this meta object as well.</p>
+<p>You need to register an application for Instagram and get a client id (and later an access token for full access) before you can use this API. First register on: <a href="http://instagram.com/developer">instagram.com/developer</a> to get the required client id and secret - then use this API to receive an access token.</p>
 
-<h2>Installation &amp; Demo</h2>
+<p>A Response object is returned from all methods and it contains:</p>
 
+<ul>
+  <li>Data - the stuff you actually want. This is the JSON response parsed to a corresponding object.</li>
+  <li>Pagination - if a large result set is retrieved, this object contains what you need to fetch the next “batch” of information. You can pass the relevant pieces of this information to the same method as called before as optional parameters.</li>
+  <li>Meta - contains the status from Instagram (like 200 OK, 400 error). Internal errors such as parsing or socket errors will be stored in this meta object as well.</li>
+</ul>
+
+<h2 id="installation--demo">Installation &amp; Demo</h2>
 <p>You can use SBT to download the required dependencies and run the Demo-file:</p>
 
-<div class="highlight"><pre><code class="scala"><span class="n">sbt</span> <span class="n">run</span></code></pre></div>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="n">sbt</span> <span class="n">run</span></code></pre></div>
 
 <p>The demo-file contains all implemented methods but you need to uncomment some of them to try them (to avoid spamming the Instagram servers). You need to get a client id (and optionally an access token) before running the examples.</p>
 
-<h2>Adding to your project</h2>
-
+<h2 id="adding-to-your-project">Adding to your project</h2>
 <p>Simply run:</p>
 
-<div class="highlight"><pre><code class="scala"><span class="n">sbt</span> <span class="k">package</span></code></pre></div>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="n">sbt</span> <span class="k">package</span></code></pre></div>
 
 <p>To create a Jar-file. However, you need to add the dependencies below to your project manually!</p>
 
-<h3>Dependencies</h3>
+<h3 id="dependencies">Dependencies</h3>
 
-<div class="highlight"><pre><code class="scala"><span class="s">&quot;net.liftweb&quot;</span> <span class="o">%%</span> <span class="s">&quot;lift-json&quot;</span> <span class="o">%</span> <span class="s">&quot;2.5&quot;</span>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="s">&quot;net.liftweb&quot;</span> <span class="o">%%</span> <span class="s">&quot;lift-json&quot;</span> <span class="o">%</span> <span class="s">&quot;2.5&quot;</span>
 <span class="s">&quot;org.scalaj&quot;</span> <span class="o">%%</span> <span class="s">&quot;scalaj-http&quot;</span> <span class="o">%</span> <span class="s">&quot;0.3.15&quot;</span></code></pre></div>
 
-<h2>Implementation status</h2>
+<h2 id="implementation-status">Implementation status</h2>
 
-<h3>Implemented</h3>
-
+<h3 id="implemented">Implemented</h3>
 <ul>
-<li>Get basic information about a user.</li>
-<li>Search for a user by name.</li>
-<li>Get information about a media object.</li>
-<li>See the authenticated user&#39;s feed.</li>
-<li>Get the most recent media published by a user.</li>
-<li>See the authenticated user&#39;s list of liked media.</li>
-<li>Get the list of users this user follows.</li>
-<li>Get the list of users this user is followed by.</li>
-<li>Get a list of currently popular media.</li>
-<li>Get a full list of comments on a media.</li>
-<li>Get a list of users who have liked this media.</li>
-<li>Get information about a tag object.</li>
-<li>Get a list of recently tagged media.</li>
-<li>Search for tags by name.</li>
-<li>Get information about a location.</li>
-<li>Search for a location by geographic coordinate.</li>
-<li>Get a list of media objects from a given location.</li>
-<li>Token support.</li>
-<li>Client ID support.</li>
-<li>Pagination.</li>
-<li>OAuth 2.0 authentication.</li>
-<li>Get information about a relationship to another user.</li>
-<li>Modify the relationship with target user.</li>
-<li>List the users who have requested to follow.</li>
-<li>Set a like on this media by the current user.</li>
-<li>Remove a like on this media by the current user.</li>
-<li>Add a comment (requires special permission from Instagram).</li>
-<li>Remove a comment.</li>
-<li>Search for media in a given area. The default time span is set to 5 days. The time span must not exceed 7 days. Defaults time stamps cover the last 5 days.</li>
-<li>Create a comment on a media. Please email apidevelopers[at]instagram.com for access.</li>
+  <li>Images and Videos.</li>
+  <li>Get basic information about a user.</li>
+  <li>Search for a user by name.</li>
+  <li>Get information about a media object.</li>
+  <li>See the authenticated user’s feed.</li>
+  <li>Get the most recent media published by a user.</li>
+  <li>See the authenticated user’s list of liked media.</li>
+  <li>Get the list of users this user follows.</li>
+  <li>Get the list of users this user is followed by.</li>
+  <li>Get a list of currently popular media.</li>
+  <li>Get a full list of comments on a media.</li>
+  <li>Get a list of users who have liked this media.</li>
+  <li>Get information about a tag object.</li>
+  <li>Get a list of recently tagged media.</li>
+  <li>Search for tags by name.</li>
+  <li>Get information about a location.</li>
+  <li>Search for a location by geographic coordinate.</li>
+  <li>Get a list of media objects from a given location.</li>
+  <li>Token support.</li>
+  <li>Client ID support.</li>
+  <li>Pagination.</li>
+  <li>OAuth 2.0 authentication.</li>
+  <li>Get information about a relationship to another user.</li>
+  <li>Modify the relationship with target user.</li>
+  <li>List the users who have requested to follow.</li>
+  <li>Set a like on this media by the current user.</li>
+  <li>Remove a like on this media by the current user.</li>
+  <li>Add a comment (requires special permission from Instagram).</li>
+  <li>Remove a comment.</li>
+  <li>Search for media in a given area. The default time span is set to 5 days. The time span must not exceed 7 days. Defaults time stamps cover the last 5 days.</li>
+  <li>Create a comment on a media. Please email apidevelopers[at]instagram.com for access.</li>
 </ul>
 
-<h3>Not implemented</h3>
-
+<h3 id="not-implemented">Not implemented</h3>
 <ul>
-<li>Subscriptions.</li>
+  <li>Subscriptions.</li>
 </ul>
 
-<h2>Example usage</h2>
+<h2 id="example-usage">Example usage</h2>
 
-<div class="highlight"><pre><code class="scala"><span class="c1">// You need to request these variables from Instagram: www.instagram.com/developer</span>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="c1">// You need to request these variables from Instagram: www.instagram.com/developer</span>
 <span class="k">val</span> <span class="n">clientId</span> <span class="k">=</span> <span class="s">&quot;client-id&quot;</span>
 <span class="k">val</span> <span class="n">clientSecret</span> <span class="k">=</span> <span class="s">&quot;client-secret&quot;</span>
 <span class="k">val</span> <span class="n">redirectURI</span> <span class="k">=</span> <span class="s">&quot;redirect-URI&quot;</span>
@@ -135,7 +128,7 @@
 <span class="c1">// Server-side (Explicit) Flow</span>
 <span class="c1">// Step 1: Get a URL to call. This URL will return the CODE to use in step 2 in the URI as a parameter code.</span>
 <span class="n">println</span><span class="o">(</span><span class="nc">Authenticator</span><span class="o">.</span><span class="n">codeURL</span><span class="o">(</span><span class="n">clientId</span><span class="o">,</span> <span class="n">redirectURI</span><span class="o">))</span>
-<span class="c1">// You can append scopes by doing println(Authenticator.codeURL(clientId, redirectURI, comments = true, relationships = true, likes = true))    </span>
+<span class="c1">// You can append scopes by doing println(Authenticator.codeURL(clientId, redirectURI, comments = true, relationships = true, likes = true))</span>
 <span class="c1">// Step 2: Request a token for the code requested in step 1 (the code is valid one time only).</span>
 <span class="c1">// This will return Either a Authentication object with access token and user information or a Meta object on failure.</span>
 <span class="n">println</span><span class="o">(</span><span class="nc">Authenticator</span><span class="o">.</span><span class="n">requestToken</span><span class="o">(</span><span class="n">clientId</span><span class="o">,</span> <span class="n">clientSecret</span><span class="o">,</span> <span class="n">redirectURI</span><span class="o">,</span> <span class="n">code</span> <span class="k">=</span> <span class="s">&quot;the-code-from-step-1&quot;</span><span class="o">))</span>
@@ -207,33 +200,71 @@
 
 <span class="c1">// println(s&quot;Search for images near a coordinate: ${instagram.mediaSearch(&quot;48.858844&quot; -&gt; &quot;2.294351&quot;)}&quot;)</span></code></pre></div>
 
-<h2>Download</h2>
-
+<h2 id="download">Download</h2>
 <p><a href="https://github.com/AntonFagerberg/InstagramScalaAPI">github.com/AntonFagerberg/InstagramScalaAPI</a></p>
 
-<h2>License</h2>
-
+<h2 id="license">License</h2>
 <p>Copyright 2013 Anton Fagerberg (http://www.antonfagerberg.com).</p>
 
-<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
+<p>Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
 
 <p>http://www.apache.org/licenses/LICENSE-2.0</p>
 
-<p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
+<p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an “AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
 
 <p>For more information and examples, visit the project on GitHub.</p>
 
 	<!--<span class="notice">14 May 2013</span>-->
 </div>
 
-      <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      </div>
+    </div>
 
-            ga('create', 'UA-40700896-1', 'antonfagerberg.com');
-            ga('send', 'pageview');
-        </script>
-    </body>
+    <!-- <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Anton Fagerberg</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>Anton Fagerberg</li>
+          <li><a href="mailto:anton@antonfagerberg.com">anton@antonfagerberg.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+
+          
+          <li>
+            <a href="https://twitter.com/antonfagerberg">
+              <span class="icon  icon--twitter">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809
+                  c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/>
+                </svg>
+              </span>
+
+              <span class="username">antonfagerberg</span>
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text"></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer> -->
+
+
+  </body>
+
 </html>

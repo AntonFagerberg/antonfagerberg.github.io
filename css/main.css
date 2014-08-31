@@ -1,80 +1,307 @@
-@import url(http://fonts.googleapis.com/css?family=Chewy|Noto+Serif);
-
+@import url(http://fonts.googleapis.com/css?family=Permanent+Marker);
+@import url(http://fonts.googleapis.com/css?family=Playfair+Display:400,700);
+@import url(http://fonts.googleapis.com/css?family=Abril+Fatface);
+@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:400,700);
 body {
-	margin: 0;
-	background-color: #f7f5f1;
-}
-
-h1, h2, h3 {
-	font-family: 'Noto Serif', cursive;
-	line-height: 1; 
-	margin: 0;
-	margin-top: 20px;
-	font-weight: normal;
-	text-decoration: none;
-}
-
-h1 { 
-	font-size:36px;
-}
-
-h2 {
-	font-size:32px;
-}
-
-h3 {
-	font-size:22px;
-}
+  margin: 0;
+  background-color: #f7f5f1; }
 
 a {
-	color: #000;
-}
+  color: #000;
+  text-decoration: none; }
 
-#menu a {
-	text-decoration: none;
-}
+a:hover {
+  border-bottom: 2px solid #4094aa; }
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Abril Fatface', cursive;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2em; }
+
+p {
+  margin-top: 0;
+  margin-bottom: 20px; }
 
 #gradient {
-	background: url('../images/gradient.png');
-	background-position: center;
-	height:10px;
-}
+  background: url("../images/gradient.png");
+  background-position: center;
+  height: 10px; }
 
-#header {
-	background: url('../images/header.png');
-	height: 150px;
-	width: 800px; 
-	margin:0 auto;
-}
+#logo {
+  font-family: 'Permanent Marker', cursive;
+  text-align: center;
+  padding-bottom: 26px;
+  width: 700px;
+  margin: 55px auto;
+  -webkit-transform: rotate(-7deg);
+  -moz-transform: rotate(-7deg);
+  -ms-transform: rotate(-7deg);
+  -o-transform: rotate(-7deg);
+  transform: rotate(-7deg); }
+  #logo a {
+    font-size: 100px;
+    line-height: 64px;
+    color: #7400a4; }
+  #logo a:hover {
+    border: 0;
+    color: #4094aa;
+    cursor: pointer; }
 
 #menu {
-	margin-top: 25px;
-	margin-bottom: 30px;
-	text-align: center;
-	font-family: 'Chewy', cursive;
-	font-size: 38px;
-	color: #888;
-	width: 100%;
-}
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 36px; }
 
-.item, .description {
-	max-width: 700px;
-	margin: 0 auto;
-	font-family: 'Noto Serif', serif;
-	font-size: 16px;
-	line-height: 1.8;
-	border-left: 2px solid #f9d28b;
-	padding-left: 20px;
-	padding-right: 20px;
-}
+.grayBar {
+  color: #ccc;
+  padding: 0 10px; }
 
-.description { 
-	border-color: #f0978b;
-	font-style:italic;
-}
+.post, #categoryDescription {
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  text-align: justify;
+  padding: 0 20px; }
+  .post a, #categoryDescription a {
+    border-bottom: 2px solid #4094aa; }
 
-.link-color-0 a:hover { color:#f0978b; }
-.link-color-1 a:hover { color:#f9d28b; }
-.link-color-2 a:hover { color:#d9d594; }
-.link-color-3 a:hover { color:#9cab8b; }
-.link-color-4 a:hover { color:#4094aa; }
+#categoryDescription {
+  font-style: italic;
+  border-left: 3px solid #f0978b;
+  margin: 55px auto; }
+
+.post {
+  line-height: 1.6em;
+  border-left: 3px solid #f9d28b;
+  margin-bottom: 55px; }
+  .post img {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%; }
+
+.description:hover {
+  border-left: 3px solid #4094aa; }
+
+.post.full {
+  margin-top: 55px; }
+
+/*
+ * GitHub style for Pygments syntax highlighter, for use with Jekyll
+ * Courtesy of GitHub.com
+ * Minor changed by Anton Fagerberg
+ */
+.highlight pre, pre, .highlight .hll {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: 'Source Code Pro';
+  line-height: 1.5em;
+  overflow: scroll; }
+
+.highlight .c {
+  color: #999988;
+  font-style: italic; }
+
+.highlight .err {
+  color: #a61717;
+  background-color: #e3d2d2; }
+
+.highlight .k {
+  font-weight: bold; }
+
+.highlight .o {
+  font-weight: bold; }
+
+.highlight .cm {
+  color: #999988;
+  font-style: italic; }
+
+.highlight .cp {
+  color: #999999;
+  font-weight: bold; }
+
+.highlight .c1 {
+  color: #999988;
+  font-style: italic; }
+
+.highlight .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic; }
+
+.highlight .gd {
+  color: #000000;
+  background-color: #ffdddd; }
+
+.highlight .gd .x {
+  color: #000000;
+  background-color: #ffaaaa; }
+
+.highlight .ge {
+  font-style: italic; }
+
+.highlight .gr {
+  color: #aa0000; }
+
+.highlight .gh {
+  color: #999999; }
+
+.highlight .gi {
+  color: #000000;
+  background-color: #ddffdd; }
+
+.highlight .gi .x {
+  color: #000000;
+  background-color: #aaffaa; }
+
+.highlight .go {
+  color: #888888; }
+
+.highlight .gp {
+  color: #555555; }
+
+.highlight .gs {
+  font-weight: bold; }
+
+.highlight .gu {
+  color: #800080;
+  font-weight: bold; }
+
+.highlight .gt {
+  color: #aa0000; }
+
+.highlight .kc {
+  font-weight: bold; }
+
+.highlight .kd {
+  font-weight: bold; }
+
+.highlight .kn {
+  font-weight: bold; }
+
+.highlight .kp {
+  font-weight: bold; }
+
+.highlight .kr {
+  font-weight: bold; }
+
+.highlight .kt {
+  color: #445588;
+  font-weight: bold; }
+
+.highlight .m {
+  color: #009999; }
+
+.highlight .s {
+  color: #dd1144; }
+
+.highlight .n {
+  color: #333333; }
+
+.highlight .na {
+  color: teal; }
+
+.highlight .nb {
+  color: #0086b3; }
+
+.highlight .nc {
+  color: #445588;
+  font-weight: bold; }
+
+.highlight .no {
+  color: teal; }
+
+.highlight .ni {
+  color: purple; }
+
+.highlight .ne {
+  color: #990000;
+  font-weight: bold; }
+
+.highlight .nf {
+  color: #990000;
+  font-weight: bold; }
+
+.highlight .nn {
+  color: #555555; }
+
+.highlight .nt {
+  color: navy; }
+
+.highlight .nv {
+  color: teal; }
+
+.highlight .ow {
+  font-weight: bold; }
+
+.highlight .w {
+  color: #bbbbbb; }
+
+.highlight .mf {
+  color: #009999; }
+
+.highlight .mh {
+  color: #009999; }
+
+.highlight .mi {
+  color: #009999; }
+
+.highlight .mo {
+  color: #009999; }
+
+.highlight .sb {
+  color: #dd1144; }
+
+.highlight .sc {
+  color: #dd1144; }
+
+.highlight .sd {
+  color: #dd1144; }
+
+.highlight .s2 {
+  color: #dd1144; }
+
+.highlight .se {
+  color: #dd1144; }
+
+.highlight .sh {
+  color: #dd1144; }
+
+.highlight .si {
+  color: #dd1144; }
+
+.highlight .sx {
+  color: #dd1144; }
+
+.highlight .sr {
+  color: #009926; }
+
+.highlight .s1 {
+  color: #dd1144; }
+
+.highlight .ss {
+  color: #990073; }
+
+.highlight .bp {
+  color: #999999; }
+
+.highlight .vc {
+  color: teal; }
+
+.highlight .vg {
+  color: teal; }
+
+.highlight .vi {
+  color: teal; }
+
+.highlight .il {
+  color: #009999; }
+
+.highlight .gc {
+  color: #999;
+  background-color: #EAF2F5; }

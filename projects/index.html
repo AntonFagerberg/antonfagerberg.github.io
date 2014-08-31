@@ -1,87 +1,106 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Projects</title>
-        <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="/css/main.css">
-        <link rel="stylesheet" href="/css/syntax.css">
-    </head>
-    <body>
-      <div id="gradient">&nbsp;</div>
-      <div id="header">&nbsp;</div>
 
-      <div id="menu">
-        <span class="link-color-0">
-            <a href="/">
-                Home
-            </a>
-        </span>
-        |
-        <span class="link-color-4">
-            <a href="/projects">
-                Projects
-            </a>
-        </span>
-        |
-        <span class="link-color-1">
-            <a href="/work">
-                Work
-            </a>
-        </span>
-        |
-        <span class="link-color-2">
-            <a href="/cv">
-                CV
-            </a>
-        </span>
-        
-        |
-        <span class="link-color-3">
-            <a href="/contact">
-                Contact
-            </a>
-        </span>
-      </div>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-      <div class="description">
-	<p>This is a selection of some of the hobby projects which I&#39;ve created in the past. You can only find a few of the things I&#39;ve created on this page. For more stuff, check out my <a href="https://github.com/AntonFagerberg">GitHub profile</a>. </p>
+    <title>Projects</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://www.antonfagerberg.com/projects">
+</head>
+
+
+  <body>
+
+    <div id="gradient"></div>
+<div id="logo">
+  <a href="/">Anton<br>Fagerberg</a>
+</div>
+
+<div id="menu">
+  <a href="/">Home</a>
+  <span class="grayBar">|</span>
+  <a href="/projects">Projects</a>
+  <span class="grayBar">|</span>
+  <a href="/work">Work</a>
+  <span class="grayBar">|</span>
+  <a href="/cv">CV</a>
+  <span class="grayBar">|</span>
+  <a href="/contact">Contact</a>
+</div>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div id="categoryDescription">
+	<p>This is a selection of some of the hobby projects which I’ve created in the past. You can only find a few of the things I’ve created on this page - for more stuff, check out my <a href="https://github.com/AntonFagerberg">GitHub profile</a>. </p>
+
 
 </div>
 
 
 	
-		<div class="item" onclick="location.href='/projects/skip-list-java/'" style="cursor: pointer;">
-			<h2>Generic skip list (map) in Java</h2>
-			<p>The skip list is a interesting probabilistic data structure which and can be an alternative to trees. Here I've completed a simple implementation in Java using generics. The items in the skip list are actually key-value pairs and therefore works as a map.
+		<div class="post description" onclick="location.href='/projects/kinect-ware/'" style="cursor: pointer;">
+			<h1>KinectWare</h1>
+			<p><iframe src="//player.vimeo.com/video/104841932?portrait=0&amp;color=c9ff23" width="800" height="450" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 </p>
-			<a href="/projects/skip-list-java/">Read more</a><br />
-			<!--<span class="notice">18 May 2014</span>-->
+			<a style="font-weight: bold;" href="/projects/kinect-ware/">Read more</a><br />
 		</div>
 	
 
 	
-		<div class="item" onclick="location.href='/projects/temporal-information-extraction/'" style="cursor: pointer;">
-			<h2>Temporal Information Extraction</h2>
+		<div class="post description" onclick="location.href='/projects/sweet-spots/'" style="cursor: pointer;">
+			<h1>Sweet Spots</h1>
+			<p>SweetSpots is an app I developed to learn how to use the Android SDK (target API-level 17 and above). I never released it on Google Play, I did however find it useful for my own needs. Below is a fictive sales pitch I wrote:
+
+</p>
+			<a style="font-weight: bold;" href="/projects/sweet-spots/">Read more</a><br />
+		</div>
+	
+
+	
+		<div class="post description" onclick="location.href='/projects/travelling-salesman-problem/'" style="cursor: pointer;">
+			<h1>Traveling Salesman Problem in C++</h1>
+			<p>We had a friendly competition at Jayway where I work of who could get the best result in different instances of the Traveling Salesman Problem. I wrote my solver in C++ to refresh my knowledge there an it worked fairly well. I quickly achieved very good results on the smaller instances but had problems dealing with instances with 10,000 nodes.
+
+</p>
+			<a style="font-weight: bold;" href="/projects/travelling-salesman-problem/">Read more</a><br />
+		</div>
+	
+
+	
+		<div class="post description" onclick="location.href='/projects/skip-list-java/'" style="cursor: pointer;">
+			<h1>Generic skip list (map) in Java</h1>
+			<p>The skip list is a interesting probabilistic data structure which can be an alternative to trees. Below is a simple implementation in Java using generics to store key-value pairs and therefore works as a map.
+
+</p>
+			<a style="font-weight: bold;" href="/projects/skip-list-java/">Read more</a><br />
+		</div>
+	
+
+	
+		<div class="post description" onclick="location.href='/projects/temporal-information-extraction/'" style="cursor: pointer;">
+			<h1>Temporal Information Extraction</h1>
 			<p>This project uses mainly regular expressions with some additional tweaking functions to extract temporal information (dates, durations, time, etc) from news articles or any other text.
 
 </p>
-			<a href="/projects/temporal-information-extraction/">Read more</a><br />
-			<!--<span class="notice">29 Nov 2013</span>-->
+			<a style="font-weight: bold;" href="/projects/temporal-information-extraction/">Read more</a><br />
 		</div>
 	
 
 	
-		<div class="item" onclick="location.href='/projects/dlerss/'" style="cursor: pointer;">
-			<h2>Dlerss - RSS Downloader</h2>
+		<div class="post description" onclick="location.href='/projects/dlerss/'" style="cursor: pointer;">
+			<h1>Dlerss - RSS Downloader</h1>
 			<p>This project is inspired by RSSDler ([code.google.com/p/rssdler](https://code.google.com/p/rssdler/)), but this project does not have as many features.
 The only thing this application does is that it downloads files linked in RSS (XML) feeds if the titles are matched against some regular expression.
 
 </p>
-			<a href="/projects/dlerss/">Read more</a><br />
-			<!--<span class="notice">28 Nov 2013</span>-->
+			<a style="font-weight: bold;" href="/projects/dlerss/">Read more</a><br />
 		</div>
 	
 
@@ -102,88 +121,128 @@ The only thing this application does is that it downloads files linked in RSS (X
 	
 
 	
-		<div class="item" onclick="location.href='/projects/instagram-api-scala/'" style="cursor: pointer;">
-			<h2>Instagram API Scala</h2>
-			<p><p>This is an Scala implementation of the Instagram API. It uses scalaj-http to send HTTP-requests and lift-json to parse the JSON response to case classes.</p>
+		<div class="post description" onclick="location.href='/projects/instagram-api-scala/'" style="cursor: pointer;">
+			<h1>Instagram API Scala</h1>
+			<p><p>This is an Scala implementation of the Instagram API.</p>
+
 </p>
-			<a href="/projects/instagram-api-scala/">Read more</a><br />
-			<!--<span class="notice">14 May 2013</span>-->
+			<a style="font-weight: bold;" href="/projects/instagram-api-scala/">Read more</a><br />
 		</div>
 	
 
 	
 
 	
-		<div class="item" onclick="location.href='/projects/bm-elite-force-2/'" style="cursor: pointer;">
-			<h2>BM Elite Force 2</h2>
-			<p><iframe src="http://player.vimeo.com/video/56785260?title=0&amp;byline=0&amp;portrait=0&amp;color=c9ff23" width="656" height="369" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+		<div class="post description" onclick="location.href='/projects/bm-elite-force-2/'" style="cursor: pointer;">
+			<h1>BM Elite Force 2</h1>
+			<p><iframe src="//player.vimeo.com/video/56785260?portrait=0&amp;color=c9ff23" width="800" height="450" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+
 </p>
-			<a href="/projects/bm-elite-force-2/">Read more</a><br />
-			<!--<span class="notice">24 Dec 2012</span>-->
+			<a style="font-weight: bold;" href="/projects/bm-elite-force-2/">Read more</a><br />
 		</div>
 	
 
 	
-		<div class="item" onclick="location.href='/projects/personnummer-sverige/'" style="cursor: pointer;">
-			<h2>Personnummer Sverige</h2>
-			<p><p>I made this app, mostly like a proof of concept, since I wanted to try working with Objective-C and how it is like to develop iOS apps in the Apple eco-system. It&#39;s a small app which can create and validate Swedish personal identity numbers. I decided not to keep it on the Appstore after my one year &quot;developer license&quot; expired. The development was fairly easy and I had no problem with Apples review-process. It had about 50 downloads every week since I released it which was quite a lot more than what I&#39;d expected.</p>
+		<div class="post description" onclick="location.href='/projects/personnummer-sverige/'" style="cursor: pointer;">
+			<h1>Personnummer Sverige</h1>
+			<p><p>I made this app, mostly like a proof of concept, since I wanted to try working with Objective-C and how it is like to develop iOS apps in the Apple eco-system. It’s a small app which can create and validate Swedish personal identity numbers. I decided not to keep it on the Appstore after my one year “developer license” expired. The development was fairly easy given the small scope of the app and I had no problem with Apples review-process. It had about 50 downloads every week since I released it which was quite a lot more than what I’d expected. I am well aware of that the design is butt ugly!</p>
+
 </p>
-			<a href="/projects/personnummer-sverige/">Read more</a><br />
-			<!--<span class="notice">20 Dec 2012</span>-->
+			<a style="font-weight: bold;" href="/projects/personnummer-sverige/">Read more</a><br />
 		</div>
 	
 
 	
-		<div class="item" onclick="location.href='/projects/crazy-akka-game-of-life/'" style="cursor: pointer;">
-			<h2>Crazy Akka Game of Life</h2>
-			<p><p>As the title says, this is a crazy implementation of Conway&#39;s Game of Life using Akka and Scala. The goal of this implementation was:</p>
+		<div class="post description" onclick="location.href='/projects/crazy-akka-game-of-life/'" style="cursor: pointer;">
+			<h1>Crazy Akka Game of Life</h1>
+			<p><p>As the title says, this is a crazy implementation of Conway’s Game of Life using Akka and Scala. The goal of this implementation was:</p>
+
 </p>
-			<a href="/projects/crazy-akka-game-of-life/">Read more</a><br />
-			<!--<span class="notice">22 Aug 2012</span>-->
+			<a style="font-weight: bold;" href="/projects/crazy-akka-game-of-life/">Read more</a><br />
 		</div>
 	
 
 	
-		<div class="item" onclick="location.href='/projects/binary-(back-tracking)-sudoku-solver/'" style="cursor: pointer;">
-			<h2>Binary (back tracking) Sudoku solver</h2>
+		<div class="post description" onclick="location.href='/projects/binary-(back-tracking)-sudoku-solver/'" style="cursor: pointer;">
+			<h1>Binary (back tracking) Sudoku solver</h1>
 			<p><p>Binary (back tracking) Sudoku solver meant to be really fast, written in C. Solves the worst-case scenario (according to Wikipedia) in 5 seconds on my machine.</p>
+
 </p>
-			<a href="/projects/binary-(back-tracking)-sudoku-solver/">Read more</a><br />
-			<!--<span class="notice">20 Aug 2012</span>-->
+			<a style="font-weight: bold;" href="/projects/binary-(back-tracking)-sudoku-solver/">Read more</a><br />
 		</div>
 	
 
 	
-		<div class="item" onclick="location.href='/projects/bm-elite-force/'" style="cursor: pointer;">
-			<h2>BM Elite Force</h2>
-			<p><iframe src="http://player.vimeo.com/video/37264636?title=0&amp;byline=0&amp;portrait=0" width="656" height="369" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+		<div class="post description" onclick="location.href='/projects/bm-elite-force/'" style="cursor: pointer;">
+			<h1>BM Elite Force</h1>
+			<p><iframe src="//player.vimeo.com/video/37264636?portrait=0&amp;color=c9ff23" width="800" height="450" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+
 </p>
-			<a href="/projects/bm-elite-force/">Read more</a><br />
-			<!--<span class="notice">24 Dec 2011</span>-->
+			<a style="font-weight: bold;" href="/projects/bm-elite-force/">Read more</a><br />
 		</div>
 	
 
 	
-		<div class="item" onclick="location.href='/projects/eternity-ii-puzzle-solver/'" style="cursor: pointer;">
-			<h2>Eternity II Puzzle Solver</h2>
-			<p><p>The built in pattern will place the pieces from the middle piece in a spiral pattern towards the edges. I have solved different &quot;areas&quot; of the puzzle which works but there is no guarantee that it can actually solve the entire thing - and if you change the pattern, the puzzle might not work if you do not place a start piece manually. I have double checked all the pieces with another person so they should be correct but again, no guarantee. Whenever the algorithm successfully places a new piece (or finds a new solution with atleast equally many pieces as the record) it will output the solution to the terminal and to a file. Be ware that the code is pretty bad and not optimized at all.</p>
+		<div class="post description" onclick="location.href='/projects/eternity-ii-puzzle-solver/'" style="cursor: pointer;">
+			<h1>Eternity II Puzzle Solver</h1>
+			<p><p>Wikipedia article about the puzzle: <a href="http://en.wikipedia.org/wiki/Eternity_II_puzzle">wikipedia.org/wiki/Eternity_II_puzzle</a></p>
+
 </p>
-			<a href="/projects/eternity-ii-puzzle-solver/">Read more</a><br />
-			<!--<span class="notice">21 Aug 2010</span>-->
+			<a style="font-weight: bold;" href="/projects/eternity-ii-puzzle-solver/">Read more</a><br />
 		</div>
 	
 
 	
 
 
-      <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      </div>
+    </div>
 
-            ga('create', 'UA-40700896-1', 'antonfagerberg.com');
-            ga('send', 'pageview');
-        </script>
-    </body>
+    <!-- <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Anton Fagerberg</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>Anton Fagerberg</li>
+          <li><a href="mailto:anton@antonfagerberg.com">anton@antonfagerberg.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+
+          
+          <li>
+            <a href="https://twitter.com/antonfagerberg">
+              <span class="icon  icon--twitter">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809
+                  c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/>
+                </svg>
+              </span>
+
+              <span class="username">antonfagerberg</span>
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text"></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer> -->
+
+
+  </body>
+
 </html>
