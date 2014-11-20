@@ -88,6 +88,14 @@ p {
 .post.full {
   margin-top: 55px; }
 
+@media screen and (max-width: 700px) {
+  #logo {
+    width: 100vw; }
+    #logo a {
+      font-size: 14vw; }
+
+  #menu {
+    font-size: 4.5vw; } }
 /*
  * GitHub style for Pygments syntax highlighter, for use with Jekyll
  * Courtesy of GitHub.com
