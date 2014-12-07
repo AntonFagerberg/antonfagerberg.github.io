@@ -1,48 +1,118 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Generic skip list (map) in Java</title>
+    <title>Generic Skip List (map) in Java</title>
     <meta name="description" content="">
 
     <link rel="stylesheet" href="/css/main.css">
     <link rel="canonical" href="http://www.antonfagerberg.com/projects/skip-list-java/">
 </head>
 
-
   <body>
-
     <div id="gradient"></div>
-<div id="logo">
-  <a href="/">Anton<br>Fagerberg</a>
-</div>
 
 <div id="menu">
-  <a href="/">Home</a>
-  <span class="grayBar">|</span>
-  <a href="/projects">Projects</a>
-  <span class="grayBar">|</span>
-  <a href="/work">Work</a>
-  <span class="grayBar">|</span>
-  <a href="/cv">CV</a>
-  <span class="grayBar">|</span>
-  <a href="/favorites">Favorites</a>
-  <span class="grayBar">|</span>
+  <a href="/">About</a>&nbsp;&nbsp;|&nbsp;
+  <a href="/projects">Projects</a>&nbsp;&nbsp;|&nbsp;
+  <a href="/texts">Texts</a>&nbsp;&nbsp;|&nbsp;
+  <a href="/cv">CV</a>&nbsp;&nbsp;|&nbsp;
   <a href="/contact">Contact</a>
 </div>
-
-
-    <div class="page-content">
-      <div class="wrapper">
-        <div class="post full">
-	<h1>Generic skip list (map) in Java</h1>
-	<p>The skip list is a interesting probabilistic data structure which can be an alternative to trees. Below is a simple implementation in Java using generics to store key-value pairs and therefore works as a map.</p>
+    <div class="post full">
+	<h1>Generic Skip List (map) in Java</h1>
+	<p>The skip list is a interesting probabilistic data structure which can be used as an alternative to trees. Below is a simple implementation in Java using generics to store key-value pairs and therefore works as a map.</p>
 
 <p>Code available on my <a href="https://github.com/AntonFagerberg/SkipList-Map-Java">GitHub page</a>.</p>
+
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.util.NoSuchElementException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SkipList</span><span class="o">&lt;</span><span class="n">K</span> <span class="kd">extends</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">K</span><span class="o">&gt;,</span><span class="n">V</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">QuadNode</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="n">head</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QuadNode</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;(</span><span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+    <span class="kd">final</span> <span class="kd">static</span> <span class="n">Random</span> <span class="n">random</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Random</span><span class="o">();</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">insert</span><span class="o">(</span><span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">level</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">random</span><span class="o">.</span><span class="na">nextBoolean</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">level</span><span class="o">++;</span>
+        <span class="o">}</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">head</span><span class="o">.</span><span class="na">getLevel</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">level</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">QuadNode</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="n">newHead</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QuadNode</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;(</span><span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">head</span><span class="o">.</span><span class="na">getLevel</span><span class="o">()</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+            <span class="n">head</span><span class="o">.</span><span class="na">setUp</span><span class="o">(</span><span class="n">newHead</span><span class="o">);</span>
+            <span class="n">newHead</span><span class="o">.</span><span class="na">setDown</span><span class="o">(</span><span class="n">head</span><span class="o">);</span>
+            <span class="n">head</span> <span class="o">=</span> <span class="n">newHead</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="n">head</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">level</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="n">V</span> <span class="nf">find</span><span class="o">(</span><span class="n">K</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">head</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="n">key</span><span class="o">).</span><span class="na">getValue</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">delete</span><span class="o">(</span><span class="n">K</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">for</span> <span class="o">(</span><span class="n">QuadNode</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="n">key</span><span class="o">);</span> <span class="n">node</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span> <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">getDown</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">node</span><span class="o">.</span><span class="na">getPrevious</span><span class="o">().</span><span class="na">setNext</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">getNext</span><span class="o">());</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">getNext</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">node</span><span class="o">.</span><span class="na">getNext</span><span class="o">().</span><span class="na">setPrevious</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">getPrevious</span><span class="o">());</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="k">while</span> <span class="o">(</span><span class="n">head</span><span class="o">.</span><span class="na">getNext</span><span class="o">()</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">head</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="na">getDown</span><span class="o">();</span>
+            <span class="n">head</span><span class="o">.</span><span class="na">setUp</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">head</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">SkipList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">sl</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SkipList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;();</span>
+        <span class="n">sl</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="s">&quot;tre&quot;</span><span class="o">);</span>
+        <span class="n">sl</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">6</span><span class="o">,</span> <span class="s">&quot;sex&quot;</span><span class="o">);</span>
+        <span class="n">sl</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">&quot;två&quot;</span><span class="o">);</span>
+        <span class="n">sl</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="s">&quot;fem&quot;</span><span class="o">);</span>
+        <span class="n">sl</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">&quot;ett&quot;</span><span class="o">);</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">sl</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">&quot;ett&quot;</span><span class="o">);</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="s">&quot;Duplicates are not allowed!&quot;</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IllegalArgumentException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Yes, 1 should not be allowed again.&quot;</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sl</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;-------&quot;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sl</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="mi">3</span><span class="o">).</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;tre&quot;</span><span class="o">));</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sl</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="mi">6</span><span class="o">).</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;sex&quot;</span><span class="o">));</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sl</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="mi">2</span><span class="o">).</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;två&quot;</span><span class="o">));</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sl</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="mi">5</span><span class="o">).</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;fem&quot;</span><span class="o">));</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sl</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="mi">1</span><span class="o">).</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;ett&quot;</span><span class="o">));</span>
+
+        <span class="n">sl</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="mi">6</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sl</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;-------&quot;</span><span class="o">);</span>
+
+        <span class="n">sl</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sl</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;-------&quot;</span><span class="o">);</span>
+
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">sl</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="s">&quot;Nooo!&quot;</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchElementException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Yes, 3 should not be found&quot;</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
 
 <div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.util.NoSuchElementException</span><span class="o">;</span>
 
@@ -177,153 +247,17 @@
     <span class="o">}</span>
 <span class="o">}</span></code></pre></div>
 
-<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.util.NoSuchElementException</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SkipList</span><span class="o">&lt;</span><span class="n">K</span> <span class="kd">extends</span> <span class="n">Comparable</span><span class="o">&lt;</span><span class="n">K</span><span class="o">&gt;,</span><span class="n">V</span><span class="o">&gt;</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">QuadNode</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="n">head</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QuadNode</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;(</span><span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
-    <span class="kd">final</span> <span class="kd">static</span> <span class="n">Random</span> <span class="n">random</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Random</span><span class="o">();</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">insert</span><span class="o">(</span><span class="n">K</span> <span class="n">key</span><span class="o">,</span> <span class="n">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">level</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-        <span class="k">while</span> <span class="o">(</span><span class="n">random</span><span class="o">.</span><span class="na">nextBoolean</span><span class="o">())</span> <span class="o">{</span>
-            <span class="n">level</span><span class="o">++;</span>
-        <span class="o">}</span>
-
-        <span class="k">while</span> <span class="o">(</span><span class="n">head</span><span class="o">.</span><span class="na">getLevel</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">level</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">QuadNode</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span> <span class="n">newHead</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QuadNode</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;(</span><span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">head</span><span class="o">.</span><span class="na">getLevel</span><span class="o">()</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
-            <span class="n">head</span><span class="o">.</span><span class="na">setUp</span><span class="o">(</span><span class="n">newHead</span><span class="o">);</span>
-            <span class="n">newHead</span><span class="o">.</span><span class="na">setDown</span><span class="o">(</span><span class="n">head</span><span class="o">);</span>
-            <span class="n">head</span> <span class="o">=</span> <span class="n">newHead</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="n">head</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">level</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="n">V</span> <span class="nf">find</span><span class="o">(</span><span class="n">K</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">head</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="n">key</span><span class="o">).</span><span class="na">getValue</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">delete</span><span class="o">(</span><span class="n">K</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">for</span> <span class="o">(</span><span class="n">QuadNode</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="n">key</span><span class="o">);</span> <span class="n">node</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span> <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">getDown</span><span class="o">())</span> <span class="o">{</span>
-            <span class="n">node</span><span class="o">.</span><span class="na">getPrevious</span><span class="o">().</span><span class="na">setNext</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">getNext</span><span class="o">());</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">getNext</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">node</span><span class="o">.</span><span class="na">getNext</span><span class="o">().</span><span class="na">setPrevious</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">getPrevious</span><span class="o">());</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-
-        <span class="k">while</span> <span class="o">(</span><span class="n">head</span><span class="o">.</span><span class="na">getNext</span><span class="o">()</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">head</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="na">getDown</span><span class="o">();</span>
-            <span class="n">head</span><span class="o">.</span><span class="na">setUp</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">head</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">SkipList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">sl</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SkipList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;();</span>
-        <span class="n">sl</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="s">&quot;tre&quot;</span><span class="o">);</span>
-        <span class="n">sl</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">6</span><span class="o">,</span> <span class="s">&quot;sex&quot;</span><span class="o">);</span>
-        <span class="n">sl</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">&quot;två&quot;</span><span class="o">);</span>
-        <span class="n">sl</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="s">&quot;fem&quot;</span><span class="o">);</span>
-        <span class="n">sl</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">&quot;ett&quot;</span><span class="o">);</span>
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="n">sl</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">&quot;ett&quot;</span><span class="o">);</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="s">&quot;Duplicates are not allowed!&quot;</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IllegalArgumentException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Yes, 1 should not be allowed again.&quot;</span><span class="o">);</span>
-        <span class="o">}</span>
-
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sl</span><span class="o">);</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;-------&quot;</span><span class="o">);</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sl</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="mi">3</span><span class="o">).</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;tre&quot;</span><span class="o">));</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sl</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="mi">6</span><span class="o">).</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;sex&quot;</span><span class="o">));</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sl</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="mi">2</span><span class="o">).</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;två&quot;</span><span class="o">));</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sl</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="mi">5</span><span class="o">).</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;fem&quot;</span><span class="o">));</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sl</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="mi">1</span><span class="o">).</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;ett&quot;</span><span class="o">));</span>
-
-        <span class="n">sl</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="mi">6</span><span class="o">);</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sl</span><span class="o">);</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;-------&quot;</span><span class="o">);</span>
-
-        <span class="n">sl</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">sl</span><span class="o">);</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;-------&quot;</span><span class="o">);</span>
-
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="n">sl</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalStateException</span><span class="o">(</span><span class="s">&quot;Nooo!&quot;</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NoSuchElementException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Yes, 3 should not be found&quot;</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre></div>
-
-
-	<!--<span class="notice">18 May 2014</span>-->
 </div>
 
-      </div>
-    </div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    <!-- <footer class="site-footer">
-
-  <div class="wrapper">
-
-    <h2 class="footer-heading">Anton Fagerberg</h2>
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col  footer-col-1">
-        <ul class="contact-list">
-          <li>Anton Fagerberg</li>
-          <li><a href="mailto:anton@antonfagerberg.com">anton@antonfagerberg.com</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col  footer-col-2">
-        <ul class="social-media-list">
-          
-
-          
-          <li>
-            <a href="https://twitter.com/antonfagerberg">
-              <span class="icon  icon--twitter">
-                <svg viewBox="0 0 16 16">
-                  <path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809
-                  c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/>
-                </svg>
-              </span>
-
-              <span class="username">antonfagerberg</span>
-            </a>
-          </li>
-          
-        </ul>
-      </div>
-
-      <div class="footer-col  footer-col-3">
-        <p class="text"></p>
-      </div>
-    </div>
-
-  </div>
-
-</footer> -->
-
-
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-40700896-1', 'antonfagerberg.com');
-    ga('send', 'pageview');
-  </script>
+      ga('create', 'UA-40700896-1', 'antonfagerberg.com');
+      ga('send', 'pageview');
+    </script>
   </body>
-
 </html>
