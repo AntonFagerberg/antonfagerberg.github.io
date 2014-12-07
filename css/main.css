@@ -170,6 +170,7 @@ $margin: 55px;
 }
 
 .post.full {
+<<<<<<< HEAD
   margin-top: $margin;
 }
 
@@ -191,6 +192,22 @@ $margin: 55px;
  * https://github.com/kkga/spacegray
  *
  * (Minor changes by Anton Fagerberg)
+=======
+  margin-top: 55px; }
+
+@media screen and (max-width: 700px) {
+  #logo {
+    width: 100vw; }
+    #logo a {
+      font-size: 14vw; }
+
+  #menu {
+    font-size: 4.5vw; } }
+/*
+ * GitHub style for Pygments syntax highlighter, for use with Jekyll
+ * Courtesy of GitHub.com
+ * Minor changed by Anton Fagerberg
+>>>>>>> FETCH_HEAD
  */
 .highlight {
   background-color: #343d46;

@@ -5,6 +5,7 @@
     <description></description>
     <link>http://www.antonfagerberg.com/</link>
     <atom:link href="http://www.antonfagerberg.com/feed.xml" rel="self" type="application/rss+xml" />
+<<<<<<< HEAD
     <pubDate>Sun, 07 Dec 2014 13:40:31 +0100</pubDate>
     <lastBuildDate>Sun, 07 Dec 2014 13:40:31 +0100</lastBuildDate>
     <generator>Jekyll v2.5.2</generator>
@@ -127,6 +128,11 @@
         <category>projects</category>
         
       </item>
+=======
+    <pubDate>Thu, 20 Nov 2014 21:29:32 +0100</pubDate>
+    <lastBuildDate>Thu, 20 Nov 2014 21:29:32 +0100</lastBuildDate>
+    <generator>Jekyll v2.5.1</generator>
+>>>>>>> FETCH_HEAD
     
       <item>
         <title>KinectWare</title>
