@@ -5,9 +5,68 @@
     <description></description>
     <link>http://www.antonfagerberg.com/</link>
     <atom:link href="http://www.antonfagerberg.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 08 Dec 2014 17:28:15 +0100</pubDate>
-    <lastBuildDate>Mon, 08 Dec 2014 17:28:15 +0100</lastBuildDate>
-    <generator>Jekyll v2.5.2</generator>
+    <pubDate>Mon, 02 Mar 2015 23:13:09 +0100</pubDate>
+    <lastBuildDate>Mon, 02 Mar 2015 23:13:09 +0100</lastBuildDate>
+    <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Install Elixir on a Raspberry Pi</title>
+        <description>&lt;p&gt;This is a tutorial of how to install Elixir on a Raspberry Pi using the distribution Raspbian.&lt;/p&gt;
+
+&lt;p&gt;The first thing we need to do is to add the Erlang Solutions repository to our system. Open the file /etc/apt/sources.list with your favorite editor and add the following line to it:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;deb http://packages.erlang-solutions.com/debian wheezy contrib&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;After saving the file, we need to add the repository’s public key to our systems keychain:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;wget http://packages.erlang-solutions.com/debian/erlang_solutions.asc
+sudo apt-key add erlang_solutions.asc&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;After this is done, we can remove the file erlang_solutions.asc if we want to.&lt;/p&gt;
+
+&lt;p&gt;Now we’re ready to update our systems repositories:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get update&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;After that has been done, we can begin install the needed packages:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get install git erlang-mini erlang-eunit&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Git is a version control system which we’ll use for fetching Elixir. Erlang-mini is a tiny Erlang package for small devices (no GUI related dependencies and so on). Erlang-eunit is not really required to build Elixir itself but it will fail the unit-tests after the compilation is done which means that we can’t know for sure that the system is working properly.&lt;/p&gt;
+
+&lt;p&gt;After the packages has been installed, we’re ready to get Elixir from GitHub:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git clone https://github.com/elixir-lang/elixir.git
+cd elixir&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, optionally, we can checkout a specific version of Elixir if we want to:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git checkout tags/v1.0.3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We’re now ready to compile Elixir:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;make clean test&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will take several minutes so go get yourself a coffee or beverage of choice while the Raspberry Pi is chewing away.&lt;/p&gt;
+
+&lt;p&gt;After the compilation has completed and all unit-tests has passed, you’ve got yourself Elixir ready to use!&lt;/p&gt;
+
+&lt;p&gt;Now you probably want to add the bin folder for Elixir to your path. This can be done temporarily by executing the following command in the terminal - or permanently by adding it to the file .profile in your home folder reloading the shell.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;export PATH=&amp;quot;$PATH:/path/to/elixir/bin&amp;quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Be sure to change the path to the appropriate path where you cloned and compiled Elixir.&lt;/p&gt;
+
+&lt;p&gt;Now you’re all set - happy hacking!&lt;/p&gt;
+</description>
+        <pubDate>Sun, 01 Mar 2015 00:00:00 +0100</pubDate>
+        <link>http://www.antonfagerberg.com/texts/elixir-on-raspberry-pi/</link>
+        <guid isPermaLink="true">http://www.antonfagerberg.com/texts/elixir-on-raspberry-pi/</guid>
+        
+        
+        <category>texts</category>
+        
+      </item>
     
       <item>
         <title>Bencode in Elixir</title>
@@ -254,20 +313,6 @@
         <pubDate>Sun, 31 Aug 2014 00:00:00 +0200</pubDate>
         <link>http://www.antonfagerberg.com/favorites/frances-hs/</link>
         <guid isPermaLink="true">http://www.antonfagerberg.com/favorites/frances-hs/</guid>
-        
-        
-        <category>favorites</category>
-        
-      </item>
-    
-      <item>
-        <title>1Q84</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/images/recommended/1q84.jpg&quot; alt=&quot;1Q84&quot; /&gt;
-&lt;a href=&quot;http://en.wikipedia.org/wiki/1Q84&quot;&gt;The book on Wikipedia&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 31 Aug 2014 00:00:00 +0200</pubDate>
-        <link>http://www.antonfagerberg.com/favorites/1q84/</link>
-        <guid isPermaLink="true">http://www.antonfagerberg.com/favorites/1q84/</guid>
         
         
         <category>favorites</category>
