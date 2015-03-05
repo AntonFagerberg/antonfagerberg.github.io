@@ -5,8 +5,8 @@
     <description></description>
     <link>http://www.antonfagerberg.com/</link>
     <atom:link href="http://www.antonfagerberg.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 05 Mar 2015 23:48:54 +0100</pubDate>
-    <lastBuildDate>Thu, 05 Mar 2015 23:48:54 +0100</lastBuildDate>
+    <pubDate>Thu, 05 Mar 2015 23:57:56 +0100</pubDate>
+    <lastBuildDate>Thu, 05 Mar 2015 23:57:56 +0100</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -141,6 +141,54 @@ mix ecto.migrate -r Repo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
         <pubDate>Wed, 04 Mar 2015 00:00:00 +0100</pubDate>
         <link>http://www.antonfagerberg.com/projects/temperature-raspberry-pi/</link>
         <guid isPermaLink="true">http://www.antonfagerberg.com/projects/temperature-raspberry-pi/</guid>
+        
+        
+        <category>projects</category>
+        
+      </item>
+    
+      <item>
+        <title>Humble Download</title>
+        <description>&lt;p&gt;HumbleDownload is used for downloading / making a complete back-up of your library from &lt;a href=&quot;http://humblebundle.com/&quot;&gt;Humble Bundle&lt;/a&gt; to your computer. It will download everything: games, books, music etc and try to group them together in folders based on the names (which isn’t perfect unfortunately).&lt;/p&gt;
+
+&lt;h2 id=&quot;build-the-project&quot;&gt;Build the project&lt;/h2&gt;
+&lt;p&gt;First, &lt;a href=&quot;http://elixir-lang.org/install.html&quot;&gt;install Elixir&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Execute the following from the project root:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;mix deps.get
+mix escript.build&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will create the executable file “humble_download” which can be run on any system which has the Erlang runtime installed.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;./humble_download &amp;lt;input file&amp;gt; &amp;lt;download folder&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;create-the-input-file&quot;&gt;Create the input file&lt;/h2&gt;
+&lt;p&gt;Copy-paste the code from &lt;a href=&quot;https://github.com/AntonFagerberg/humble_download/blob/master/humbledownload.js&quot;&gt;humbledownload.js&lt;/a&gt; in to the developer console in your browser when you’re viewing your library on the Humble Bundle site. Copy-paste the result to a new text-file and use it as the input file as described above. The file should have three lines per item in your library: folder name, filename, link.&lt;/p&gt;
+
+&lt;h2 id=&quot;important&quot;&gt;Important!&lt;/h2&gt;
+&lt;p&gt;The links are timed-based and will expire. When that happens, create another input file as before and restart humble_download with the new input file. The previously downloaded files will not be downloaded again.&lt;/p&gt;
+
+&lt;h2 id=&quot;code&quot;&gt;Code&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/AntonFagerberg/humble_download&quot;&gt;All code is on my GitHub page&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;license&quot;&gt;License&lt;/h3&gt;
+&lt;p&gt;This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.&lt;/p&gt;
+
+&lt;p&gt;This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.&lt;/p&gt;
+
+&lt;p&gt;You should have received a copy of the GNU General Public License
+along with this program.  If not, see &lt;a href=&quot;http://www.gnu.org/licenses/&quot;&gt;http://www.gnu.org/licenses/&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 03 Mar 2015 00:00:00 +0100</pubDate>
+        <link>http://www.antonfagerberg.com/projects/humble-download/</link>
+        <guid isPermaLink="true">http://www.antonfagerberg.com/projects/humble-download/</guid>
         
         
         <category>projects</category>
@@ -423,20 +471,6 @@ cd elixir&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
         <pubDate>Sun, 31 Aug 2014 00:00:00 +0200</pubDate>
         <link>http://www.antonfagerberg.com/favorites/grim-fandango/</link>
         <guid isPermaLink="true">http://www.antonfagerberg.com/favorites/grim-fandango/</guid>
-        
-        
-        <category>favorites</category>
-        
-      </item>
-    
-      <item>
-        <title>Ghost in the Shell</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/images/recommended/ghost-in-the-shell.png&quot; alt=&quot;ghost in the shell&quot; /&gt;
-&lt;a href=&quot;http://en.wikipedia.org/wiki/Ghost_in_the_Shell&quot;&gt;The film on Wikipedia&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 31 Aug 2014 00:00:00 +0200</pubDate>
-        <link>http://www.antonfagerberg.com/favorites/ghost-in-the-shell/</link>
-        <guid isPermaLink="true">http://www.antonfagerberg.com/favorites/ghost-in-the-shell/</guid>
         
         
         <category>favorites</category>
