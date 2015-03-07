@@ -5,8 +5,8 @@
     <description></description>
     <link>http://www.antonfagerberg.com/</link>
     <atom:link href="http://www.antonfagerberg.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 06 Mar 2015 00:04:03 +0100</pubDate>
-    <lastBuildDate>Fri, 06 Mar 2015 00:04:03 +0100</lastBuildDate>
+    <pubDate>Sun, 08 Mar 2015 00:49:59 +0100</pubDate>
+    <lastBuildDate>Sun, 08 Mar 2015 00:49:59 +0100</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -189,6 +189,61 @@ along with this program.  If not, see &lt;a href=&quot;http://www.gnu.org/licens
         <pubDate>Tue, 03 Mar 2015 00:00:00 +0100</pubDate>
         <link>http://www.antonfagerberg.com/projects/humble-download/</link>
         <guid isPermaLink="true">http://www.antonfagerberg.com/projects/humble-download/</guid>
+        
+        
+        <category>projects</category>
+        
+      </item>
+    
+      <item>
+        <title>Duplicate image removal</title>
+        <description>&lt;p&gt;This application will search a folder and its sub-folders for duplicate files and move them to a specified location.
+Only files within the same folder are considered duplicates!&lt;/p&gt;
+
+&lt;h2 id=&quot;build-the-application&quot;&gt;Build the application&lt;/h2&gt;
+
+&lt;p&gt;All source is available on &lt;a href=&quot;https://github.com/AntonFagerberg/duplicate_image&quot;&gt;my GitHub page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;dependencies&quot;&gt;Dependencies&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://elixir-lang.org/install.html&quot;&gt;Install Elixir&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;You need the tool &lt;a href=&quot;http://www.imagemagick.org/script/compare.php&quot;&gt;Compare&lt;/a&gt; from &lt;a href=&quot;http://www.imagemagick.org/&quot;&gt;ImageMagick&lt;/a&gt;. If you are on OS X and have got brew installed, you can install it with:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;brew install imagemagick&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;compile-the-application-to-a-binary&quot;&gt;Compile the application to a binary&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;mix escript.build&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will create a binary called “duplicate_image” which you can run on all systems which has the Erlang-runtime installed.&lt;/p&gt;
+
+&lt;h3 id=&quot;launch-the-application&quot;&gt;Launch the application&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;./duplicate_iamge /path/to/gallery /path/where/to/store/duplicates 0.1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The threshold, 0.1 in the example, must be a floating-poing number. 0.0 is a perfect match and 1.0 is entirely different. Perfect matches will always be moved!&lt;/p&gt;
+
+&lt;h2 id=&quot;other&quot;&gt;Other&lt;/h2&gt;
+&lt;p&gt;The &lt;a href=&quot;http://www.imagemagick.org/script/command-line-options.php#metric&quot;&gt;metric&lt;/a&gt; used is “RMSE”. The comparison is very slow and CPU-demanding which motivates parallelisation. The number of concurrent Elixir processes will be determined by the Erlang setting “schedulers_online” which normally amounts to the number of CPU-cores (or CPU-cures * 2 if hyper-threading is used).&lt;/p&gt;
+
+&lt;h2 id=&quot;license&quot;&gt;License&lt;/h2&gt;
+&lt;p&gt;This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.&lt;/p&gt;
+
+&lt;p&gt;This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.&lt;/p&gt;
+
+&lt;p&gt;You should have received a copy of the GNU General Public License
+along with this program.  If not, see &lt;a href=&quot;http://www.gnu.org/licenses/&quot;&gt;http://www.gnu.org/licenses/&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 02 Mar 2015 00:00:00 +0100</pubDate>
+        <link>http://www.antonfagerberg.com/projects/duplicate-image/</link>
+        <guid isPermaLink="true">http://www.antonfagerberg.com/projects/duplicate-image/</guid>
         
         
         <category>projects</category>
@@ -457,20 +512,6 @@ cd elixir&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
         <pubDate>Sun, 31 Aug 2014 00:00:00 +0200</pubDate>
         <link>http://www.antonfagerberg.com/favorites/her/</link>
         <guid isPermaLink="true">http://www.antonfagerberg.com/favorites/her/</guid>
-        
-        
-        <category>favorites</category>
-        
-      </item>
-    
-      <item>
-        <title>Grim Fandango</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/images/recommended/grim-fandango.jpg&quot; alt=&quot;grim fandango&quot; /&gt;
-&lt;a href=&quot;http://en.wikipedia.org/wiki/Grim_Fandango&quot;&gt;The game on Wikipedia&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 31 Aug 2014 00:00:00 +0200</pubDate>
-        <link>http://www.antonfagerberg.com/favorites/grim-fandango/</link>
-        <guid isPermaLink="true">http://www.antonfagerberg.com/favorites/grim-fandango/</guid>
         
         
         <category>favorites</category>
