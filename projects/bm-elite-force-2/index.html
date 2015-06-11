@@ -2,10 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <title>BM Elite Force 2</title>
+    <title>BM Elite Force 2 -  AntonFagerberg.com</title>
     <meta name="description" content="">
 
     <link rel="stylesheet" href="/css/main.css">
@@ -14,108 +14,139 @@
 
   <body>
     <div id="gradient"></div>
-
-<div id="menu">
-  <a href="/">About</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/projects">Projects</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/texts">Texts</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/cv">CV</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/contact">Contact</a>
-</div>
+    
+    
+    <div id="header">
+      <a href="/">
+        AntonFagerberg.com
+        <div id="punchline">
+          A programmer's field notes.
+        </div>
+      </a>
+    </div>
+    
+    
     <div class="post full">
 	<h1>BM Elite Force 2</h1>
-	<iframe src="//player.vimeo.com/video/56785260?portrait=0&amp;color=c9ff23" width="750" height="422" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+	
+	
+	<strong>24 Dec 2012</strong>
+	
+	
+	<iframe src="//player.vimeo.com/video/56785260?portrait=0&amp;color=c9ff23" width="750" height="422" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
-<p>This is the second game in the BM Elite Force series (not much related to each other). BM Elite Force 2 has been my autumn/winter project of 2012. I started this “tradition” in 2011 where I create a new game in a new (for me) language every year and release it around christmas dedicated to my good old friends when we meet up. This year the game was written in Scala using the Java library Slick 2D (built on LWJGL).</p>
+<p>This is the second game in the BM Elite Force series (not much related to each other). BM Elite Force 2 has been my autumn/winter project of 2012. I started this &quot;tradition&quot; in 2011 where I create a new game in a new (for me) language every year and release it around christmas dedicated to my good old friends when we meet up. This year the game was written in Scala using the Java library Slick 2D (built on LWJGL).</p>
 
 <p><a href="http://code.google.com/p/bm-elite-force-2/downloads/list">Download binaries from Google Code</a></p>
 
-<h2 id="builds--requirements">Builds &amp; Requirements</h2>
+<h2>Builds &amp; Requirements</h2>
+
 <p>Pre-compiled versions for OS X, Windows and Linux is found in the project root (in the folders named OS X, Windows and Linux). If you just want to download and play the game, use the link above (Google Code).</p>
 
-<h2 id="controls">Controls</h2>
+<h2>Controls</h2>
+
 <p>This game is meant to be played with and <strong>Xbox 360 controller</strong>. You really should use one to enjoy this game (analog precision makes all the difference) and it has the correct color coding. There is however keyboard bindings avaliable if you just want to try it out.</p>
 
-<h3 id="xbox-360-controller">Xbox 360 controller</h3>
+<h3>Xbox 360 controller</h3>
+
 <ul>
-  <li>Steering: Left stick</li>
-  <li>Change color: Colored buttons A, B, X, Y or Right stick</li>
-  <li>Shoot: Right trigger</li>
-  <li>Toggle health: Press left stick</li>
+<li>Steering: Left stick</li>
+<li>Change color: Colored buttons A, B, X, Y or Right stick</li>
+<li>Shoot: Right trigger</li>
+<li>Toggle health: Press left stick</li>
 </ul>
 
-<h3 id="keyboard">Keyboard</h3>
+<h3>Keyboard</h3>
+
 <ul>
-  <li>Steering: Arrow keys</li>
-  <li>Change color: W, A, S, D</li>
-  <li>Shoot: Space or Left Shift</li>
-  <li>Toggle health: Right Shift</li>
+<li>Steering: Arrow keys</li>
+<li>Change color: W, A, S, D</li>
+<li>Shoot: Space or Left Shift</li>
+<li>Toggle health: Right Shift</li>
 </ul>
 
-<h2 id="bugs">Bugs</h2>
-<p>There are some bugs which I know of but I’m not currently not trying to fix them. Feel free to submit a pull request if you wish.</p>
+<h2>Bugs</h2>
 
-<h3 id="linux">Linux</h3>
-<p>Fullscreen mode and sound doesn’t work in Ubuntu 12.10 as far as I can tell?</p>
+<p>There are some bugs which I know of but I&#39;m not currently not trying to fix them. Feel free to submit a pull request if you wish.</p>
 
-<h2 id="requirements">Requirements</h2>
+<h3>Linux</h3>
+
+<p>Fullscreen mode and sound doesn&#39;t work in Ubuntu 12.10 as far as I can tell?</p>
+
+<h2>Requirements</h2>
+
 <p>Java 1.6+ is required. Everything else is distributed with the pre-compiled builds.</p>
 
-<h2 id="resources-for-hacking--building-the-game">Resources for hacking / building the game</h2>
+<h2>Resources for hacking / building the game</h2>
+
 <p><a href="http://www.slick2d.org/">Slick 2D</a></p>
 
 <p><a href="http://www.lwjgl.org/">LWJGL</a></p>
 
-<h3 id="javalangunsatisfiedlinkerror-no-lwjgl-in-javalibrarypath">java.lang.UnsatisfiedLinkError: no lwjgl in java.library.path</h3>
+<h3>java.lang.UnsatisfiedLinkError: no lwjgl in java.library.path</h3>
+
 <p>You must specify the native files, for OS X you should provide the following VM option:</p>
 
 <div class="highlight"><pre><code class="language-java" data-lang="java"><span class="o">-</span><span class="n">Djava</span><span class="o">.</span><span class="na">library</span><span class="o">.</span><span class="na">path</span><span class="o">=</span><span class="n">lib</span><span class="o">/</span><span class="kd">native</span><span class="o">/</span><span class="n">macosx</span></code></pre></div>
 
-<h2 id="bm-elite-force-1-game-from-2011">BM Elite Force 1 (game from 2011)</h2>
+<h2>BM Elite Force 1 (game from 2011)</h2>
+
 <p>This was the previous game which I coded in Ruby with LibGosu.</p>
 
 <p><a href="https://github.com/AntonFagerberg/BM-Elite-Force">github.com/AntonFagerberg/BM-Elite-Force</a></p>
 
-<h2 id="license">License</h2>
+<h2>License</h2>
+
 <p>GNU General Public License, version 2</p>
 
-<h2 id="music-cc-by-nc-sa-30">Music (CC BY-NC-SA 3.0)</h2>
+<h2>Music (CC BY-NC-SA 3.0)</h2>
 
-<h3 id="jimmypig">Jimmypig</h3>
+<h3>Jimmypig</h3>
+
 <p><a href="http://www.newgrounds.com/audio/listen/469781">XS &amp; GS - Game Over</a></p>
 
 <p><a href="http://www.newgrounds.com/audio/listen/498935">X Sentinel - Lift Off</a></p>
 
-<h3 id="nal1200">nal1200</h3>
+<h3>nal1200</h3>
+
 <p><a href="http://www.newgrounds.com/audio/listen/500422">Defiance</a></p>
 
-<h3 id="avizura">Avizura</h3>
+<h3>Avizura</h3>
+
 <p><a href="http://www.newgrounds.com/audio/listen/500531">Avizura - Loyalty</a></p>
 
-<h3 id="mainstreambeats">MainStreamBeats</h3>
+<h3>MainStreamBeats</h3>
+
 <p><a href="http://www.newgrounds.com/audio/listen/476561">LED (SMB) - (wip)</a></p>
 
-<h3 id="magicaldani13">magicalDANI13</h3>
+<h3>magicalDANI13</h3>
+
 <p><a href="http://www.newgrounds.com/audio/listen/476147">Magically Winterland</a></p>
 
-<h3 id="unknown">unknown</h3>
+<h3>unknown</h3>
+
 <p><a href="http://www.newgrounds.com/audio/listen/481979">Tangerine</a></p>
 
-<h3 id="bezo">Bezo</h3>
+<h3>Bezo</h3>
+
 <p><a href="http://www.newgrounds.com/audio/listen/38773">The Most Inspiring Song Ever</a></p>
 
-<h2 id="graphics-cc-by-sa-30--gpl-20--gpl-30">Graphics (CC BY-SA 3.0 / GPL 2.0 / GPL 3.0)</h2>
+<h2>Graphics (CC BY-SA 3.0 / GPL 2.0 / GPL 3.0)</h2>
 
-<h3 id="surt">Surt</h3>
+<h3>Surt</h3>
+
 <p><a href="http://opengameart.org/content/shmup-ships">opengameart.org/content/shmup-ships</a></p>
 
-<h3 id="widgetworx">WidgetWorx</h3>
+<h3>WidgetWorx</h3>
+
 <p><a href="http://www.widgetworx.com/widgetworx/portfolio/spritelib.html">widgetworx.com/widgetworx/portfolio/spritelib.html</a></p>
 
-<h3 id="wyverii">Wyverii</h3>
+<h3>Wyverii</h3>
+
 <p><a href="http://opengameart.org/content/unsealed-terrex">opengameart.org/content/unsealed-terrex</a></p>
 
-<h3 id="frenetikfred-space-invaders-icons">FrenetikFred (Space Invaders icons)</h3>
+<h3>FrenetikFred (Space Invaders icons)</h3>
+
 <p><a href="http://frenetikfred.deviantart.com/art/Space-Invaders-icons-32203053">frenetikfred.deviantart.com/art/Space-Invaders-icons-32203053</a></p>
 
 </div>

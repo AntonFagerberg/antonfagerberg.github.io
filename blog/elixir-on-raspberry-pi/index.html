@@ -2,42 +2,51 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <title>Install Elixir on a Raspberry Pi</title>
+    <title>Install Elixir on a Raspberry Pi -  AntonFagerberg.com</title>
     <meta name="description" content="">
 
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://www.antonfagerberg.com/texts/elixir-on-raspberry-pi/">
+    <link rel="canonical" href="http://www.antonfagerberg.com/blog/elixir-on-raspberry-pi/">
 </head>
 
   <body>
     <div id="gradient"></div>
-
-<div id="menu">
-  <a href="/">About</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/projects">Projects</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/texts">Texts</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/cv">CV</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/contact">Contact</a>
-</div>
+    
+    
+    <div id="header">
+      <a href="/">
+        AntonFagerberg.com
+        <div id="punchline">
+          A programmer's field notes.
+        </div>
+      </a>
+    </div>
+    
+    
     <div class="post full">
 	<h1>Install Elixir on a Raspberry Pi</h1>
+	
+	
+	<strong>01 Mar 2015</strong>
+	
+	
 	<p>This is a tutorial of how to install Elixir (from source) on a Raspberry Pi using the distribution Raspbian.</p>
 
 <p>The first thing we need to do is to add the Erlang Solutions repository to our system. Open the file /etc/apt/sources.list with your favorite editor and add the following line to it:</p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">deb http://packages.erlang-solutions.com/debian wheezy contrib</code></pre></div>
 
-<p>After saving the file, we need to add the repository’s public key to our systems keychain:</p>
+<p>After saving the file, we need to add the repository&#39;s public key to our systems keychain:</p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">wget http://packages.erlang-solutions.com/debian/erlang_solutions.asc
 sudo apt-key add erlang_solutions.asc</code></pre></div>
 
 <p>After this is done, we can remove the file erlang_solutions.asc if we want to.</p>
 
-<p>Now we’re ready to update our systems repositories:</p>
+<p>Now we&#39;re ready to update our systems repositories:</p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">sudo apt-get update</code></pre></div>
 
@@ -45,9 +54,9 @@ sudo apt-key add erlang_solutions.asc</code></pre></div>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">sudo apt-get install git erlang</code></pre></div>
 
-<p>Git is a version control system which we’ll use for fetching Elixir. Erlang-mini is a tiny Erlang package for small devices (no GUI related dependencies and so on). Erlang-eunit is not really required to build Elixir itself but it will fail the unit-tests after the compilation is done which means that we can’t know for sure that the system is working properly.</p>
+<p>Git is a version control system which we&#39;ll use for fetching Elixir. Erlang-mini is a tiny Erlang package for small devices (no GUI related dependencies and so on). Erlang-eunit is not really required to build Elixir itself but it will fail the unit-tests after the compilation is done which means that we can&#39;t know for sure that the system is working properly.</p>
 
-<p>After the packages has been installed, we’re ready to get Elixir from GitHub:</p>
+<p>After the packages has been installed, we&#39;re ready to get Elixir from GitHub:</p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">git clone https://github.com/elixir-lang/elixir.git
 cd elixir</code></pre></div>
@@ -56,13 +65,13 @@ cd elixir</code></pre></div>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">git checkout tags/v1.0.3</code></pre></div>
 
-<p>We’re now ready to compile Elixir:</p>
+<p>We&#39;re now ready to compile Elixir:</p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">make clean test</code></pre></div>
 
 <p>This will take several minutes so go get yourself a coffee or beverage of choice while the Raspberry Pi is chewing away.</p>
 
-<p>After the compilation has completed and all unit-tests has passed, you’ve got yourself Elixir ready to use!</p>
+<p>After the compilation has completed and all unit-tests has passed, you&#39;ve got yourself Elixir ready to use!</p>
 
 <p>Now you probably want to add the bin folder for Elixir to your path. This can be done temporarily by executing the following command in the terminal - or permanently by adding it to the file .profile in your home folder reloading the shell.</p>
 
@@ -70,7 +79,7 @@ cd elixir</code></pre></div>
 
 <p>Be sure to change the path to the appropriate path where you cloned and compiled Elixir.</p>
 
-<p>Now you’re all set - happy hacking!</p>
+<p>Now you&#39;re all set - happy hacking!</p>
 
 </div>
 

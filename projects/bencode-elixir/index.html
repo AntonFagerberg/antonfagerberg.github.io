@@ -2,10 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <title>Bencode in Elixir</title>
+    <title>Bencode in Elixir -  AntonFagerberg.com</title>
     <meta name="description" content="">
 
     <link rel="stylesheet" href="/css/main.css">
@@ -14,16 +14,25 @@
 
   <body>
     <div id="gradient"></div>
-
-<div id="menu">
-  <a href="/">About</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/projects">Projects</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/texts">Texts</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/cv">CV</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/contact">Contact</a>
-</div>
+    
+    
+    <div id="header">
+      <a href="/">
+        AntonFagerberg.com
+        <div id="punchline">
+          A programmer's field notes.
+        </div>
+      </a>
+    </div>
+    
+    
     <div class="post full">
 	<h1>Bencode in Elixir</h1>
+	
+	
+	<strong>07 Dec 2014</strong>
+	
+	
 	<p>This is my implementation of <a href="http://en.wikipedia.org/wiki/Bencode">Bencode</a> in Elixir. I felt that Elixir was a perfect fit for this task because of its use of pattern matching and bit strings. The implementation was a joy to write!</p>
 
 <p>You can get the source code from this projects <a href="https://github.com/AntonFagerberg/elixir_bencode">GitHub page</a>.</p>
@@ -61,180 +70,11 @@
 <span class="nc">Bencode</span><span class="p">.</span><span class="n">decode!</span><span class="p">(</span><span class="s2">&quot;d5:hello5:worlde&quot;</span><span class="p">)</span>
 <span class="p">%{</span><span class="s2">&quot;hello&quot;</span> <span class="p">=&gt;</span> <span class="s2">&quot;world&quot;</span><span class="p">}</span></code></pre></div>
 
-<div class="highlight"><pre><code class="language-elixir" data-lang="elixir"><span class="kd">defmodule</span> <span class="nc">Bencode</span> <span class="k">do</span>
-  <span class="na">@moduledoc</span> <span class="sh">&quot;&quot;&quot;</span>
-<span class="sh">  Bencode decoder / encoder using Elixir data structures.</span>
+<p>You can also add it as a Mix dependency:</p>
 
-<span class="sh">  </span><span class="err">##</span><span class="sh"> Encode strings (with thrown exceptions)</span>
-<span class="sh">      Bencode.encode!(&quot;hello world&quot;)</span>
-<span class="sh">      &quot;11:hello world&quot;</span>
-<span class="sh">  </span>
-<span class="sh">  </span><span class="err">##</span><span class="sh"> Encode integers</span>
-<span class="sh">      Bencode.encode!(42)</span>
-<span class="sh">      &quot;i42e&quot;</span>
-
-<span class="sh">  </span><span class="err">##</span><span class="sh"> Encode lists</span>
-<span class="sh">      Bencode.encode!([1,2,3])</span>
-<span class="sh">      &quot;li1ei2ei3ee&quot;</span>
-
-<span class="sh">  </span><span class="err">##</span><span class="sh"> Encode maps</span>
-<span class="sh">      Bencode.encode!(%{&quot;a&quot; =&gt; 1, 2 =&gt; &quot;b&quot;})</span>
-<span class="sh">      &quot;di2e1:b1:ai1ee&quot;</span>
-
-<span class="sh">  </span><span class="err">##</span><span class="sh"> Encode Dicts</span>
-<span class="sh">      Bencode.encode!(HashDict.new |&gt; Dict.put :hello, :world)</span>
-<span class="sh">      &quot;d5:hello5:worlde&quot;</span>
-
-<span class="sh">  </span><span class="err">##</span><span class="sh"> Encode bitstrings</span>
-<span class="sh">      Bencode.encode!(&lt;&lt;1,2,3,4&gt;&gt;)</span>
-<span class="sh">      &lt;&lt;52, 58, 1, 2, 3, 4&gt;&gt;</span>
-<span class="sh">      </span>
-<span class="sh">  </span><span class="err">##</span><span class="sh"> Encode without exceptions</span>
-<span class="sh">      Bencode.encode(2.0)</span>
-<span class="sh">      {:error, :invalid_format}</span>
-<span class="sh">      </span>
-<span class="sh">  </span><span class="err">##</span><span class="sh"> Decode strings (with thrown expcetions)</span>
-<span class="sh">      Bencode.decode!(&quot;5:hello&quot;)</span>
-<span class="sh">      &quot;hello&quot;</span>
-<span class="sh">      </span>
-<span class="sh">  </span><span class="err">##</span><span class="sh"> Decode integers</span>
-<span class="sh">      Bencode.decode!(&quot;i42e&quot;)</span>
-<span class="sh">      42</span>
-
-<span class="sh">  </span><span class="err">##</span><span class="sh"> Decode lists </span>
-<span class="sh">      Bencode.decode!(&quot;li1ei2ei3ee&quot;)</span>
-<span class="sh">      [1, 2, 3]</span>
-<span class="sh">      </span>
-<span class="sh">  </span><span class="err">##</span><span class="sh"> Decode maps</span>
-<span class="sh">      Bencode.decode!(&quot;d5:hello5:worlde&quot;)</span>
-<span class="sh">      %{&quot;hello&quot; =&gt; &quot;world&quot;}</span>
-<span class="sh">  </span>
-<span class="sh">  </span><span class="err">##</span><span class="sh"> Decode without exceptions</span>
-<span class="sh">      Bencode.decode(&quot;4:spam&quot;)</span>
-<span class="sh">      {:ok, &quot;spam&quot;}</span>
-<span class="sh">  &quot;&quot;&quot;</span>
-  
-  <span class="na">@type</span> <span class="n">encodable</span> <span class="p">::</span> <span class="n">binary</span> <span class="p">|</span> <span class="n">atom</span> <span class="p">|</span> <span class="nc">Map</span> <span class="p">|</span> <span class="nc">Dict</span><span class="p">.</span><span class="n">t</span> <span class="p">|</span> <span class="nc">List</span> <span class="p">|</span> <span class="nc">Integer</span>
-  <span class="na">@type</span> <span class="n">error_trailing_data</span> <span class="p">::</span> <span class="p">{</span><span class="ss">:error</span><span class="p">,</span> <span class="ss">:trailing_data</span><span class="p">}</span>
-  <span class="na">@type</span> <span class="n">error_invalid_format</span> <span class="p">::</span> <span class="p">{</span><span class="ss">:error</span><span class="p">,</span> <span class="ss">:invalid_format</span><span class="p">}</span>
-  <span class="na">@type</span> <span class="n">bencode_error</span> <span class="p">::</span> <span class="n">error_trailing_data</span> <span class="p">|</span> <span class="n">error_invalid_format</span>
-  
-  <span class="na">@doc</span> <span class="sh">&quot;&quot;&quot;</span>
-<span class="sh">  Decode a Bencode bitstring to an Elixir data structure.</span>
-<span class="sh">  </span>
-<span class="sh">  An exception will be thrown if an invalid Bencoded string is provided.</span>
-<span class="sh">  </span>
-<span class="sh">  Args:</span>
-<span class="sh">    * `bitstring` - Bencoded bitstring to decode.</span>
-<span class="sh">  &quot;&quot;&quot;</span>
-  <span class="na">@spec</span> <span class="n">decode!</span><span class="p">(</span><span class="n">binary</span><span class="p">)</span> <span class="p">::</span> <span class="n">encodable</span>
-  <span class="kd">def</span> <span class="n">decode!</span><span class="p">(</span><span class="n">bitstring</span><span class="p">)</span> <span class="k">do</span>
-    <span class="k">case</span> <span class="n">decode_p</span><span class="p">(</span><span class="n">bitstring</span><span class="p">)</span> <span class="k">do</span>
-      <span class="p">{</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">}</span> <span class="p">-&gt;</span> <span class="n">result</span>
-      <span class="bp">_</span> <span class="p">-&gt;</span> <span class="k">raise</span><span class="p">(</span><span class="s2">&quot;Unparsed trailing data.&quot;</span><span class="p">)</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-
-  <span class="na">@doc</span> <span class="sh">&quot;&quot;&quot;</span>
-<span class="sh">  Decode a Bencode bitstring to an Elixir data structure.</span>
-<span class="sh">  </span>
-<span class="sh">  The function returns either `{:ok, data_structure}` on success, or</span>
-<span class="sh">  `{:error, :trailing_data}` on unspecified trailing data or </span>
-<span class="sh">  `{:error, :invalid_format}` on format errors.</span>
-<span class="sh">  </span>
-<span class="sh">  Args:</span>
-<span class="sh">    * `bitstring` - Bencoded bitstring to decode.</span>
-<span class="sh">  &quot;&quot;&quot;</span>
-  <span class="na">@spec</span> <span class="n">decode</span><span class="p">(</span><span class="n">binary</span><span class="p">)</span> <span class="p">::</span> <span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="n">encodable</span><span class="p">}</span> <span class="p">|</span> <span class="n">bencode_error</span>
-  <span class="kd">def</span> <span class="n">decode</span><span class="p">(</span><span class="n">bitstring</span><span class="p">)</span> <span class="k">do</span>
-    <span class="k">try</span> <span class="k">do</span>
-      <span class="k">case</span> <span class="n">decode_p</span><span class="p">(</span><span class="n">bitstring</span><span class="p">)</span> <span class="k">do</span>
-        <span class="p">{</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">}</span> <span class="p">-&gt;</span> <span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="n">result</span><span class="p">}</span>
-        <span class="bp">_</span> <span class="p">-&gt;</span> <span class="p">{</span><span class="ss">:error</span><span class="p">,</span> <span class="ss">:trailing_data</span><span class="p">}</span>
-      <span class="k">end</span>
-    <span class="k">rescue</span>
-      <span class="bp">_</span> <span class="p">-&gt;</span> <span class="p">{</span><span class="ss">:error</span><span class="p">,</span> <span class="ss">:invalid_format</span><span class="p">}</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-
-  <span class="kd">defp</span> <span class="n">decode_p</span><span class="p">(</span><span class="s2">&quot;l&quot;</span> <span class="o">&lt;&gt;</span> <span class="n">rest</span><span class="p">),</span> <span class="ss">do</span><span class="p">:</span> <span class="n">decode_p</span><span class="p">(</span><span class="n">rest</span><span class="p">,</span> <span class="p">[])</span>
-  <span class="kd">defp</span> <span class="n">decode_p</span><span class="p">(</span><span class="s2">&quot;d&quot;</span> <span class="o">&lt;&gt;</span> <span class="n">rest</span><span class="p">),</span> <span class="ss">do</span><span class="p">:</span> <span class="n">decode_p</span><span class="p">(</span><span class="n">rest</span><span class="p">,</span> <span class="p">%{})</span>
-
-  <span class="kd">defp</span> <span class="n">decode_p</span><span class="p">(</span><span class="s2">&quot;i&quot;</span> <span class="o">&lt;&gt;</span> <span class="n">rest</span><span class="p">)</span> <span class="k">do</span>
-    <span class="n">int_pattern</span> <span class="p">=</span> <span class="sx">~r/^(?&lt;num&gt;(-?[1-9]+[1-9]*|[0-9]+))e/</span>
-    <span class="p">%{</span><span class="s2">&quot;num&quot;</span> <span class="p">=&gt;</span> <span class="n">num</span><span class="p">}</span> <span class="p">=</span> <span class="nc">Regex</span><span class="p">.</span><span class="n">named_captures</span><span class="p">(</span><span class="n">int_pattern</span><span class="p">,</span> <span class="n">rest</span><span class="p">)</span>
-    
-    <span class="n">int</span> <span class="p">=</span> <span class="n">num</span> <span class="o">|&gt;</span> <span class="nc">Integer</span><span class="p">.</span><span class="n">parse</span> <span class="o">|&gt;</span> <span class="n">elem</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    
-    <span class="n">offset</span> <span class="p">=</span> <span class="nc">String</span><span class="p">.</span><span class="n">length</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="n">tail</span> <span class="p">=</span> <span class="n">binary_part</span><span class="p">(</span><span class="n">rest</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">byte_size</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span> <span class="o">-</span> <span class="n">offset</span><span class="p">)</span>
-
-    <span class="p">{</span><span class="n">int</span><span class="p">,</span> <span class="n">tail</span><span class="p">}</span>
-  <span class="k">end</span>
-  
-  <span class="kd">defp</span> <span class="n">decode_p</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="k">do</span>
-    <span class="p">%{</span><span class="s2">&quot;size&quot;</span> <span class="p">=&gt;</span> <span class="n">size</span><span class="p">}</span> <span class="p">=</span> <span class="nc">Regex</span><span class="p">.</span><span class="n">named_captures</span><span class="p">(</span><span class="sx">~r/^(?&lt;size&gt;[0-9]+):/</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-    
-    <span class="n">int</span> <span class="p">=</span> <span class="n">size</span> <span class="o">|&gt;</span> <span class="nc">Integer</span><span class="p">.</span><span class="n">parse</span> <span class="o">|&gt;</span> <span class="n">elem</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">prefix</span> <span class="p">=</span> <span class="nc">String</span><span class="p">.</span><span class="n">length</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-    
-    <span class="n">string</span> <span class="p">=</span> <span class="n">binary_part</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">int</span><span class="p">)</span>
-    
-    <span class="n">offset</span> <span class="p">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="n">int</span>
-    <span class="n">tail</span> <span class="p">=</span> <span class="n">binary_part</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">byte_size</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="n">offset</span><span class="p">)</span>
-    
-    <span class="p">{</span><span class="n">string</span><span class="p">,</span> <span class="n">tail</span><span class="p">}</span>
-  <span class="k">end</span>
-
-  <span class="kd">defp</span> <span class="n">decode_p</span><span class="p">(</span><span class="s2">&quot;e&quot;</span> <span class="o">&lt;&gt;</span> <span class="n">rest</span><span class="p">,</span> <span class="n">acc</span><span class="p">)</span> <span class="ow">when</span> <span class="n">is_list</span><span class="p">(</span><span class="n">acc</span><span class="p">),</span> <span class="ss">do</span><span class="p">:</span> <span class="p">{</span><span class="nc">Enum</span><span class="p">.</span><span class="n">reverse</span><span class="p">(</span><span class="n">acc</span><span class="p">),</span> <span class="n">rest</span><span class="p">}</span>
-  <span class="kd">defp</span> <span class="n">decode_p</span><span class="p">(</span><span class="s2">&quot;e&quot;</span> <span class="o">&lt;&gt;</span> <span class="n">rest</span><span class="p">,</span> <span class="n">acc</span><span class="p">)</span> <span class="ow">when</span> <span class="n">is_map</span><span class="p">(</span><span class="n">acc</span><span class="p">),</span> <span class="ss">do</span><span class="p">:</span> <span class="p">{</span><span class="n">acc</span><span class="p">,</span> <span class="n">rest</span><span class="p">}</span>
-
-  <span class="kd">defp</span> <span class="n">decode_p</span><span class="p">(</span><span class="n">rest</span><span class="p">,</span> <span class="n">acc</span><span class="p">)</span> <span class="ow">when</span> <span class="n">is_list</span><span class="p">(</span><span class="n">acc</span><span class="p">)</span> <span class="k">do</span>
-    <span class="p">{</span><span class="n">value</span><span class="p">,</span> <span class="n">tail</span><span class="p">}</span> <span class="p">=</span> <span class="n">decode_p</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span>
-    <span class="n">decode_p</span><span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="p">[</span><span class="n">value</span> <span class="p">|</span> <span class="n">acc</span><span class="p">])</span>
-  <span class="k">end</span>
-
-  <span class="kd">defp</span> <span class="n">decode_p</span><span class="p">(</span><span class="n">rest</span><span class="p">,</span> <span class="n">acc</span><span class="p">)</span> <span class="ow">when</span> <span class="n">is_map</span><span class="p">(</span><span class="n">acc</span><span class="p">)</span> <span class="k">do</span>
-    <span class="p">{</span><span class="n">key</span><span class="p">,</span> <span class="n">key_tail</span><span class="p">}</span> <span class="p">=</span> <span class="n">decode_p</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span>
-    <span class="p">{</span><span class="n">value</span><span class="p">,</span> <span class="n">tail</span><span class="p">}</span> <span class="p">=</span> <span class="n">decode_p</span><span class="p">(</span><span class="n">key_tail</span><span class="p">)</span>
-    <span class="n">decode_p</span><span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="nc">Map</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
-  <span class="k">end</span>
-  
-  <span class="na">@doc</span> <span class="sh">&quot;&quot;&quot;</span>
-<span class="sh">  Encode Elixir data structures to a Bencode bitstring.</span>
-<span class="sh">  </span>
-<span class="sh">  An exception will be thrown if an unsupported data structure is provided.</span>
-<span class="sh">  </span>
-<span class="sh">  Args:</span>
-<span class="sh">    * `data` - Data structure to encode.</span>
-<span class="sh">  &quot;&quot;&quot;</span>
-  <span class="na">@spec</span> <span class="n">encode!</span><span class="p">(</span><span class="n">encodable</span><span class="p">)</span> <span class="p">::</span> <span class="n">binary</span>
-  <span class="kd">def</span> <span class="n">encode!</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="ow">when</span> <span class="n">is_number</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="ss">do</span><span class="p">:</span> <span class="s2">&quot;i&quot;</span> <span class="o">&lt;&gt;</span> <span class="nc">Integer</span><span class="p">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;&gt;</span> <span class="s2">&quot;e&quot;</span>
-  <span class="kd">def</span> <span class="n">encode!</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="ow">when</span> <span class="n">is_list</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="ss">do</span><span class="p">:</span> <span class="nc">Enum</span><span class="p">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;l&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">(</span><span class="ni">&amp;2</span> <span class="o">&lt;&gt;</span> <span class="n">encode!</span><span class="p">(</span><span class="ni">&amp;1</span><span class="p">)))</span> <span class="o">&lt;&gt;</span> <span class="s2">&quot;e&quot;</span>
-  <span class="kd">def</span> <span class="n">encode!</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="ow">when</span> <span class="n">is_map</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="ss">do</span><span class="p">:</span> <span class="nc">Enum</span><span class="p">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">(</span><span class="ni">&amp;2</span> <span class="o">&lt;&gt;</span> <span class="n">encode!</span><span class="p">(</span><span class="ni">&amp;1</span><span class="p">)))</span> <span class="o">&lt;&gt;</span> <span class="s2">&quot;e&quot;</span>  
-  <span class="kd">def</span> <span class="n">encode!</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="ow">when</span> <span class="n">is_atom</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="ss">do</span><span class="p">:</span> <span class="n">data</span> <span class="o">|&gt;</span> <span class="nc">Atom</span><span class="p">.</span><span class="n">to_string</span> <span class="o">|&gt;</span> <span class="n">encode!</span>
-  <span class="kd">def</span> <span class="n">encode!</span><span class="p">({</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">}),</span> <span class="ss">do</span><span class="p">:</span> <span class="n">encode!</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">&lt;&gt;</span> <span class="n">encode!</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-  <span class="kd">def</span> <span class="n">encode!</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="ss">do</span><span class="p">:</span> <span class="p">(</span><span class="n">data</span> <span class="o">|&gt;</span> <span class="n">byte_size</span> <span class="o">|&gt;</span> <span class="nc">Integer</span><span class="p">.</span><span class="n">to_string</span><span class="p">)</span> <span class="o">&lt;&gt;</span> <span class="s2">&quot;:&quot;</span> <span class="o">&lt;&gt;</span> <span class="n">data</span>
-  
-  <span class="na">@doc</span> <span class="sh">&quot;&quot;&quot;</span>
-<span class="sh">  Encode Elixir data structures to a Bencode bitstring.</span>
-<span class="sh">  </span>
-<span class="sh">  The function will return `{:ok, bitstring}` on success or </span>
-<span class="sh">  `{:error, :invalid_format}` on failure.</span>
-<span class="sh">  </span>
-<span class="sh">  Args:</span>
-<span class="sh">    * `data` - Data structure to encode.</span>
-<span class="sh">  &quot;&quot;&quot;</span>
-  <span class="na">@spec</span> <span class="n">encode</span><span class="p">(</span><span class="n">encodable</span><span class="p">)</span> <span class="p">::</span> <span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="n">binary</span><span class="p">}</span> <span class="p">|</span> <span class="n">error_invalid_format</span>
-  <span class="kd">def</span> <span class="n">encode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="k">do</span>
-    <span class="k">try</span> <span class="k">do</span>
-      <span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="n">encode!</span><span class="p">(</span><span class="n">data</span><span class="p">)}</span>
-    <span class="k">rescue</span>
-      <span class="bp">_</span> <span class="p">-&gt;</span> <span class="p">{</span><span class="ss">:error</span><span class="p">,</span> <span class="ss">:invalid_format</span><span class="p">}</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+<div class="highlight"><pre><code class="language-elixir" data-lang="elixir"><span class="kd">defp</span> <span class="n">deps</span> <span class="k">do</span>
+  <span class="p">[{</span><span class="ss">:elixir_bencode</span><span class="p">,</span> <span class="s2">&quot;~&gt; 1.0.0&quot;</span><span class="p">}]</span>
 <span class="k">end</span></code></pre></div>
-
 
 </div>
 

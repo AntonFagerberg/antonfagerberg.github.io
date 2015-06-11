@@ -2,10 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <title>Dlerss - RSS Downloader</title>
+    <title>Dlerss - RSS Downloader -  AntonFagerberg.com</title>
     <meta name="description" content="">
 
     <link rel="stylesheet" href="/css/main.css">
@@ -14,20 +14,29 @@
 
   <body>
     <div id="gradient"></div>
-
-<div id="menu">
-  <a href="/">About</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/projects">Projects</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/texts">Texts</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/cv">CV</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/contact">Contact</a>
-</div>
+    
+    
+    <div id="header">
+      <a href="/">
+        AntonFagerberg.com
+        <div id="punchline">
+          A programmer's field notes.
+        </div>
+      </a>
+    </div>
+    
+    
     <div class="post full">
 	<h1>Dlerss - RSS Downloader</h1>
+	
+	
+	<strong>28 Nov 2013</strong>
+	
+	
 	<p>This project is inspired by RSSDler (<a href="https://code.google.com/p/rssdler/">code.google.com/p/rssdler</a>), but this project does not have as many features.
 The only thing this application does is that it downloads files linked in RSS (XML) feeds if the titles are matched against some regular expression.</p>
 
-<h3 id="example-configuration">Example configuration</h3>
+<h3>Example configuration</h3>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Names of all enabled feeds.</span>
 <span class="nv">names</span> <span class="o">=</span> <span class="o">[</span> <span class="s2">&quot;coolfeeds&quot;</span>, <span class="s2">&quot;hotfeeds&quot;</span> <span class="o">]</span>
@@ -52,47 +61,51 @@ hotfeeds.regexTrue <span class="o">=</span> <span class="s2">&quot;(KittyNews S\
 hotfeeds.regexFalse <span class="o">=</span> <span class="s2">&quot;Fluffy&quot;</span>
 hotfeeds.saveFolder <span class="o">=</span> <span class="s2">&quot;/my/hot/stuff&quot;</span></code></pre></div>
 
-<h3 id="build">Build</h3>
-<p>To build a “fat” self-contained executable, use the SBT assembly provided in this project.</p>
+<h3>Build</h3>
+
+<p>To build a &quot;fat&quot; self-contained executable, use the SBT assembly provided in this project.</p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">sbt assembly</code></pre></div>
 
 <p>This will generate a self-contained JAR-file, see command output for the location where it is saved.</p>
 
-<h3 id="run">Run</h3>
+<h3>Run</h3>
+
 <p>If assembly has been used to create the JAR-file, you can execute the file with either Java or Scala:</p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">scala dlerss.jar</code></pre></div>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">java -jar dlerss.jar</code></pre></div>
 
-<p>By default, dlerss will look for a configuration file in the current directory called “application.conf”. To specify another configuration file, simply specify it as the first argument:</p>
+<p>By default, dlerss will look for a configuration file in the current directory called &quot;application.conf&quot;. To specify another configuration file, simply specify it as the first argument:</p>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">scala Dlerss.jar ../folder/bad-ass.conf</code></pre></div>
 
-<h3 id="dependencies">Dependencies</h3>
+<h3>Dependencies</h3>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="s2">&quot;com.typesafe&quot;</span> % <span class="s2">&quot;config&quot;</span> % <span class="s2">&quot;1.0.2&quot;</span></code></pre></div>
 
-<h3 id="regular-expressions">Regular Expressions</h3>
+<h3>Regular Expressions</h3>
+
 <p>This is a good site to learn more:</p>
 
-<p><a href="http://www.tutorialspoint.com/scala/scala_regular_expressions.htm">tutorialspoint.com/scala/scala_regular_expressions.htm</a></p>
+<p><a href="http://www.tutorialspoint.com/scala/scala_regular_expressions.htm">tutorialspoint.com/scala/scala<em>regular</em>expressions.htm</a></p>
 
 <p>Note that to match for example digits, you have to use \\d with double back slashes to not mess up the string in the configuration file.</p>
 
-<h3 id="source-code">Source code</h3>
+<h3>Source code</h3>
 
 <p><a href="https://github.com/AntonFagerberg/Dlerss">github.com/AntonFagerberg/Dlerss</a></p>
 
-<h3 id="license">License</h3>
+<h3>License</h3>
+
 <p>Copyright 2013 Anton Fagerberg (http://www.antonfagerberg.com).</p>
 
-<p>Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
+<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
 
 <p>http://www.apache.org/licenses/LICENSE-2.0</p>
 
-<p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an “AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
+<p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
 
 </div>
 

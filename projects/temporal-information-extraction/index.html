@@ -2,10 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <title>Temporal Information Extraction</title>
+    <title>Temporal Information Extraction -  AntonFagerberg.com</title>
     <meta name="description" content="">
 
     <link rel="stylesheet" href="/css/main.css">
@@ -14,25 +14,34 @@
 
   <body>
     <div id="gradient"></div>
-
-<div id="menu">
-  <a href="/">About</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/projects">Projects</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/texts">Texts</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/cv">CV</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/contact">Contact</a>
-</div>
+    
+    
+    <div id="header">
+      <a href="/">
+        AntonFagerberg.com
+        <div id="punchline">
+          A programmer's field notes.
+        </div>
+      </a>
+    </div>
+    
+    
     <div class="post full">
 	<h1>Temporal Information Extraction</h1>
+	
+	
+	<strong>29 Nov 2013</strong>
+	
+	
 	<p>This project uses mainly regular expressions with some additional tweaking functions to extract temporal information (dates, durations, time, etc) from news articles or any other text.</p>
 
 <p>Everything here should be viewed as a proof on concept. To code is not pretty and it is only targeted against the TempEval-2 Task A of the SemEval-2010 conference competition and should not to be used in a real product.</p>
 
-<p><img src="/images/projects/temporal.png" alt="screenshot" /></p>
+<p><img src="/images/projects/temporal.png" alt="screenshot"></p>
 
 <p>The code was evaluated against SemEval-2010.</p>
 
-<h3 id="test-set">Test set:</h3>
+<h3>Test set:</h3>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">true positives:   165
 true negatives:   9336
@@ -50,7 +59,7 @@ accuracy    0.99
 attribute type       0.96
 attribute value      0.88</code></pre></div>
 
-<h3 id="training-set">Training set:</h3>
+<h3>Training set:</h3>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">true positives:   1053
 true negatives:   51246
@@ -70,14 +79,15 @@ attribute value      0.88</code></pre></div>
 
 <p>Due to time constraints, I decided to quit when reaching 50% in the training set - but I believe that this could be greatly improved if I had more time to work on it. This is only a proof of concept but my belief is that this technique could work very well given enough time and dedication.</p>
 
-<h3 id="paper">Paper</h3>
+<h3>Paper</h3>
+
 <p><a href="/files/tempex_anton_fagerberg.pdf">Paper about this project</a></p>
 
-<h3 id="source-code">Source code</h3>
+<h3>Source code</h3>
 
 <p><a href="https://github.com/AntonFagerberg/Temporal-Information-Extraction">github.com/AntonFagerberg/Temporal-Information-Extraction</a></p>
 
-<p>Modified “demo system” source code:</p>
+<p>Modified &quot;demo system&quot; source code:</p>
 
 <p><a href="https://github.com/AntonFagerberg/Temporal-Information-Extraction-Demo">github.com/AntonFagerberg/Temporal-Information-Extraction-Demo</a></p>
 

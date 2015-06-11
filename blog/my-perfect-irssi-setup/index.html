@@ -2,49 +2,60 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <title>My perfect Irssi setup</title>
+    <title>My perfect Irssi setup -  AntonFagerberg.com</title>
     <meta name="description" content="">
 
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://www.antonfagerberg.com/texts/my-perfect-irssi-setup/">
+    <link rel="canonical" href="http://www.antonfagerberg.com/blog/my-perfect-irssi-setup/">
 </head>
 
   <body>
     <div id="gradient"></div>
-
-<div id="menu">
-  <a href="/">About</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/projects">Projects</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/texts">Texts</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/cv">CV</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/contact">Contact</a>
-</div>
+    
+    
+    <div id="header">
+      <a href="/">
+        AntonFagerberg.com
+        <div id="punchline">
+          A programmer's field notes.
+        </div>
+      </a>
+    </div>
+    
+    
     <div class="post full">
 	<h1>My perfect Irssi setup</h1>
-	<h3 id="overview">Overview</h3>
+	
+	
+	<strong>29 Mar 2006</strong>
+	
+	
+	<h3>Overview</h3>
+
 <ul>
-  <li>Installation</li>
-  <li>Basic Irssi usage</li>
-  <li>Scripts</li>
-  <li>Themes</li>
-  <li>BitlBee</li>
-  <li>Setting up BitlBee with Twitter and Google Talk</li>
-  <li>Nicklist</li>
-  <li>Xchat nick color</li>
-  <li>Hilight window</li>
-  <li>Advanced Window List</li>
-  <li>Auto Away</li>
-  <li>Autoreply (BitlBee)</li>
-  <li>Status notice (BitlBee)</li>
-  <li>OTR encryption for Irssi and BitlBee</li>
-  <li>Notifications</li>
-  <li>Last.FM</li>
+<li>Installation</li>
+<li>Basic Irssi usage</li>
+<li>Scripts</li>
+<li>Themes</li>
+<li>BitlBee</li>
+<li>Setting up BitlBee with Twitter and Google Talk</li>
+<li>Nicklist</li>
+<li>Xchat nick color</li>
+<li>Hilight window</li>
+<li>Advanced Window List</li>
+<li>Auto Away</li>
+<li>Autoreply (BitlBee)</li>
+<li>Status notice (BitlBee)</li>
+<li>OTR encryption for Irssi and BitlBee</li>
+<li>Notifications</li>
+<li>Last.FM</li>
 </ul>
 
-<h3 id="installation">Installation</h3>
+<h3>Installation</h3>
+
 <p>This guide focuses on Ubuntu since it is one of the most common Linux distributions. Everything else in the guide is however the same everywhere.</p>
 
 <p>To install everything we need type:</p>
@@ -57,7 +68,8 @@
 
 <p>Now type irssi in your terminal to get going!</p>
 
-<h4 id="basic-irssi-usage">Basic Irssi usage</h4>
+<h4>Basic Irssi usage</h4>
+
 <p>All Irssi-commands starts with a forward slash /. You can use the tab-key to auto-complete commands and you can browse through all commands by pressing tab several times.</p>
 
 <p>First of all you should set your nickname:</p>
@@ -87,21 +99,23 @@
 
 <p>This will save all your settings and apply the current theme.</p>
 
-<p><a href="http://irssi.org/documentation/manual&quot;&gt; http://irssi.org/documentation/manual">Consult the official manual to get more information about commands and features.</a></p>
+<p><a href="http://irssi.org/documentation/manual%22%3E%20http://irssi.org/documentation/manual">Consult the official manual to get more information about commands and features.</a></p>
 
-<h4 id="scripts">Scripts</h4>
+<h4>Scripts</h4>
+
 <p>The really great thing about Irssi is that there are thousands of scripts and customizations. I will walk you through my favorite scripts further down.</p>
 
 <p>Irssi scripts are written i Perl and are usually located in ~/.irssi/scripts/. To load a script you can use the /script command:</p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">/script load mycoolscript.pl</code></pre></div>
 
-<p>Or you can auto-load the scripts so you don’t have to use the script command every time you start Irssi. You can do this by putting the .pl-file in a folder called autorun in the scripts folder ~/.irssi/scripts/autorun/.</p>
+<p>Or you can auto-load the scripts so you don&#8217;t have to use the script command every time you start Irssi. You can do this by putting the .pl-file in a folder called autorun in the scripts folder ~/.irssi/scripts/autorun/.</p>
 
-<p>You can find a lot of scripts on Irssi’s official script site:
+<p>You can find a lot of scripts on Irssi&#8217;s official script site:
 <a href="http://scripts.irssi.org/">scripts.irssi.org</a>.</p>
 
-<h3 id="themes">Themes</h3>
+<h3>Themes</h3>
+
 <p>There are tons of themes. I use a theme called xchat which you will see in this guide. You can find a lot of themes if you Google for it or visit the official Irssi Theme page: <a href="http://irssi.org/themes">irssi.org/themes</a>.</p>
 
 <p>The xchat theme is located at <a href="http://irssi.org/themefiles/xchat.theme">irssi.org/themefiles/xchat.theme</a>.</p>
@@ -112,12 +126,13 @@
 
 <p>Replace xchat with the name of your theme of choice.</p>
 
-<p><img src="/images/tutorials/irssi3.png" alt="irssi overview" /></p>
+<p><img src="/images/tutorials/irssi3.png" alt="irssi overview"></p>
 
 <p>Note that I use a special script with this theme. You can read about it further down.</p>
 
-<h3 id="bitlbee">Bitlbee</h3>
-<p>BitlBee is an “IRC to other networks gateway”. This means that you can use other protocols like XMPP/Jabber (used by Google Talk and Facebook chat), MSN Messenger, Yahoo! Messenger, AIM and ICQ from inside an IRC-client like Irssi. You can connect to a public server but there is no hassle setting up your own which means that your information (like passwords and chat records) isn’t transmitted to any unknown servers.</p>
+<h3>Bitlbee</h3>
+
+<p>BitlBee is an &#8220;IRC to other networks gateway&#8221;. This means that you can use other protocols like XMPP/Jabber (used by Google Talk and Facebook chat), MSN Messenger, Yahoo! Messenger, AIM and ICQ from inside an IRC-client like Irssi. You can connect to a public server but there is no hassle setting up your own which means that your information (like passwords and chat records) isn&#8217;t transmitted to any unknown servers.</p>
 
 <p>This guide uses BitlBee 3.0.1 which you can install in Ubuntu Maverick or greater by executing:</p>
 
@@ -129,7 +144,7 @@
 
 <p>The config file is located at /etc/bitlbee/bitlbee.conf . Look it up and customize it for your own needs. You need to restart the service if you make any changes to the configuration file.</p>
 
-<p>When you are ready to connect to your BitlBee server (and if you haven’t changed any configurations) execute the following in Irssi:</p>
+<p>When you are ready to connect to your BitlBee server (and if you haven&#8217;t changed any configurations) execute the following in Irssi:</p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">/connect localhost</code></pre></div>
 
@@ -139,9 +154,9 @@
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">register (password)</code></pre></div>
 
-<p>Make sure that you have the nickname which you want to use and note that we want to send command to the Bitlbee-channel and not to Irssi so make sure you don’t have a / in front of any commands to Bitlbee.</p>
+<p>Make sure that you have the nickname which you want to use and note that we want to send command to the Bitlbee-channel and not to Irssi so make sure you don&#8217;t have a / in front of any commands to Bitlbee.</p>
 
-<p>The next time you return to Bitlbee you’ll use:</p>
+<p>The next time you return to Bitlbee you&#8217;ll use:</p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">identify (password)</code></pre></div>
 
@@ -166,7 +181,7 @@
 
 <p>If you do not provide any account number all of your accounts will be connected.</p>
 
-<p>There is a help command which you can use if you want to know about the syntax of any of the commands. Usually you’ll do it in several steps:</p>
+<p>There is a help command which you can use if you want to know about the syntax of any of the commands. Usually you&#8217;ll do it in several steps:</p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">help account
 help account add
@@ -178,7 +193,7 @@ help account add msn</code></pre></div>
 
 <p>I will guide you how to use Twitter and Google Talk in Bitlbee. You should have no problem adding other accounts the same way.</p>
 
-<h4 id="google-talk">Google Talk</h4>
+<h4>Google Talk</h4>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">account add jabber (email)
 /OPER
@@ -186,7 +201,8 @@ account (number) set server talk.google.com:5223:ssl</code></pre></div>
 
 <p>The account is now ready to be brought online!</p>
 
-<h4 id="twitter">Twitter</h4>
+<h4>Twitter</h4>
+
 <p>This setup is a bit different since Twitter use OAuth.</p>
 
 <p>Firstly do as normal:</p>
@@ -194,7 +210,7 @@ account (number) set server talk.google.com:5223:ssl</code></pre></div>
 <div class="highlight"><pre><code class="language-text" data-lang="text">account add twitter (username)
 /OPER</code></pre></div>
 
-<p>The new “twitter user” will send ju a PM. With a link for the OAuth authentication. Open the link in your browser, sign in and press Allow. Get the numeric code and send it back to the twitter user in the same window.</p>
+<p>The new &#8220;twitter user&#8221; will send ju a PM. With a link for the OAuth authentication. Open the link in your browser, sign in and press Allow. Get the numeric code and send it back to the twitter user in the same window.</p>
 
 <p>You should now be signed in to your twitter account. If you like you can rename this or any other user:</p>
 
@@ -202,7 +218,8 @@ account (number) set server talk.google.com:5223:ssl</code></pre></div>
 
 <p>Once signed in a new channel will be open which displays all tweets from your contacts.  Send a message in this channel to post a status update to Twitter.</p>
 
-<h3 id="nicklist">Nicklist</h3>
+<h3>Nicklist</h3>
+
 <p>This script places all nicknames in a channel in a bar at the side of the window like many other IRC-channels. You can use it in two ways. None of them is perfect but I prefer using it together with Screen.</p>
 
 <p>You have to start Irssi inside a Gnu Screen session for it to work. You can do this directly from the console by typing:</p>
@@ -217,19 +234,21 @@ account (number) set server talk.google.com:5223:ssl</code></pre></div>
 
 <p>Learn more about Irssi and Screen: <a href="http://quadpoint.org/articles/irssi">quadpoint.org/articles/irssi</a></p>
 
-<p><img src="/images/tutorials/nicklist2.png" alt="nicklist" /></p>
+<p><img src="/images/tutorials/nicklist2.png" alt="nicklist"></p>
 
-<h3 id="xchat-nick-color">Xchat nick color</h3>
+<h3>Xchat nick color</h3>
+
 <p>This script works together with the xchat-theme (as you can find if you scroll up a bit) and does two very important things. First of all, it aligns all nicknames to the right in the chat area which creates a vertical line with the chat messages. This makes it a lot easier to read. And secondly, it will give all nicknames a unique color so it is easier to see who sends what.</p>
 
 <p>Download: <a href="http://dave.waxman.org/irssi/xchatnickcolor.pl">dave.waxman.org/irssi/xchatnickcolor.pl</a></p>
 
-<p><img src="/images/tutorials/irssi_nickcolor1.png" alt="nick color" /></p>
+<p><img src="/images/tutorials/irssi_nickcolor1.png" alt="nick color"></p>
 
-<h3 id="hilight-window">Hilight window</h3>
+<h3>Hilight window</h3>
+
 <p>Every time you get hilighted (someone types your nickname or any other higlighted word or sends you a private message) a copy of that message will be sent to a separate window.</p>
 
-<p>A great option is to display that window on the top of the terminal at all time. That way you’ll never miss a message.</p>
+<p>A great option is to display that window on the top of the terminal at all time. That way you&#8217;ll never miss a message.</p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">/window new split
 /window name hilight
@@ -239,12 +258,13 @@ account (number) set server talk.google.com:5223:ssl</code></pre></div>
 
 <p>More info: <a href="http://quadpoint.org/articles/irssi#hilight_window">quadpoint.org/articles/irssi#hilight_window</a></p>
 
-<p><img src="/images/tutorials/hilight1.png" alt="hilight" /></p>
+<p><img src="/images/tutorials/hilight1.png" alt="hilight"></p>
 
-<h3 id="advanced-window-list">Advanced Window List</h3>
+<h3>Advanced Window List</h3>
+
 <p>AWL customizes the list at the bottom which displays the window list with channels etc.</p>
 
-<p>This is my configuration which I’ve stoled from the link below:</p>
+<p>This is my configuration which I&#8217;ve stoled from the link below:</p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">/set awl_display_key $Q%K|%n$H$C$S</code></pre></div>
 
@@ -252,9 +272,10 @@ account (number) set server talk.google.com:5223:ssl</code></pre></div>
 
 <p>More info: <a href="http://quadpoint.org/articles/irssi#channel_statusbar_using_advanced_windowlist">quadpoint.org/articles/irssi#channel_statusbar_using_advanced_windowlist</a></p>
 
-<p><img src="/images/tutorials/awl1.png" alt="awl" /></p>
+<p><img src="/images/tutorials/awl1.png" alt="awl"></p>
 
-<h3 id="auto-away">Auto away</h3>
+<h3>Auto away</h3>
+
 <p>Another script to use together with Screen. It marks you as away when Screen detects that you are not active in the session.</p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">/set screen_away_active ON
@@ -263,7 +284,8 @@ account (number) set server talk.google.com:5223:ssl</code></pre></div>
 
 <p>Download: <a href="http://scripts.irssi.org/scripts/screen_away.pl">scripts.irssi.org/scripts/screen_away.pl</a></p>
 
-<h3 id="auto-reply-bitlbee">Auto-reply Bitlbee</h3>
+<h3>Auto-reply Bitlbee</h3>
+
 <p>This will reply to all incoming conversation within BitlBee with a custom message when you are away. This of it as an answering machine.</p>
 
 <p>You will need the Perl library time-duration. Ubuntu users can use:</p>
@@ -276,16 +298,18 @@ account (number) set server talk.google.com:5223:ssl</code></pre></div>
 
 <p>Download: <a href="https://github.com/msparks/irssiscripts/raw/master/bitlbee_autoreply.pl">github.com/msparks/irssiscripts/raw/master/bitlbee_autoreply.pl</a></p>
 
-<p><img src="/images/tutorials/irssi_autoreply1.png" alt="auto reply" /></p>
+<p><img src="/images/tutorials/irssi_autoreply1.png" alt="auto reply"></p>
 
-<h3 id="status-notice-bitlbee">Status notice (BitlBee)</h3>
+<h3>Status notice (BitlBee)</h3>
+
 <p>Displays additional information when a users change status such as how long the user was marked as away / offline.</p>
 
 <p>Download: <a href="http://github.com/msparks/irssiscripts/raw/master/bitlbee_status_notice.pl">github.com/msparks/irssiscripts/raw/master/bitlbee_status_notice.pl</a></p>
 
-<p><img src="/images/tutorials/irssi_status_notice1.png" alt="status notice" /></p>
+<p><img src="/images/tutorials/irssi_status_notice1.png" alt="status notice"></p>
 
-<h3 id="otr-encryption-for-irssi-amp-bitlbee">OTR encryption for Irssi &amp; BitlBee</h3>
+<h3>OTR encryption for Irssi &amp; BitlBee</h3>
+
 <p>Installation for Ubuntu users:</p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">sudo apt-get install bitlbee-plugin-otr irssi-plugin-otr</code></pre></div>
@@ -343,7 +367,8 @@ otr_createqueries
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">help otr</code></pre></div>
 
-<h3 id="notifications">Notifications</h3>
+<h3>Notifications</h3>
+
 <p>This script provides notifications when you get hilighted via libnotify. In Ubuntu you need to install libnotify-bin:</p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">sudo apt-get install libnotify-bin</code></pre></div>
@@ -354,36 +379,39 @@ otr_createqueries
 
 <p>More info: <a href="http://code.google.com/p/irssi-libnotify/">code.google.com/p/irssi-libnotify</a></p>
 
-<p><img src="/images/tutorials/notification1.png" alt="notification" /></p>
+<p><img src="/images/tutorials/notification1.png" alt="notification"></p>
 
-<h3 id="lastfm">Last.FM</h3>
-<p>I use this to show my friends what I’m listening to. It prints out the last played song from Last.FM.</p>
+<h3>Last.FM</h3>
+
+<p>I use this to show my friends what I&#8217;m listening to. It prints out the last played song from Last.FM.</p>
 
 <p>Set your username:</p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">/set lastfm_user</code></pre></div>
 
-<p>And show what’s playing:</p>
+<p>And show what&#8217;s playing:</p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">/np</code></pre></div>
 
 <p>Download: <a href="http://scripts.irssi.org/scripts/lastfm.pl">scripts.irssi.org/scripts/lastfm.pl</a></p>
 
-<h3 id="official-sites">Official sites</h3>
+<h3>Official sites</h3>
+
 <p><a href="http://irssi.org/">irssi.org</a></p>
 
 <p><a href="http://bitlbee.org/">bitlbee.org</a></p>
 
 <p><a href="http://irssi-otr.tuxfamily.org/">irssi-otr.tuxfamily.org</a></p>
 
-<h3 id="more-help">More help</h3>
+<h3>More help</h3>
+
 <p>Official Irssi documentation:
 <a href="http://irssi.org/documentation">irssi.org/documentation</a></p>
 
 <p>Official BitlBee wiki:
 <a href="http://wiki.bitlbee.org">wiki.bitlbee.org</a></p>
 
-<p>Quadpoint – the best known Irssi guides:
+<p>Quadpoint &#8211; the best known Irssi guides:
 <a href="http://quadpoint.org/articles/irssi">quadpoint.org/articles/irssi</a></p>
 
 </div>

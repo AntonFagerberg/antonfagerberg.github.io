@@ -2,10 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <title>Instagram API Scala</title>
+    <title>Instagram API Scala -  AntonFagerberg.com</title>
     <meta name="description" content="">
 
     <link rel="stylesheet" href="/css/main.css">
@@ -14,16 +14,25 @@
 
   <body>
     <div id="gradient"></div>
-
-<div id="menu">
-  <a href="/">About</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/projects">Projects</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/texts">Texts</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/cv">CV</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/contact">Contact</a>
-</div>
+    
+    
+    <div id="header">
+      <a href="/">
+        AntonFagerberg.com
+        <div id="punchline">
+          A programmer's field notes.
+        </div>
+      </a>
+    </div>
+    
+    
     <div class="post full">
 	<h1>Instagram API Scala</h1>
+	
+	
+	<strong>14 May 2013</strong>
+	
+	
 	<p>This is an Scala implementation of the Instagram API.</p>
 
 <p>This project uses scalaj-http to send HTTP-requests and lift-json to parse the JSON response to case classes.</p>
@@ -33,73 +42,77 @@
 <p>A Response object is returned from all methods and it contains:</p>
 
 <ul>
-  <li>Data - the stuff you actually want. This is the JSON response parsed to a corresponding object.</li>
-  <li>Pagination - if a large result set is retrieved, this object contains what you need to fetch the next “batch” of information. You can pass the relevant pieces of this information to the same method as called before as optional parameters.</li>
-  <li>Meta - contains the status from Instagram (like 200 OK, 400 error). Internal errors such as parsing or socket errors will be stored in this meta object as well.</li>
+<li>Data - the stuff you actually want. This is the JSON response parsed to a corresponding object.</li>
+<li>Pagination - if a large result set is retrieved, this object contains what you need to fetch the next &quot;batch&quot; of information. You can pass the relevant pieces of this information to the same method as called before as optional parameters.</li>
+<li>Meta - contains the status from Instagram (like 200 OK, 400 error). Internal errors such as parsing or socket errors will be stored in this meta object as well.</li>
 </ul>
 
-<h2 id="installation--demo">Installation &amp; Demo</h2>
+<h2>Installation &amp; Demo</h2>
+
 <p>You can use SBT to download the required dependencies and run the Demo-file:</p>
 
 <div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="n">sbt</span> <span class="n">run</span></code></pre></div>
 
 <p>The demo-file contains all implemented methods but you need to uncomment some of them to try them (to avoid spamming the Instagram servers). You need to get a client id (and optionally an access token) before running the examples.</p>
 
-<h2 id="adding-to-your-project">Adding to your project</h2>
+<h2>Adding to your project</h2>
+
 <p>Simply run:</p>
 
 <div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="n">sbt</span> <span class="k">package</span></code></pre></div>
 
 <p>To create a Jar-file. However, you need to add the dependencies below to your project manually!</p>
 
-<h3 id="dependencies">Dependencies</h3>
+<h3>Dependencies</h3>
 
 <div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="s">&quot;net.liftweb&quot;</span> <span class="o">%%</span> <span class="s">&quot;lift-json&quot;</span> <span class="o">%</span> <span class="s">&quot;2.5&quot;</span>
 <span class="s">&quot;org.scalaj&quot;</span> <span class="o">%%</span> <span class="s">&quot;scalaj-http&quot;</span> <span class="o">%</span> <span class="s">&quot;0.3.15&quot;</span></code></pre></div>
 
-<h2 id="implementation-status">Implementation status</h2>
+<h2>Implementation status</h2>
 
-<h3 id="implemented">Implemented</h3>
+<h3>Implemented</h3>
+
 <ul>
-  <li>Images and Videos.</li>
-  <li>Get basic information about a user.</li>
-  <li>Search for a user by name.</li>
-  <li>Get information about a media object.</li>
-  <li>See the authenticated user’s feed.</li>
-  <li>Get the most recent media published by a user.</li>
-  <li>See the authenticated user’s list of liked media.</li>
-  <li>Get the list of users this user follows.</li>
-  <li>Get the list of users this user is followed by.</li>
-  <li>Get a list of currently popular media.</li>
-  <li>Get a full list of comments on a media.</li>
-  <li>Get a list of users who have liked this media.</li>
-  <li>Get information about a tag object.</li>
-  <li>Get a list of recently tagged media.</li>
-  <li>Search for tags by name.</li>
-  <li>Get information about a location.</li>
-  <li>Search for a location by geographic coordinate.</li>
-  <li>Get a list of media objects from a given location.</li>
-  <li>Token support.</li>
-  <li>Client ID support.</li>
-  <li>Pagination.</li>
-  <li>OAuth 2.0 authentication.</li>
-  <li>Get information about a relationship to another user.</li>
-  <li>Modify the relationship with target user.</li>
-  <li>List the users who have requested to follow.</li>
-  <li>Set a like on this media by the current user.</li>
-  <li>Remove a like on this media by the current user.</li>
-  <li>Add a comment (requires special permission from Instagram).</li>
-  <li>Remove a comment.</li>
-  <li>Search for media in a given area. The default time span is set to 5 days. The time span must not exceed 7 days. Defaults time stamps cover the last 5 days.</li>
-  <li>Create a comment on a media. Please email apidevelopers[at]instagram.com for access.</li>
+<li>Images and Videos.</li>
+<li>Get basic information about a user.</li>
+<li>Search for a user by name.</li>
+<li>Get information about a media object.</li>
+<li>See the authenticated user&#39;s feed.</li>
+<li>Get the most recent media published by a user.</li>
+<li>See the authenticated user&#39;s list of liked media.</li>
+<li>Get the list of users this user follows.</li>
+<li>Get the list of users this user is followed by.</li>
+<li>Get a list of currently popular media.</li>
+<li>Get a full list of comments on a media.</li>
+<li>Get a list of users who have liked this media.</li>
+<li>Get information about a tag object.</li>
+<li>Get a list of recently tagged media.</li>
+<li>Search for tags by name.</li>
+<li>Get information about a location.</li>
+<li>Search for a location by geographic coordinate.</li>
+<li>Get a list of media objects from a given location.</li>
+<li>Token support.</li>
+<li>Client ID support.</li>
+<li>Pagination.</li>
+<li>OAuth 2.0 authentication.</li>
+<li>Get information about a relationship to another user.</li>
+<li>Modify the relationship with target user.</li>
+<li>List the users who have requested to follow.</li>
+<li>Set a like on this media by the current user.</li>
+<li>Remove a like on this media by the current user.</li>
+<li>Add a comment (requires special permission from Instagram).</li>
+<li>Remove a comment.</li>
+<li>Search for media in a given area. The default time span is set to 5 days. The time span must not exceed 7 days. Defaults time stamps cover the last 5 days.</li>
+<li>Create a comment on a media. Please email apidevelopers[at]instagram.com for access.</li>
 </ul>
 
-<h3 id="not-implemented">Not implemented</h3>
+<h3>Not implemented</h3>
+
 <ul>
-  <li>Subscriptions.</li>
+<li>Subscriptions.</li>
 </ul>
 
-<h2 id="example-usage">Example usage</h2>
+<h2>Example usage</h2>
 
 <div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="c1">// You need to request these variables from Instagram: www.instagram.com/developer</span>
 <span class="k">val</span> <span class="n">clientId</span> <span class="k">=</span> <span class="s">&quot;client-id&quot;</span>
@@ -186,17 +199,19 @@
 
 <span class="c1">// println(s&quot;Search for images near a coordinate: ${instagram.mediaSearch(&quot;48.858844&quot; -&gt; &quot;2.294351&quot;)}&quot;)</span></code></pre></div>
 
-<h2 id="download">Download</h2>
+<h2>Download</h2>
+
 <p><a href="https://github.com/AntonFagerberg/InstagramScalaAPI">github.com/AntonFagerberg/InstagramScalaAPI</a></p>
 
-<h2 id="license">License</h2>
+<h2>License</h2>
+
 <p>Copyright 2013 Anton Fagerberg (http://www.antonfagerberg.com).</p>
 
-<p>Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
+<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except in compliance with the License. You may obtain a copy of the License at</p>
 
 <p>http://www.apache.org/licenses/LICENSE-2.0</p>
 
-<p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an “AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
+<p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</p>
 
 <p>For more information and examples, visit the project on GitHub.</p>
 

@@ -2,10 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <title>Duplicate image removal</title>
+    <title>Duplicate image removal -  AntonFagerberg.com</title>
     <meta name="description" content="">
 
     <link rel="stylesheet" href="/css/main.css">
@@ -14,24 +14,33 @@
 
   <body>
     <div id="gradient"></div>
-
-<div id="menu">
-  <a href="/">About</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/projects">Projects</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/texts">Texts</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/cv">CV</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/contact">Contact</a>
-</div>
+    
+    
+    <div id="header">
+      <a href="/">
+        AntonFagerberg.com
+        <div id="punchline">
+          A programmer's field notes.
+        </div>
+      </a>
+    </div>
+    
+    
     <div class="post full">
 	<h1>Duplicate image removal</h1>
+	
+	
+	<strong>02 Mar 2015</strong>
+	
+	
 	<p>This application will search a folder and its sub-folders for duplicate files and move them to a specified location.
 Only files within the same folder are considered duplicates!</p>
 
-<h2 id="build-the-application">Build the application</h2>
+<h2>Build the application</h2>
 
 <p>All source is available on <a href="https://github.com/AntonFagerberg/duplicate_image">my GitHub page</a>.</p>
 
-<h3 id="dependencies">Dependencies</h3>
+<h3>Dependencies</h3>
 
 <p><a href="http://elixir-lang.org/install.html">Install Elixir</a>.</p>
 
@@ -39,22 +48,24 @@ Only files within the same folder are considered duplicates!</p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">brew install imagemagick</code></pre></div>
 
-<h3 id="compile-the-application-to-a-binary">Compile the application to a binary</h3>
+<h3>Compile the application to a binary</h3>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">mix escript.build</code></pre></div>
 
-<p>This will create a binary called “duplicate_image” which you can run on all systems which has the Erlang-runtime installed.</p>
+<p>This will create a binary called &quot;duplicate_image&quot; which you can run on all systems which has the Erlang-runtime installed.</p>
 
-<h3 id="launch-the-application">Launch the application</h3>
+<h3>Launch the application</h3>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">./duplicate_iamge /path/to/gallery /path/where/to/store/duplicates 0.1</code></pre></div>
 
 <p>The threshold, 0.1 in the example, must be a floating-poing number. 0.0 is a perfect match and 1.0 is entirely different. Perfect matches will always be moved!</p>
 
-<h2 id="other">Other</h2>
-<p>The <a href="http://www.imagemagick.org/script/command-line-options.php#metric">metric</a> used is “RMSE”. The comparison is very slow and CPU-demanding which motivates parallelisation. The number of concurrent Elixir processes will be determined by the Erlang setting “schedulers_online” which normally amounts to the number of CPU-cores (or CPU-cures * 2 if hyper-threading is used).</p>
+<h2>Other</h2>
 
-<h2 id="license">License</h2>
+<p>The <a href="http://www.imagemagick.org/script/command-line-options.php#metric">metric</a> used is &quot;RMSE&quot;. The comparison is very slow and CPU-demanding which motivates parallelisation. The number of concurrent Elixir processes will be determined by the Erlang setting &quot;schedulers_online&quot; which normally amounts to the number of CPU-cores (or CPU-cures * 2 if hyper-threading is used).</p>
+
+<h2>License</h2>
+
 <p>This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or

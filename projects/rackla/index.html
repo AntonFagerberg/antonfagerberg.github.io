@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title>Rackla: API Gateway Framework -  AntonFagerberg.com</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://www.antonfagerberg.com/projects/rackla/">
+</head>
+
+  <body>
+    <div id="gradient"></div>
+    
+    
+    <div id="header">
+      <a href="/">
+        AntonFagerberg.com
+        <div id="punchline">
+          A programmer's field notes.
+        </div>
+      </a>
+    </div>
+    
+    
+    <div class="post full">
+	<h1>Rackla: API Gateway Framework</h1>
+	
+	
+	<strong>11 Jun 2015</strong>
+	
+	
+	<p>I investigated &quot;API-gateways&quot; for of my <a href="https://lup.lub.lu.se/student-papers/search/publication/5469608">master&#39;s thesis</a>. The hypothesis was that it is common that the APIs we are working with are not optimized for the clients - so we often have to do multiple requests from the client, take the responses and combine them in in some way to get the data that the client actually want.</p>
+
+<p><img src="http://www.antonfagerberg.com/images/projects/api-gateway.png" alt="API Gateway"></p>
+
+<p>In some cases, we might not be able to change the actual API and that is where the API gateway can be used. The API gateway acts as a &quot;translation layer&quot; between the client and the back-end API. What we want to do is to move the complexity away from the client and let the API gateway do most of the heavy duty work instead. There are many performance benefits by doing so, especially with HTTP/1.1 and browsers which are bound by the 6 TCP connection limit (without domain sharding), no header compression etc - by placing the API-gateway close to the back-end API where the latency is low and the bandwidth high, it can do the heavy work and optimize the traffic to the client.</p>
+
+<p>You can also use API gateways to design entirely new APIs based on existing ones by combining and transforming them in any way you want. (And of course much much more...)</p>
+
+<p>Rackla is a framework which allows you to write your own API-gateways with Elixir. The goal is to define your own end-points in terms of a &quot;pipeline&quot; where each individual request can &quot;flow&quot; through the pipeline asynchronously but at the same be manipulated using well known functions such as map, flat_map and reduce. The framework is built to be used with Plug and internally I use Hackney and Poison.</p>
+
+<p>This is an example of what you can do with Rackla:</p>
+<div class="highlight"><pre><code class="language-elixir" data-lang="elixir"><span class="n">get</span> <span class="s2">&quot;/date&quot;</span> <span class="k">do</span>
+  <span class="n">extract_date</span> <span class="p">=</span> <span class="k">fn</span><span class="p">(</span><span class="n">json</span><span class="p">)</span> <span class="p">-&gt;</span>
+    <span class="n">date</span> <span class="p">=</span> <span class="nc">Poison</span><span class="p">.</span><span class="n">decode!</span><span class="p">(</span><span class="n">json</span><span class="p">)[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span>
+    <span class="p">%{</span><span class="ss">date</span><span class="p">:</span> <span class="n">date</span><span class="p">}</span>
+  <span class="k">end</span>
+
+  <span class="s2">&quot;http://date.jsontest.com/&quot;</span>
+  <span class="o">|&gt;</span> <span class="n">request</span>
+  <span class="o">|&gt;</span> <span class="n">map</span><span class="p">(</span><span class="n">extract_date</span><span class="p">)</span>
+  <span class="o">|&gt;</span> <span class="n">response</span><span class="p">(</span><span class="ss">json</span><span class="p">:</span> <span class="no">true</span><span class="p">,</span> <span class="ss">compress</span><span class="p">:</span> <span class="no">true</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Here we use an existing API, send a request to it and transform the response by decoding the JSON string and extracting the date field. Then we put it in a new map, respond to the client with it by JSON encoding the response and compressing it using gzip if the client supports it. (Note that while this example only executes one HTTP request to one back-end API, we could have just as easily made an arbitrary amount of (potentially recursive) calls instead which would&#39;ve been handled asynchronously/concurrently.)</p>
+
+<p>More information is available on <a href="https://github.com/AntonFagerberg/rackla">GitHub</a> and <a href="http://rackla.org">Rackla.org</a>!</p>
+
+</div>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-40700896-1', 'antonfagerberg.com');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>

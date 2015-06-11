@@ -2,10 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <title>Fix the invalid CD key bug in Warhammer 40.000</title>
+    <title>Fix the invalid CD key bug in Warhammer 40.000 -  AntonFagerberg.com</title>
     <meta name="description" content="">
 
     <link rel="stylesheet" href="/css/main.css">
@@ -14,31 +14,40 @@
 
   <body>
     <div id="gradient"></div>
-
-<div id="menu">
-  <a href="/">About</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/projects">Projects</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/texts">Texts</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/cv">CV</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/contact">Contact</a>
-</div>
+    
+    
+    <div id="header">
+      <a href="/">
+        AntonFagerberg.com
+        <div id="punchline">
+          A programmer's field notes.
+        </div>
+      </a>
+    </div>
+    
+    
     <div class="post full">
 	<h1>Fix the invalid CD key bug in Warhammer 40.000</h1>
-	<p>Warhammer 40.000 is a great RTS series for the PC. What’s good for us Linux people is that it works excellent under Wine. I bought the “Warhammer 40K - Dawn of War Anthology”, I believe it’s called Dawn of War Platinum Edition on Steam. It really is an awesome game and it should be able to find it fairly cheap (I bought it at a “local” online retailer for about $20, however the USD is really low compared to the SEK right now so it might sound cheeper to me then it does to you). There is a new expansion out called Soul Storm but I havn’t bought it yet. Dawn of War 2 is under development as well.</p>
+	
+	
+	<strong>07 May 2013</strong>
+	
+	
+	<p>Warhammer 40.000 is a great RTS series for the PC. What&#39;s good for us Linux people is that it works excellent under Wine. I bought the &quot;Warhammer 40K - Dawn of War Anthology&quot;, I believe it&#39;s called Dawn of War Platinum Edition on Steam. It really is an awesome game and it should be able to find it fairly cheap (I bought it at a &quot;local&quot; online retailer for about $20, however the USD is really low compared to the SEK right now so it might sound cheeper to me then it does to you). There is a new expansion out called Soul Storm but I havn&#39;t bought it yet. Dawn of War 2 is under development as well.</p>
 
-<p>The anthology edition contains Warhammer 40K - Dawn of War and Winter Assault and Dark Crusade. Installing Dawn of War and Winter Assault went just fine but I ran into some trouble with Dark Crusade. Dark Crusade is a expansion but they’ve made it into a stand alone game so you can play it without having Dawn of War or Winter Assault installed (or owned). However, if you wish to play the races from Dawn of War and Winter Assault you have to enter the CD-keys from those games.</p>
+<p>The anthology edition contains Warhammer 40K - Dawn of War and Winter Assault and Dark Crusade. Installing Dawn of War and Winter Assault went just fine but I ran into some trouble with Dark Crusade. Dark Crusade is a expansion but they&#39;ve made it into a stand alone game so you can play it without having Dawn of War or Winter Assault installed (or owned). However, if you wish to play the races from Dawn of War and Winter Assault you have to enter the CD-keys from those games.</p>
 
-<p>When I tried to enter these CD-keys I got the error message saying “Your CD-key seems to be invalid. Please try again.” even though I have bought the games and the keys are valid. I Googled it and found a lot of people had the same problem (on the Windows side as well) but the only solution they had was to re-install it. I did not feel like re-installing it because it’s a pain in the ass and you have to switch between 6 CDs.</p>
+<p>When I tried to enter these CD-keys I got the error message saying &quot;Your CD-key seems to be invalid. Please try again.&quot; even though I have bought the games and the keys are valid. I Googled it and found a lot of people had the same problem (on the Windows side as well) but the only solution they had was to re-install it. I did not feel like re-installing it because it&#39;s a pain in the ass and you have to switch between 6 CDs.</p>
 
-<p>I felt that there could be something messy in the Windows Registry Editor (open it with wine using “wine regedit”) since they recomended a re-install so I started searching through it and found the strings which caused this problem. It seems as the Winter Assault and Dawn of War keys for Dark Crusade is located in “HKEY_LOCAL_MACHINE/Software/THQ/Dawn of War - Dark Crusade”. However, the same strings can also be found in “HKEY_LOCAL_MACHINE/Software/THQ/Dawn of War” and it looks like the game checks these strings as well.</p>
+<p>I felt that there could be something messy in the Windows Registry Editor (open it with wine using &quot;wine regedit&quot;) since they recomended a re-install so I started searching through it and found the strings which caused this problem. It seems as the Winter Assault and Dawn of War keys for Dark Crusade is located in &quot;HKEY_LOCAL_MACHINE/Software/THQ/Dawn of War - Dark Crusade&quot;. However, the same strings can also be found in &quot;HKEY_LOCAL_MACHINE/Software/THQ/Dawn of War&quot; and it looks like the game checks these strings as well.</p>
 
-<p>For some reason these strings just contained zeros so what you have to do is to change these strings to your CD-keys in the “Dawn Of War”-folder (not “Dawn of War - Dark Crusade”!). The CD-key string for Dawn of War is named CDKEY (16 chars) and the Winter Assault is named CDKEY_WXP (20 chars). I have also read that some recieved a 16 chars long CD-key for Winter Assault. This seems to be a printing error and cant be fixed this way.</p>
+<p>For some reason these strings just contained zeros so what you have to do is to change these strings to your CD-keys in the &quot;Dawn Of War&quot;-folder (not &quot;Dawn of War - Dark Crusade&quot;!). The CD-key string for Dawn of War is named CDKEY (16 chars) and the Winter Assault is named CDKEY_WXP (20 chars). I have also read that some recieved a 16 chars long CD-key for Winter Assault. This seems to be a printing error and cant be fixed this way.</p>
 
-<p>Start the game again after you’ve entered your CD-keys (with the “-“ between them ofcourse). You will be prompted for you CD-keys in the game once more but they should report as valid. You can enter them directly in to you “Dawn of War - Dark Crusade” registry folder as well. The Dawn of War string is named W40KCDKEY and the Winter Assault is named WXPCDKEY (and the CDKEY-string in this folder is for the Dark Crusade game itself). I have heard that the Soul Storm has a similair problem but since I havn’t bought it yet I cant tell you how to fix it. My guess is that it is pretty much the same deal.</p>
+<p>Start the game again after you&#39;ve entered your CD-keys (with the &quot;-&quot; between them ofcourse). You will be prompted for you CD-keys in the game once more but they should report as valid. You can enter them directly in to you &quot;Dawn of War - Dark Crusade&quot; registry folder as well. The Dawn of War string is named W40KCDKEY and the Winter Assault is named WXPCDKEY (and the CDKEY-string in this folder is for the Dark Crusade game itself). I have heard that the Soul Storm has a similair problem but since I havn&#39;t bought it yet I cant tell you how to fix it. My guess is that it is pretty much the same deal.</p>
 
-<h3 id="update">Update:</h3>
+<h3>Update:</h3>
 
-<p>For Windows 7 64-bit: “HKEY_LOCAL_MACHINE/Software/Wow6432Node/THQ/”</p>
+<p>For Windows 7 64-bit: &quot;HKEY_LOCAL_MACHINE/Software/Wow6432Node/THQ/&quot;</p>
 
 </div>
 

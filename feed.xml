@@ -5,23 +5,133 @@
     <description></description>
     <link>http://www.antonfagerberg.com/</link>
     <atom:link href="http://www.antonfagerberg.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 01 Jun 2015 12:04:40 +0200</pubDate>
-    <lastBuildDate>Mon, 01 Jun 2015 12:04:40 +0200</lastBuildDate>
+    <pubDate>Thu, 11 Jun 2015 20:56:12 +0200</pubDate>
+    <lastBuildDate>Thu, 11 Jun 2015 20:56:12 +0200</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
-        <title>Temperature station with a Raspberry Pi</title>
-        <description>&lt;p&gt;To begin with, I did a clean install of &lt;a href=&quot;http://raspbian.org/&quot;&gt;Raspbian based on Debian Wheezy&lt;/a&gt;. I’m running it without a graphical user interface, no overclocking but I have reduced the GPU memory to 16 megabytes.&lt;/p&gt;
+        <title>Rackla: API Gateway Framework</title>
+        <description>&lt;p&gt;I investigated &amp;quot;API-gateways&amp;quot; for of my &lt;a href=&quot;https://lup.lub.lu.se/student-papers/search/publication/5469608&quot;&gt;master&amp;#39;s thesis&lt;/a&gt;. The hypothesis was that it is common that the APIs we are working with are not optimized for the clients - so we often have to do multiple requests from the client, take the responses and combine them in in some way to get the data that the client actually want.&lt;/p&gt;
 
-&lt;h2 id=&quot;hardware&quot;&gt;Hardware&lt;/h2&gt;
-&lt;p&gt;I won’t describe how the sensors are put together because there are so many good guides already. I would recommend &lt;a href=&quot;https://learn.adafruit.com/downloads/pdf/adafruits-raspberry-pi-lesson-11-ds18b20-temperature-sensing.pdf&quot;&gt;this guide from adafruit&lt;/a&gt; which I followed myself. I used two waterproof DS18B20 sensors connected in parallel with one 4.7kΩ resistor.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.antonfagerberg.com/images/projects/api-gateway.png&quot; alt=&quot;API Gateway&quot;&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/projects/raspberry_pi.jpg&quot; alt=&quot;temp_log raspberry pi&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;In some cases, we might not be able to change the actual API and that is where the API gateway can be used. The API gateway acts as a &amp;quot;translation layer&amp;quot; between the client and the back-end API. What we want to do is to move the complexity away from the client and let the API gateway do most of the heavy duty work instead. There are many performance benefits by doing so, especially with HTTP/1.1 and browsers which are bound by the 6 TCP connection limit (without domain sharding), no header compression etc - by placing the API-gateway close to the back-end API where the latency is low and the bandwidth high, it can do the heavy work and optimize the traffic to the client.&lt;/p&gt;
 
-&lt;p&gt;Note that there is one change (not present in the guide linked above) which has to be made in Raspbian in order to read the sensor data which I’ll describe below.&lt;/p&gt;
+&lt;p&gt;You can also use API gateways to design entirely new APIs based on existing ones by combining and transforming them in any way you want. (And of course much much more...)&lt;/p&gt;
 
-&lt;h2 id=&quot;reading-the-sensors&quot;&gt;Reading the sensors&lt;/h2&gt;
-&lt;p&gt;It seems like there has been a change in Raspbian lately which requires a minor change before the sensors can be read. If you’ve followed the guide I linked above from adafruit, then you want to add the following line to the file /boot/config.txt:&lt;/p&gt;
+&lt;p&gt;Rackla is a framework which allows you to write your own API-gateways with Elixir. The goal is to define your own end-points in terms of a &amp;quot;pipeline&amp;quot; where each individual request can &amp;quot;flow&amp;quot; through the pipeline asynchronously but at the same be manipulated using well known functions such as map, flat_map and reduce. The framework is built to be used with Plug and internally I use Hackney and Poison.&lt;/p&gt;
+
+&lt;p&gt;This is an example of what you can do with Rackla:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/date&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;extract_date&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Poison&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decode!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;date&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;s2&quot;&gt;&amp;quot;http://date.jsontest.com/&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;extract_date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;compress&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Here we use an existing API, send a request to it and transform the response by decoding the JSON string and extracting the date field. Then we put it in a new map, respond to the client with it by JSON encoding the response and compressing it using gzip if the client supports it. (Note that while this example only executes one HTTP request to one back-end API, we could have just as easily made an arbitrary amount of (potentially recursive) calls instead which would&amp;#39;ve been handled asynchronously/concurrently.)&lt;/p&gt;
+
+&lt;p&gt;More information is available on &lt;a href=&quot;https://github.com/AntonFagerberg/rackla&quot;&gt;GitHub&lt;/a&gt; and &lt;a href=&quot;http://rackla.org&quot;&gt;Rackla.org&lt;/a&gt;!&lt;/p&gt;
+</description>
+        <pubDate>Thu, 11 Jun 2015 00:00:00 +0200</pubDate>
+        <link>http://www.antonfagerberg.com/projects/rackla/</link>
+        <guid isPermaLink="true">http://www.antonfagerberg.com/projects/rackla/</guid>
+        
+        
+        <category>projects</category>
+        
+      </item>
+    
+      <item>
+        <title>Run specific tests in Elixir (ExUnit)</title>
+        <description>&lt;p&gt;When developing Elixir applications, there are two options I&amp;#39;ve learned to use for running my tests in a more specific manner.
+The normal approach for running tests in a Mix based Elixir project is to simply run: &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;mix test
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This will run all tests, but you can also use this task to only run a specific test file by executing: &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;mix test test/some_test.exs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can be even more specific by specifying the line-number of a single task you want to run. Say that you have a test on line 42, then you simply execute: &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;mix test test/some_test.exs:42
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The line number, 42 in the previous example, can be any line number between the line where the wanted test&amp;#39;s &lt;code&gt;test&lt;/code&gt; keyword is defined until the next test&amp;#39;s &lt;code&gt;test&lt;/code&gt; keyword.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 28 Apr 2015 16:21:00 +0200</pubDate>
+        <link>http://www.antonfagerberg.com/blog/specific-tests-in-elixir/</link>
+        <guid isPermaLink="true">http://www.antonfagerberg.com/blog/specific-tests-in-elixir/</guid>
+        
+        <category>elixir,</category>
+        
+        <category>exunit,</category>
+        
+        <category>tests</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>Function debugging</title>
+        <description>&lt;p&gt;I was going through the &lt;a href=&quot;http://ocaml.org/learn/taste.html&quot;&gt;OCaml Code Examples&lt;/a&gt; the other day after listening to &lt;a href=&quot;http://www.functionalgeekery.com/episode-20-eric-b-merritt/&quot;&gt;Eric B. Merritt on the podcast Functional Geekery&lt;/a&gt;. One thing that really stuck with me was the last paragraph called &amp;quot;Elementary debugging&amp;quot;.&lt;/p&gt;
+
+&lt;p&gt;It is a very short paragraph which only contain the line &amp;quot;To conclude, here is the simplest way of spying over functions&amp;quot; and a short code example:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ocaml&quot; data-lang=&quot;ocaml&quot;&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;rec&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fib&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fib&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fib&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fib&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fib&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;now&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;traced&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fib&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fib&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;--&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fib&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;--&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fib&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fib&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;--&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fib&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;--&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fib&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fib&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;--&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fib&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fib&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fib&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is a feature I think every programming language should have built in to it by default. You simply say which function you want to trace and the console will print each input value and each output value.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 20 Apr 2015 11:09:09 +0200</pubDate>
+        <link>http://www.antonfagerberg.com/blog/function-debugging/</link>
+        <guid isPermaLink="true">http://www.antonfagerberg.com/blog/function-debugging/</guid>
+        
+        <category>ocaml,</category>
+        
+        <category>haskell,</category>
+        
+        <category>println,</category>
+        
+        <category>debugging</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>Temperature station on a Raspberry Pi</title>
+        <description>&lt;p&gt;To begin with, I did a clean install of &lt;a href=&quot;http://raspbian.org/&quot;&gt;Raspbian based on Debian Wheezy&lt;/a&gt;. I&amp;#39;m running it without a graphical user interface, no overclocking but I have reduced the GPU memory to 16 megabytes.&lt;/p&gt;
+
+&lt;h2&gt;Hardware&lt;/h2&gt;
+
+&lt;p&gt;I won&amp;#39;t describe how the sensors are put together because there are so many good guides already. I would recommend &lt;a href=&quot;https://learn.adafruit.com/downloads/pdf/adafruits-raspberry-pi-lesson-11-ds18b20-temperature-sensing.pdf&quot;&gt;this guide from adafruit&lt;/a&gt; which I followed myself. I used two waterproof DS18B20 sensors connected in parallel with one 4.7kΩ resistor.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/projects/raspberry_pi.jpg&quot; alt=&quot;temp_log raspberry pi&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Note that there is one change (not present in the guide linked above) which has to be made in Raspbian in order to read the sensor data which I&amp;#39;ll describe below.&lt;/p&gt;
+
+&lt;h2&gt;Reading the sensors&lt;/h2&gt;
+
+&lt;p&gt;It seems like there has been a change in Raspbian lately which requires a minor change before the sensors can be read. If you&amp;#39;ve followed the guide I linked above from adafruit, then you want to add the following line to the file /boot/config.txt:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;dtoverlay=w1-gpio-pullup,gpiopin=x,pullup=y&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -32,18 +142,19 @@
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;pi@raspberrypi ~ $ ls /sys/bus/w1/devices/
 28-0114651de1ff  28-0314564e82ff  w1_bus_master1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Everyone of your sensors will have its own folder starting with “28-“. As you can se above, I have two sensors. There is a file in each folder called w1_slave which you can read to see the actual sensor data.&lt;/p&gt;
+&lt;p&gt;Everyone of your sensors will have its own folder starting with &amp;quot;28-&amp;quot;. As you can se above, I have two sensors. There is a file in each folder called w1_slave which you can read to see the actual sensor data.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;pi@raspberrypi ~ $ cat /sys/bus/w1/devices/28-0314564e82ff/w1_slave
 61 01 55 00 7f ff 0c 10 6a : crc=6a YES
 61 01 55 00 7f ff 0c 10 6a t=22062&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;On the first line, you can see that it ends with “YES”, which indicates that we successfully got a value. On the second line, you’ll see “t=22062” from my example. This is the temperature in 1/1000 degrees celsius, so that would be 22.062 degrees celsius.&lt;/p&gt;
+&lt;p&gt;On the first line, you can see that it ends with &amp;quot;YES&amp;quot;, which indicates that we successfully got a value. On the second line, you&amp;#39;ll see &amp;quot;t=22062&amp;quot; from my example. This is the temperature in 1/1000 degrees celsius, so that would be 22.062 degrees celsius.&lt;/p&gt;
 
-&lt;p&gt;Note that the precision isn’t actually that accurate. The sensors I bought are only precise to ±0.5 degrees even though they look a lot more precis from the read-out.&lt;/p&gt;
+&lt;p&gt;Note that the precision isn&amp;#39;t actually that accurate. The sensors I bought are only precise to ±0.5 degrees even though they look a lot more precis from the read-out.&lt;/p&gt;
 
-&lt;h2 id=&quot;lets-go-templog&quot;&gt;Let’s go temp_log!&lt;/h2&gt;
-&lt;p&gt;Alright, now we’re ready to get down to the software. We’re going to use a piece software I wrote called temp_log. It is written in Elixir and it will read all your sensors, store the result in a database, provide an HTTP API to query the results and a small visualisation with graphs.&lt;/p&gt;
+&lt;h2&gt;Let&amp;#39;s go temp_log!&lt;/h2&gt;
+
+&lt;p&gt;Alright, now we&amp;#39;re ready to get down to the software. We&amp;#39;re going to use a piece software I wrote called temp_log. It is written in Elixir and it will read all your sensors, store the result in a database, provide an HTTP API to query the results and a small visualisation with graphs.&lt;/p&gt;
 
 &lt;p&gt;So, first you have to install Elixir on Raspbian. You can use &lt;a href=&quot;http://www.antonfagerberg.com/texts/elixir-on-raspberry-pi/&quot;&gt;my previously written guide&lt;/a&gt; to do that.&lt;/p&gt;
 
@@ -51,14 +162,15 @@
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get install git postgresql&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Git will be used to clone temp_log from GitHub and postgresql is the database which we’ll use.&lt;/p&gt;
+&lt;p&gt;Git will be used to clone temp_log from GitHub and postgresql is the database which we&amp;#39;ll use.&lt;/p&gt;
 
-&lt;h3 id=&quot;prepare-the-database&quot;&gt;Prepare the database&lt;/h3&gt;
-&lt;p&gt;Now we’re ready to setup the database. First we need to use the client psql to add a user and create the database. Use the following command to start the psql with the user postgres:&lt;/p&gt;
+&lt;h3&gt;Prepare the database&lt;/h3&gt;
+
+&lt;p&gt;Now we&amp;#39;re ready to setup the database. First we need to use the client psql to add a user and create the database. Use the following command to start the psql with the user postgres:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo -u postgres psql&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Now we should create the user and the database. I’ve used “temp_log” as the username, password and database name. Change them to whatever you want!&lt;/p&gt;
+&lt;p&gt;Now we should create the user and the database. I&amp;#39;ve used &amp;quot;temp_log&amp;quot; as the username, password and database name. Change them to whatever you want!&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;CREATE USER temp_log WITH PASSWORD &amp;#39;temp_log&amp;#39;;
 CREATE DATABASE temp_log OWNER temp_log;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -67,12 +179,13 @@ CREATE DATABASE temp_log OWNER temp_log;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;\q&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;setup-templog&quot;&gt;Setup temp_log&lt;/h3&gt;
+&lt;h3&gt;Setup temp_log&lt;/h3&gt;
+
 &lt;p&gt;First we need to get the temp_log source code:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git clone https://github.com/AntonFagerberg/temp_log.git&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;The first thing we should edit is the file config/config.exs and set the values we used in the previous step when we created the database. When this is done, we can migrate the database. It is important that the code for reading from the sensors won’t be started when we do this so make sure that TempLog.Reader is commented out in the file lib/main.ex:&lt;/p&gt;
+&lt;p&gt;The first thing we should edit is the file config/config.exs and set the values we used in the previous step when we created the database. When this is done, we can migrate the database. It is important that the code for reading from the sensors won&amp;#39;t be started when we do this so make sure that TempLog.Reader is commented out in the file lib/main.ex:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span class=&quot;n&quot;&gt;children&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Repo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]),&lt;/span&gt;
@@ -80,14 +193,14 @@ CREATE DATABASE temp_log OWNER temp_log;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;span class=&quot;n&quot;&gt;worker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;TempLog.HTTP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[])&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;If it’s commented out as above, go ahead and type the following commands:&lt;/p&gt;
+&lt;p&gt;If it&amp;#39;s commented out as above, go ahead and type the following commands:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;mix deps.get
 mix ecto.migrate -r Repo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This will fetch all required dependencies and migrate the database (create the appropriate tables).&lt;/p&gt;
 
-&lt;p&gt;When this is done, go ahead and remove the comment above to enable TempLog.Reader. We’re now ready to test the application. To start it in a interactive shell, type:&lt;/p&gt;
+&lt;p&gt;When this is done, go ahead and remove the comment above to enable TempLog.Reader. We&amp;#39;re now ready to test the application. To start it in a interactive shell, type:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;iex -S mix&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -95,26 +208,27 @@ mix ecto.migrate -r Repo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;23:17:49.089 [debug] INSERT INTO &amp;quot;entry&amp;quot; (&amp;quot;sensor&amp;quot;, &amp;quot;temperature&amp;quot;, &amp;quot;timestamp&amp;quot;) VALUES ($1, $2, $3) RETURNING &amp;quot;id&amp;quot; [&amp;quot;28-0114651de1ff&amp;quot;, 2562, { {2015, 3, 5}, {23, 17, 49} }] (9.0ms)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;The data stored consists of three fields: sensor name (28-…), temperature in 1/1000 degrees celsius and a timestamp.&lt;/p&gt;
+&lt;p&gt;The data stored consists of three fields: sensor name (28-...), temperature in 1/1000 degrees celsius and a timestamp.&lt;/p&gt;
 
-&lt;h3 id=&quot;web-interface--api&quot;&gt;Web interface &amp;amp; API&lt;/h3&gt;
+&lt;h3&gt;Web interface &amp;amp; API&lt;/h3&gt;
 
 &lt;p&gt;The application has a web interface but will also exposes a simple API. The file lib/api.ex is responsible for exposing the API end-points. It will also serve the simple web interface which calls the end-points and displays the results using &lt;a href=&quot;http://www.chartjs.org/&quot;&gt;chartjs&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/projects/temp_log.png&quot; alt=&quot;temp_log graph&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/projects/temp_log.png&quot; alt=&quot;temp_log graph&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;The application is running on port 4000 by default. (See below how to change it.)&lt;/p&gt;
 
-&lt;h4 id=&quot;extending-the-api&quot;&gt;Extending the API&lt;/h4&gt;
-&lt;p&gt;You can extend the system and develop other end-points if you like. Take a look in lib/query.ex to see how the database is queried and how the results are collected. The project uses &lt;a href=&quot;https://github.com/elixir-lang/ecto&quot;&gt;Ecto&lt;/a&gt; but I haven’t used its DSL in this project.&lt;/p&gt;
+&lt;h4&gt;Extending the API&lt;/h4&gt;
+
+&lt;p&gt;You can extend the system and develop other end-points if you like. Take a look in lib/query.ex to see how the database is queried and how the results are collected. The project uses &lt;a href=&quot;https://github.com/elixir-lang/ecto&quot;&gt;Ecto&lt;/a&gt; but I haven&amp;#39;t used its DSL in this project.&lt;/p&gt;
 
 &lt;p&gt;New end-points can be added in the file lib/api.ex. This file is also responsible for serving the template (html-file) stored in lib/templates/index.eex and the public files (main javascript &amp;amp; css) from the pub/ folder.&lt;/p&gt;
 
-&lt;h3 id=&quot;settings&quot;&gt;Settings&lt;/h3&gt;
+&lt;h3&gt;Settings&lt;/h3&gt;
 
-&lt;h4 id=&quot;sensor-precision&quot;&gt;Sensor precision&lt;/h4&gt;
+&lt;h4&gt;Sensor precision&lt;/h4&gt;
 
-&lt;p&gt;My sensor has a precision of ±0.5 degrees celcius so that’s what I convert my sensory data to in the graphs. If you want to change this behaviour, you can open the file pub/main.js and change the following function:&lt;/p&gt;
+&lt;p&gt;My sensor has a precision of ±0.5 degrees celcius so that&amp;#39;s what I convert my sensory data to in the graphs. If you want to change this behaviour, you can open the file pub/main.js and change the following function:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tempFormat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;temps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;temps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;temp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -122,21 +236,23 @@ mix ecto.migrate -r Repo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;http-port&quot;&gt;HTTP port&lt;/h4&gt;
+&lt;h4&gt;HTTP port&lt;/h4&gt;
+
 &lt;p&gt;Per default, the HTTP server listens on port 4000. To change the port, open the file lib/http_worker.ex and change the init-function:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span class=&quot;nc&quot;&gt;Plug.Adapters.Cowboy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;http&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TempLog.API&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4000&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;read-interval&quot;&gt;Read interval&lt;/h4&gt;
+&lt;h4&gt;Read interval&lt;/h4&gt;
+
 &lt;p&gt;Per default, the application reads the temperature once every minute. To change this, modify the file lib/reader.ex and change the sleep timer:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span class=&quot;ss&quot;&gt;:timer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;60_000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Sleep 1 min before reading the next value.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;fake-data&quot;&gt;Fake data&lt;/h4&gt;
+&lt;h4&gt;Fake data&lt;/h4&gt;
+
 &lt;p&gt;You can fill the database with fake data if you want to develop another web-client. You can start populating the database with fake data from the iex shell by calling the method:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span class=&quot;nc&quot;&gt;TempLog.FakeData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;generate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 </description>
         <pubDate>Wed, 04 Mar 2015 00:00:00 +0100</pubDate>
         <link>http://www.antonfagerberg.com/projects/temperature-raspberry-pi/</link>
@@ -149,9 +265,10 @@ mix ecto.migrate -r Repo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
     
       <item>
         <title>Humble Download</title>
-        <description>&lt;p&gt;HumbleDownload is used for downloading / making a complete back-up of your library from &lt;a href=&quot;http://humblebundle.com/&quot;&gt;Humble Bundle&lt;/a&gt; to your computer. It will download everything: games, books, music etc and try to group them together in folders based on the names (which isn’t perfect unfortunately).&lt;/p&gt;
+        <description>&lt;p&gt;HumbleDownload is used for downloading / making a complete back-up of your library from &lt;a href=&quot;http://humblebundle.com/&quot;&gt;Humble Bundle&lt;/a&gt; to your computer. It will download everything: games, books, music etc and try to group them together in folders based on the names (which isn&amp;#39;t perfect unfortunately).&lt;/p&gt;
 
-&lt;h2 id=&quot;build-the-project&quot;&gt;Build the project&lt;/h2&gt;
+&lt;h2&gt;Build the project&lt;/h2&gt;
+
 &lt;p&gt;First, &lt;a href=&quot;http://elixir-lang.org/install.html&quot;&gt;install Elixir&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Execute the following from the project root:&lt;/p&gt;
@@ -159,20 +276,24 @@ mix ecto.migrate -r Repo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;mix deps.get
 mix escript.build&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;This will create the executable file “humble_download” which can be run on any system which has the Erlang runtime installed.&lt;/p&gt;
+&lt;p&gt;This will create the executable file &amp;quot;humble_download&amp;quot; which can be run on any system which has the Erlang runtime installed.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;./humble_download &amp;lt;input file&amp;gt; &amp;lt;download folder&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;create-the-input-file&quot;&gt;Create the input file&lt;/h2&gt;
-&lt;p&gt;Copy-paste the code from &lt;a href=&quot;https://github.com/AntonFagerberg/humble_download/blob/master/humbledownload.js&quot;&gt;humbledownload.js&lt;/a&gt; in to the developer console in your browser when you’re viewing your library on the Humble Bundle site. Copy-paste the result to a new text-file and use it as the input file as described above. The file should have three lines per item in your library: folder name, filename, link.&lt;/p&gt;
+&lt;h2&gt;Create the input file&lt;/h2&gt;
 
-&lt;h2 id=&quot;important&quot;&gt;Important!&lt;/h2&gt;
+&lt;p&gt;Copy-paste the code from &lt;a href=&quot;https://github.com/AntonFagerberg/humble_download/blob/master/humbledownload.js&quot;&gt;humbledownload.js&lt;/a&gt; in to the developer console in your browser when you&amp;#39;re viewing your library on the Humble Bundle site. Copy-paste the result to a new text-file and use it as the input file as described above. The file should have three lines per item in your library: folder name, filename, link.&lt;/p&gt;
+
+&lt;h2&gt;Important!&lt;/h2&gt;
+
 &lt;p&gt;The links are timed-based and will expire. When that happens, create another input file as before and restart humble_download with the new input file. The previously downloaded files will not be downloaded again.&lt;/p&gt;
 
-&lt;h2 id=&quot;code&quot;&gt;Code&lt;/h2&gt;
+&lt;h2&gt;Code&lt;/h2&gt;
+
 &lt;p&gt;&lt;a href=&quot;https://github.com/AntonFagerberg/humble_download&quot;&gt;All code is on my GitHub page&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;license&quot;&gt;License&lt;/h3&gt;
+&lt;h3&gt;License&lt;/h3&gt;
+
 &lt;p&gt;This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
@@ -200,11 +321,11 @@ along with this program.  If not, see &lt;a href=&quot;http://www.gnu.org/licens
         <description>&lt;p&gt;This application will search a folder and its sub-folders for duplicate files and move them to a specified location.
 Only files within the same folder are considered duplicates!&lt;/p&gt;
 
-&lt;h2 id=&quot;build-the-application&quot;&gt;Build the application&lt;/h2&gt;
+&lt;h2&gt;Build the application&lt;/h2&gt;
 
 &lt;p&gt;All source is available on &lt;a href=&quot;https://github.com/AntonFagerberg/duplicate_image&quot;&gt;my GitHub page&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h3 id=&quot;dependencies&quot;&gt;Dependencies&lt;/h3&gt;
+&lt;h3&gt;Dependencies&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://elixir-lang.org/install.html&quot;&gt;Install Elixir&lt;/a&gt;.&lt;/p&gt;
 
@@ -212,22 +333,24 @@ Only files within the same folder are considered duplicates!&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;brew install imagemagick&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;compile-the-application-to-a-binary&quot;&gt;Compile the application to a binary&lt;/h3&gt;
+&lt;h3&gt;Compile the application to a binary&lt;/h3&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;mix escript.build&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;This will create a binary called “duplicate_image” which you can run on all systems which has the Erlang-runtime installed.&lt;/p&gt;
+&lt;p&gt;This will create a binary called &amp;quot;duplicate_image&amp;quot; which you can run on all systems which has the Erlang-runtime installed.&lt;/p&gt;
 
-&lt;h3 id=&quot;launch-the-application&quot;&gt;Launch the application&lt;/h3&gt;
+&lt;h3&gt;Launch the application&lt;/h3&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;./duplicate_iamge /path/to/gallery /path/where/to/store/duplicates 0.1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;The threshold, 0.1 in the example, must be a floating-poing number. 0.0 is a perfect match and 1.0 is entirely different. Perfect matches will always be moved!&lt;/p&gt;
 
-&lt;h2 id=&quot;other&quot;&gt;Other&lt;/h2&gt;
-&lt;p&gt;The &lt;a href=&quot;http://www.imagemagick.org/script/command-line-options.php#metric&quot;&gt;metric&lt;/a&gt; used is “RMSE”. The comparison is very slow and CPU-demanding which motivates parallelisation. The number of concurrent Elixir processes will be determined by the Erlang setting “schedulers_online” which normally amounts to the number of CPU-cores (or CPU-cures * 2 if hyper-threading is used).&lt;/p&gt;
+&lt;h2&gt;Other&lt;/h2&gt;
 
-&lt;h2 id=&quot;license&quot;&gt;License&lt;/h2&gt;
+&lt;p&gt;The &lt;a href=&quot;http://www.imagemagick.org/script/command-line-options.php#metric&quot;&gt;metric&lt;/a&gt; used is &amp;quot;RMSE&amp;quot;. The comparison is very slow and CPU-demanding which motivates parallelisation. The number of concurrent Elixir processes will be determined by the Erlang setting &amp;quot;schedulers_online&amp;quot; which normally amounts to the number of CPU-cores (or CPU-cures * 2 if hyper-threading is used).&lt;/p&gt;
+
+&lt;h2&gt;License&lt;/h2&gt;
+
 &lt;p&gt;This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
@@ -258,14 +381,14 @@ along with this program.  If not, see &lt;a href=&quot;http://www.gnu.org/licens
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;deb http://packages.erlang-solutions.com/debian wheezy contrib&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;After saving the file, we need to add the repository’s public key to our systems keychain:&lt;/p&gt;
+&lt;p&gt;After saving the file, we need to add the repository&amp;#39;s public key to our systems keychain:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;wget http://packages.erlang-solutions.com/debian/erlang_solutions.asc
 sudo apt-key add erlang_solutions.asc&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;After this is done, we can remove the file erlang_solutions.asc if we want to.&lt;/p&gt;
 
-&lt;p&gt;Now we’re ready to update our systems repositories:&lt;/p&gt;
+&lt;p&gt;Now we&amp;#39;re ready to update our systems repositories:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get update&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -273,9 +396,9 @@ sudo apt-key add erlang_solutions.asc&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get install git erlang&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Git is a version control system which we’ll use for fetching Elixir. Erlang-mini is a tiny Erlang package for small devices (no GUI related dependencies and so on). Erlang-eunit is not really required to build Elixir itself but it will fail the unit-tests after the compilation is done which means that we can’t know for sure that the system is working properly.&lt;/p&gt;
+&lt;p&gt;Git is a version control system which we&amp;#39;ll use for fetching Elixir. Erlang-mini is a tiny Erlang package for small devices (no GUI related dependencies and so on). Erlang-eunit is not really required to build Elixir itself but it will fail the unit-tests after the compilation is done which means that we can&amp;#39;t know for sure that the system is working properly.&lt;/p&gt;
 
-&lt;p&gt;After the packages has been installed, we’re ready to get Elixir from GitHub:&lt;/p&gt;
+&lt;p&gt;After the packages has been installed, we&amp;#39;re ready to get Elixir from GitHub:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git clone https://github.com/elixir-lang/elixir.git
 cd elixir&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -284,13 +407,13 @@ cd elixir&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git checkout tags/v1.0.3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;We’re now ready to compile Elixir:&lt;/p&gt;
+&lt;p&gt;We&amp;#39;re now ready to compile Elixir:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;make clean test&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This will take several minutes so go get yourself a coffee or beverage of choice while the Raspberry Pi is chewing away.&lt;/p&gt;
 
-&lt;p&gt;After the compilation has completed and all unit-tests has passed, you’ve got yourself Elixir ready to use!&lt;/p&gt;
+&lt;p&gt;After the compilation has completed and all unit-tests has passed, you&amp;#39;ve got yourself Elixir ready to use!&lt;/p&gt;
 
 &lt;p&gt;Now you probably want to add the bin folder for Elixir to your path. This can be done temporarily by executing the following command in the terminal - or permanently by adding it to the file .profile in your home folder reloading the shell.&lt;/p&gt;
 
@@ -298,14 +421,63 @@ cd elixir&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Be sure to change the path to the appropriate path where you cloned and compiled Elixir.&lt;/p&gt;
 
-&lt;p&gt;Now you’re all set - happy hacking!&lt;/p&gt;
+&lt;p&gt;Now you&amp;#39;re all set - happy hacking!&lt;/p&gt;
 </description>
         <pubDate>Sun, 01 Mar 2015 00:00:00 +0100</pubDate>
-        <link>http://www.antonfagerberg.com/texts/elixir-on-raspberry-pi/</link>
-        <guid isPermaLink="true">http://www.antonfagerberg.com/texts/elixir-on-raspberry-pi/</guid>
+        <link>http://www.antonfagerberg.com/blog/elixir-on-raspberry-pi/</link>
+        <guid isPermaLink="true">http://www.antonfagerberg.com/blog/elixir-on-raspberry-pi/</guid>
         
         
-        <category>texts</category>
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>Comparison operators in Elixir</title>
+        <description>&lt;p&gt;When I began learning &lt;a href=&quot;http://elixir-lang.org/&quot;&gt;Elixir&lt;/a&gt; and worked my way through &lt;a href=&quot;http://elixir-lang.org/getting_started/1.html&quot;&gt;the getting started guide&lt;/a&gt;, I found two things which felt a bit out of place. One of them was the comparison operators which got me thinking more around this topic.&lt;/p&gt;
+
+&lt;p&gt;In Elixir, there are two equals operators: &lt;code&gt;==&lt;/code&gt; and &lt;code&gt;===&lt;/code&gt;. The difference between them are similar to other languages whereas the latter is more strict than the former.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span class=&quot;n&quot;&gt;iex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1.0&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;iex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1.0&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;false&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;It can also be used in the same regard in nested structures:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span class=&quot;n&quot;&gt;iex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;iex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;false&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;iex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;2.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;iex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;2.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;false&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;To accompany the stricter &lt;code&gt;===&lt;/code&gt; operator, Elixir also has the negated version, &lt;code&gt;!==&lt;/code&gt;, but as in most other languages, there is no strict version of the other comparison operators: &lt;code&gt;&amp;lt;&lt;/code&gt;, &lt;code&gt;&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;=&lt;/code&gt;, &lt;code&gt;&amp;lt;=&lt;/code&gt;. While one could imagine that &lt;code&gt;&amp;lt;==&lt;/code&gt; and &lt;code&gt;&amp;gt;==&lt;/code&gt; easily could be created, there isn&amp;#39;t really one as intuitive syntactic version for &lt;code&gt;&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;As a comparison, in Scala and Java to name two languages, there is no strict comparison operators. In these languages, if we compare integers and floating point numbers, the integer is converted to a floating point number since this conversion does not lead to any data loss (which would happen if &lt;code&gt;1.1&lt;/code&gt; would be converted to an integer). &lt;/p&gt;
+
+&lt;p&gt;The interesting thing to think about how is more how the less strict &lt;code&gt;==&lt;/code&gt; operator works in those languages that does have the strict version. In languages like PHP and JavaScript, the &lt;code&gt;==&lt;/code&gt; operator is much more relaxed than in Elixir and so numeric values can, to take one example, be compared with strings in this same regard as well:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;1.0&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; 
+&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In JavaScript, the implementation of the less strict &lt;code&gt;==&lt;/code&gt; operator doesn&amp;#39;t only apply to comparing numeric types and strings but &lt;a href=&quot;http://stackoverflow.com/questions/359494/does-it-matter-which-equals-operator-vs-i-use-in-javascript-comparisons&quot;&gt;can also cause much wonder&lt;/a&gt;. These sometimes unexpected behaviours are however not possible in Elixir:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span class=&quot;n&quot;&gt;iex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;1&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;false&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;So in Elixir, the &lt;code&gt;===&lt;/code&gt; operator only has one use which is to avoid comparing integers and floating point numbers which leads me to wonder if the &lt;code&gt;===&lt;/code&gt; operator really is necessary in Elixir? My guess is that it is an inherited behaviour from Erlang which has the &lt;code&gt;=:=&lt;/code&gt; operator (exactly equal to) and the corresponding &lt;code&gt;=/=&lt;/code&gt; operator &amp;quot;exactly not equal to&amp;quot;.&lt;/p&gt;
+
+&lt;p&gt;For me, the &lt;code&gt;===&lt;/code&gt; operator seems to be unnecessary in Elixir - I&amp;#39;ve never missed the &lt;code&gt;===&lt;/code&gt; operator in Scala and if it was removed from Elixir, the same behaviour could be recreated by combining the &lt;code&gt;is_integer/1&lt;/code&gt; or &lt;code&gt;is_float/1&lt;/code&gt; function with the &lt;code&gt;==&lt;/code&gt; operator.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 28 Dec 2014 03:09:25 +0100</pubDate>
+        <link>http://www.antonfagerberg.com/comparison-operators-in-elixir/</link>
+        <guid isPermaLink="true">http://www.antonfagerberg.com/comparison-operators-in-elixir/</guid>
+        
+        <category>elixir</category>
+        
         
       </item>
     
@@ -348,180 +520,11 @@ cd elixir&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;span class=&quot;nc&quot;&gt;Bencode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decode!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;d5:hello5:worlde&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;hello&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;world&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span class=&quot;kd&quot;&gt;defmodule&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Bencode&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;@moduledoc&lt;/span&gt; &lt;span class=&quot;sh&quot;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  Bencode decoder / encoder using Elixir data structures.&lt;/span&gt;
+&lt;p&gt;You can also add it as a Mix dependency:&lt;/p&gt;
 
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt; Encode strings (with thrown exceptions)&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      Bencode.encode!(&amp;quot;hello world&amp;quot;)&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      &amp;quot;11:hello world&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt; Encode integers&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      Bencode.encode!(42)&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      &amp;quot;i42e&amp;quot;&lt;/span&gt;
-
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt; Encode lists&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      Bencode.encode!([1,2,3])&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      &amp;quot;li1ei2ei3ee&amp;quot;&lt;/span&gt;
-
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt; Encode maps&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      Bencode.encode!(%{&amp;quot;a&amp;quot; =&amp;gt; 1, 2 =&amp;gt; &amp;quot;b&amp;quot;})&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      &amp;quot;di2e1:b1:ai1ee&amp;quot;&lt;/span&gt;
-
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt; Encode Dicts&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      Bencode.encode!(HashDict.new |&amp;gt; Dict.put :hello, :world)&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      &amp;quot;d5:hello5:worlde&amp;quot;&lt;/span&gt;
-
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt; Encode bitstrings&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      Bencode.encode!(&amp;lt;&amp;lt;1,2,3,4&amp;gt;&amp;gt;)&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      &amp;lt;&amp;lt;52, 58, 1, 2, 3, 4&amp;gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      &lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt; Encode without exceptions&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      Bencode.encode(2.0)&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      {:error, :invalid_format}&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      &lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt; Decode strings (with thrown expcetions)&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      Bencode.decode!(&amp;quot;5:hello&amp;quot;)&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      &amp;quot;hello&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      &lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt; Decode integers&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      Bencode.decode!(&amp;quot;i42e&amp;quot;)&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      42&lt;/span&gt;
-
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt; Decode lists &lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      Bencode.decode!(&amp;quot;li1ei2ei3ee&amp;quot;)&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      [1, 2, 3]&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      &lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt; Decode maps&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      Bencode.decode!(&amp;quot;d5:hello5:worlde&amp;quot;)&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      %{&amp;quot;hello&amp;quot; =&amp;gt; &amp;quot;world&amp;quot;}&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;##&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt; Decode without exceptions&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      Bencode.decode(&amp;quot;4:spam&amp;quot;)&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;      {:ok, &amp;quot;spam&amp;quot;}&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-  
-  &lt;span class=&quot;na&quot;&gt;@type&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encodable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;::&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;binary&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;atom&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Map&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;List&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;@type&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error_trailing_data&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;::&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:trailing_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;@type&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error_invalid_format&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;::&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:invalid_format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;@type&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bencode_error&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;::&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error_trailing_data&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error_invalid_format&lt;/span&gt;
-  
-  &lt;span class=&quot;na&quot;&gt;@doc&lt;/span&gt; &lt;span class=&quot;sh&quot;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  Decode a Bencode bitstring to an Elixir data structure.&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  An exception will be thrown if an invalid Bencoded string is provided.&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  Args:&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;    * `bitstring` - Bencoded bitstring to decode.&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;@spec&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decode!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;binary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;::&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encodable&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decode!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bitstring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decode_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bitstring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;
-      &lt;span class=&quot;bp&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;raise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Unparsed trailing data.&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-  &lt;span class=&quot;na&quot;&gt;@doc&lt;/span&gt; &lt;span class=&quot;sh&quot;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  Decode a Bencode bitstring to an Elixir data structure.&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  The function returns either `{:ok, data_structure}` on success, or&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  `{:error, :trailing_data}` on unspecified trailing data or &lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  `{:error, :invalid_format}` on format errors.&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  Args:&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;    * `bitstring` - Bencoded bitstring to decode.&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;@spec&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;binary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;::&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:ok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encodable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bencode_error&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bitstring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decode_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bitstring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:ok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;bp&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:trailing_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;rescue&lt;/span&gt;
-      &lt;span class=&quot;bp&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:invalid_format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-  &lt;span class=&quot;kd&quot;&gt;defp&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decode_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;l&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decode_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[])&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;defp&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decode_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;d&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decode_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{})&lt;/span&gt;
-
-  &lt;span class=&quot;kd&quot;&gt;defp&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decode_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;i&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;int_pattern&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;~r/^(?&amp;lt;num&amp;gt;(-?[1-9]+[1-9]*|[0-9]+))e/&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;num&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Regex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;named_captures&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;int_pattern&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-    &lt;span class=&quot;n&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parse&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-    &lt;span class=&quot;n&quot;&gt;offset&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;tail&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;binary_part&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;byte_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-  
-  &lt;span class=&quot;kd&quot;&gt;defp&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decode_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;size&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Regex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;named_captures&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;~r/^(?&amp;lt;size&amp;gt;[0-9]+):/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-    &lt;span class=&quot;n&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parse&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;prefix&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-    
-    &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;binary_part&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;prefix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-    &lt;span class=&quot;n&quot;&gt;offset&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;prefix&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;int&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;tail&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;binary_part&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;byte_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-  &lt;span class=&quot;kd&quot;&gt;defp&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decode_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;e&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is_list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Enum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reverse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;defp&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decode_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;e&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is_map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;kd&quot;&gt;defp&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decode_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is_list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decode_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;decode_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-  &lt;span class=&quot;kd&quot;&gt;defp&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decode_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is_map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key_tail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decode_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;decode_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key_tail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;decode_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;acc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-  
-  &lt;span class=&quot;na&quot;&gt;@doc&lt;/span&gt; &lt;span class=&quot;sh&quot;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  Encode Elixir data structures to a Bencode bitstring.&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  An exception will be thrown if an unsupported data structure is provided.&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  Args:&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;    * `data` - Data structure to encode.&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;@spec&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encode!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encodable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;::&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;binary&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encode!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is_number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;i&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;e&amp;quot;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encode!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is_list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Enum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reduce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;l&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;&amp;amp;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encode!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;&amp;amp;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;e&amp;quot;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encode!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is_map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Enum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reduce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;d&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;&amp;amp;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encode!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ni&quot;&gt;&amp;amp;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;e&amp;quot;&lt;/span&gt;  
-  &lt;span class=&quot;kd&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encode!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is_atom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Atom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encode!&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encode!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encode!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encode!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encode!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;byte_size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&amp;gt;&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;:&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;
-  
-  &lt;span class=&quot;na&quot;&gt;@doc&lt;/span&gt; &lt;span class=&quot;sh&quot;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  Encode Elixir data structures to a Bencode bitstring.&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  The function will return `{:ok, bitstring}` on success or &lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  `{:error, :invalid_format}` on failure.&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  Args:&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;    * `data` - Data structure to encode.&lt;/span&gt;
-&lt;span class=&quot;sh&quot;&gt;  &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;@spec&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encodable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;::&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:ok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;binary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error_invalid_format&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:ok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encode!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)}&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;rescue&lt;/span&gt;
-      &lt;span class=&quot;bp&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:invalid_format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span class=&quot;kd&quot;&gt;defp&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;deps&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;[{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:elixir_bencode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;~&amp;gt; 1.0.0&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}]&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 </description>
         <pubDate>Sun, 07 Dec 2014 00:00:00 +0100</pubDate>
         <link>http://www.antonfagerberg.com/projects/bencode-elixir/</link>
@@ -534,7 +537,7 @@ cd elixir&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
     
       <item>
         <title>KinectWare</title>
-        <description>&lt;iframe src=&quot;//player.vimeo.com/video/104841932?title=0&amp;amp;portrait=0&amp;amp;color=c9ff23&quot; width=&quot;750&quot; height=&quot;422&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+        <description>&lt;iframe src=&quot;//player.vimeo.com/video/104841932?title=0&amp;amp;portrait=0&amp;amp;color=c9ff23&quot; width=&quot;750&quot; height=&quot;422&quot; frameborder=&quot;0&quot; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
 
 &lt;p&gt;KinectWare was a WarioWare inspired project I created as part of the Virtual Reality course at Lund University. I developed remakes of the classical games Pong, Arkanoid and Marble Blast which you control with your body in different ways using a Microsoft Kinect.&lt;/p&gt;
 
@@ -548,77 +551,6 @@ cd elixir&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
         
         
         <category>projects</category>
-        
-      </item>
-    
-      <item>
-        <title>The Legend of Zelda: The Wind Waker</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/images/recommended/wind-waker.jpg&quot; alt=&quot;wind waker&quot; /&gt;
-&lt;a href=&quot;http://en.wikipedia.org/wiki/The_Legend_of_Zelda:_The_Wind_Waker&quot;&gt;The game on Wikipedia&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 31 Aug 2014 00:00:00 +0200</pubDate>
-        <link>http://www.antonfagerberg.com/favorites/wind-waker/</link>
-        <guid isPermaLink="true">http://www.antonfagerberg.com/favorites/wind-waker/</guid>
-        
-        
-        <category>favorites</category>
-        
-      </item>
-    
-      <item>
-        <title>Sweet Spots</title>
-        <description>&lt;p&gt;SweetSpots was an app I developed to learn how to use the Android SDK (target API-level 17 and above). I never released it on Google Play, I did however find it useful for my own needs. Below is a fictive sales pitch I wrote:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;“The SweetSpots app lets you save your newly discovered favourite places in the world. It is perfect for when you found a place which you would like to remember and return to at some time in the future. Found an exceptional spot when picking mushrooms in the woods and want to return to it the next season? Save a SweetSpot and easily find it again using your favourite map software!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;SweetSpot integrates with your existing map application, such as Google Maps, for effortless navigation. Take a picture of a nice-looking house, a newfound item in a store, art around town or whatever you want! The position is stored automatically in the background while you save your favourite SweetSpot so you can return to it later.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The SweetSpots app respects your privacy and does not send any data to any remote servers - all your saved SweetSpots stays secret and secure on your device! No login details or other hassle needed.”&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/projects/sweetspots.jpg&quot; alt=&quot;screenshot&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Source code: &lt;a href=&quot;https://github.com/AntonFagerberg/SweetSpots&quot;&gt;github.com/AntonFagerberg/SweetSpots&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 31 Aug 2014 00:00:00 +0200</pubDate>
-        <link>http://www.antonfagerberg.com/projects/sweet-spots/</link>
-        <guid isPermaLink="true">http://www.antonfagerberg.com/projects/sweet-spots/</guid>
-        
-        
-        <category>projects</category>
-        
-      </item>
-    
-      <item>
-        <title>Lost at Sea</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/images/recommended/lost-at-sea.jpg&quot; alt=&quot;lost at sea&quot; /&gt;
-&lt;a href=&quot;http://en.wikipedia.org/wiki/Lost_at_Sea_%28comics%29&quot;&gt;The graphic novel on Wikipedia&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 31 Aug 2014 00:00:00 +0200</pubDate>
-        <link>http://www.antonfagerberg.com/favorites/lost-at-sea/</link>
-        <guid isPermaLink="true">http://www.antonfagerberg.com/favorites/lost-at-sea/</guid>
-        
-        
-        <category>favorites</category>
-        
-      </item>
-    
-      <item>
-        <title>Her</title>
-        <description>&lt;p&gt;&lt;img src=&quot;/images/recommended/her.jpg&quot; alt=&quot;wind waker&quot; /&gt;
-&lt;a href=&quot;http://en.wikipedia.org/wiki/Her_%28film%29&quot;&gt;The film on Wikipedia&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 31 Aug 2014 00:00:00 +0200</pubDate>
-        <link>http://www.antonfagerberg.com/favorites/her/</link>
-        <guid isPermaLink="true">http://www.antonfagerberg.com/favorites/her/</guid>
-        
-        
-        <category>favorites</category>
         
       </item>
     

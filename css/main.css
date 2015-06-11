@@ -1,7 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Playfair+Display:400,700);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:700);
-@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro);
-@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:400,700);
+@import url(http://fonts.googleapis.com/css?family=Playfair+Display:400,700|Open+Sans:700|Source+Code+Pro);
 body {
   margin: 0;
   background-color: #f7f5f1; }
@@ -21,7 +18,6 @@ a:hover {
 
 #menu {
   margin: 45px 0 55px 0;
-  font-size: 36px;
   text-align: center;
   color: #f9d28b; }
   #menu a {
@@ -33,27 +29,49 @@ a:hover {
 
 #description {
   font-family: 'Playfair Display', serif;
-  font-size: 18px;
   line-height: 1.5em;
-  max-width: 750px;
-  margin: 0 auto;
   text-align: justify;
-  padding: 0 20px;
-  border-left: 3px solid #f0978b; }
+  margin: 5px; }
+
+#header {
+  font-size: 48px;
+  text-align: center;
+  font-weight: bold;
+  margin: 50px 0 75px 0; }
+
+#punchline {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #666;
+  margin-top: 5px; }
 
 .post {
   font-family: 'Playfair Display', serif;
-  font-size: 20px;
   line-height: 1.6em;
-  max-width: 750px;
-  margin: 0 auto;
   text-align: justify;
-  padding: 0 20px;
-  border-left: 3px solid #f9d28b; }
+  margin: 5px; }
   .post img {
     width: 100%;
     border-radius: 4px; }
 
+@media (min-width: 750px) {
+  #menu {
+    font-size: 36px; }
+
+  #description {
+    max-width: 725px;
+    font-size: 18px;
+    margin: 0 auto;
+    padding: 0 20px;
+    border-left: 3px solid #f0978b; }
+
+  .post {
+    font-size: 20px;
+    width: 725px;
+    margin: 0 auto;
+    padding: 0 20px;
+    border-left: 3px solid #f9d28b; } }
 /**
  * Syntax highlighting
  * Colors from SublimeText theme "Spacegray"
@@ -65,7 +83,6 @@ a:hover {
   background-color: #343d46;
   color: white;
   margin-bottom: 4px;
-  padding: 0 10px;
   border-radius: 4px;
   font-size: 15px;
   font-family: 'Source Code Pro';
@@ -129,6 +146,8 @@ a:hover {
   /* Name.Variable.Global */
   /* Name.Variable.Instance */
   /* Literal.Number.Integer.Long */ }
+  .highlight pre {
+    margin: 10px; }
   .highlight .hll {
     background-color: #343d46; }
   .highlight .c {

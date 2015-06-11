@@ -2,10 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <title>Binary (back tracking) Sudoku solver</title>
+    <title>Binary (back tracking) Sudoku solver -  AntonFagerberg.com</title>
     <meta name="description" content="">
 
     <link rel="stylesheet" href="/css/main.css">
@@ -14,16 +14,25 @@
 
   <body>
     <div id="gradient"></div>
-
-<div id="menu">
-  <a href="/">About</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/projects">Projects</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/texts">Texts</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/cv">CV</a>&nbsp;&nbsp;|&nbsp;
-  <a href="/contact">Contact</a>
-</div>
+    
+    
+    <div id="header">
+      <a href="/">
+        AntonFagerberg.com
+        <div id="punchline">
+          A programmer's field notes.
+        </div>
+      </a>
+    </div>
+    
+    
     <div class="post full">
 	<h1>Binary (back tracking) Sudoku solver</h1>
+	
+	
+	<strong>20 Aug 2012</strong>
+	
+	
 	<p>Binary (back tracking) Sudoku solver meant to be really fast, written in C. Solves the worst-case scenario (according to Wikipedia) in 5 seconds on my machine.</p>
 
 <p>Code available on my <a href="https://github.com/AntonFagerberg/Sudoku-C">GitHub page</a>.</p>
@@ -41,141 +50,141 @@
 <span class="cm"> * http://en.wikipedia.org/wiki/Sudoku_algorithms#Brute-force_algorithm</span>
 <span class="cm"> */</span>
 <span class="kt">uint16_t</span> <span class="n">puzzle</span><span class="p">[</span><span class="mi">81</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>		<span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>		<span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>
-	<span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>		<span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span>		<span class="mi">0</span><span class="p">,</span><span class="mi">128</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span>
-	<span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span>		<span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>		<span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>
+    <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>
+    <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span><span class="mi">128</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span>
+    <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>
 
-	<span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>		<span class="mi">16</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span>	<span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>
-	<span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span>		<span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>		<span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>
-	<span class="mi">0</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>	<span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>		<span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>
+    <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>     <span class="mi">16</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>
+    <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>     <span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>
+    <span class="mi">0</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>
 
-	<span class="mi">16</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>		<span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>		<span class="mi">0</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span>
-	<span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span>		<span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>		<span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>
-	<span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>		<span class="mi">0</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>		<span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">256</span>
+    <span class="mi">16</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>        <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span>
+    <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>
+    <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">256</span>
 <span class="p">};</span>
 
 <span class="kt">uint8_t</span> <span class="nf">solve</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-	<span class="c1">// Solved it!</span>
-	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">i</span> <span class="o">^</span> <span class="mi">81</span><span class="p">))</span>
-		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="c1">// Solved it!</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">i</span> <span class="o">^</span> <span class="mi">81</span><span class="p">))</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
 
-	<span class="c1">// Skip the positions which are defined from the start.</span>
-	<span class="k">if</span> <span class="p">(</span><span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> 
-		<span class="k">return</span> <span class="n">solve</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="c1">// Skip the positions which are defined from the start.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> 
+        <span class="k">return</span> <span class="n">solve</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
 
-	<span class="kt">uint8_t</span> <span class="n">align</span> <span class="o">=</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">9</span><span class="p">;</span>
-	<span class="kt">uint16_t</span> <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">9</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">18</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">27</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">36</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">45</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">54</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">63</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">72</span> <span class="p">];</span>
+    <span class="kt">uint8_t</span> <span class="n">align</span> <span class="o">=</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">9</span><span class="p">;</span>
+    <span class="kt">uint16_t</span> <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">9</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">18</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">27</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">36</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">45</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">54</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">63</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">72</span> <span class="p">];</span>
 
-	<span class="n">align</span> <span class="o">=</span> <span class="n">i</span> <span class="o">/</span> <span class="mi">9</span> <span class="o">*</span> <span class="mi">9</span><span class="p">;</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">2</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">3</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">4</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">5</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">6</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">7</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">8</span> <span class="p">];</span>
-	
-	<span class="c1">// Check &quot;squares&quot;</span>
-	<span class="n">align</span> <span class="o">=</span> <span class="mi">27</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="mi">9</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="mi">3</span> <span class="o">%</span> <span class="mi">3</span><span class="p">);</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">9</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">18</span> <span class="p">];</span>
+    <span class="n">align</span> <span class="o">=</span> <span class="n">i</span> <span class="o">/</span> <span class="mi">9</span> <span class="o">*</span> <span class="mi">9</span><span class="p">;</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">2</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">3</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">4</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">5</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">6</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">7</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">8</span> <span class="p">];</span>
+    
+    <span class="c1">// Check &quot;squares&quot;</span>
+    <span class="n">align</span> <span class="o">=</span> <span class="mi">27</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="mi">9</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="mi">3</span> <span class="o">%</span> <span class="mi">3</span><span class="p">);</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">9</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">18</span> <span class="p">];</span>
 
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">10</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">19</span> <span class="p">];</span>
-	
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">2</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">11</span> <span class="p">];</span>
-	<span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">20</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">10</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">19</span> <span class="p">];</span>
+    
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">2</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">11</span> <span class="p">];</span>
+    <span class="n">valid_numbers</span> <span class="o">=</span> <span class="n">valid_numbers</span> <span class="o">|</span> <span class="n">puzzle</span><span class="p">[</span> <span class="n">align</span> <span class="o">+</span> <span class="mi">20</span> <span class="p">];</span>
 
-	<span class="kt">uint8_t</span> <span class="n">next</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">valid_numbers</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">))</span> <span class="p">{</span>
-		<span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-		<span class="k">if</span> <span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">next</span><span class="p">))</span>
-			<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">valid_numbers</span> <span class="o">&amp;</span> <span class="mi">2</span><span class="p">))</span> <span class="p">{</span>
-		<span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-		<span class="k">if</span> <span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">next</span><span class="p">))</span>
-			<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">valid_numbers</span> <span class="o">&amp;</span> <span class="mi">4</span><span class="p">))</span> <span class="p">{</span>
-		<span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
-		<span class="k">if</span> <span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">next</span><span class="p">))</span>
-			<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">valid_numbers</span> <span class="o">&amp;</span> <span class="mi">8</span><span class="p">))</span> <span class="p">{</span>
-		<span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
-		<span class="k">if</span> <span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">next</span><span class="p">))</span>
-			<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">valid_numbers</span> <span class="o">&amp;</span> <span class="mi">16</span><span class="p">))</span> <span class="p">{</span>
-		<span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
-		<span class="k">if</span> <span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">next</span><span class="p">))</span>
-			<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">valid_numbers</span> <span class="o">&amp;</span> <span class="mi">32</span><span class="p">))</span> <span class="p">{</span>
-		<span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">32</span><span class="p">;</span>
-		<span class="k">if</span> <span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">next</span><span class="p">))</span>
-			<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">valid_numbers</span> <span class="o">&amp;</span> <span class="mi">64</span><span class="p">))</span> <span class="p">{</span>
-		<span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">64</span><span class="p">;</span>
-		<span class="k">if</span> <span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">next</span><span class="p">))</span>
-			<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">valid_numbers</span> <span class="o">&amp;</span> <span class="mi">128</span><span class="p">))</span> <span class="p">{</span>
-		<span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">128</span><span class="p">;</span>
-		<span class="k">if</span> <span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">next</span><span class="p">))</span>
-			<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">valid_numbers</span> <span class="o">&amp;</span> <span class="mi">256</span><span class="p">))</span> <span class="p">{</span>
-		<span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">256</span><span class="p">;</span>
-		<span class="k">if</span> <span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">next</span><span class="p">))</span>
-			<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="p">}</span>
+    <span class="kt">uint8_t</span> <span class="n">next</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">valid_numbers</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">next</span><span class="p">))</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">valid_numbers</span> <span class="o">&amp;</span> <span class="mi">2</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">next</span><span class="p">))</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">valid_numbers</span> <span class="o">&amp;</span> <span class="mi">4</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">next</span><span class="p">))</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">valid_numbers</span> <span class="o">&amp;</span> <span class="mi">8</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">next</span><span class="p">))</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">valid_numbers</span> <span class="o">&amp;</span> <span class="mi">16</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">next</span><span class="p">))</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">valid_numbers</span> <span class="o">&amp;</span> <span class="mi">32</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">32</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">next</span><span class="p">))</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">valid_numbers</span> <span class="o">&amp;</span> <span class="mi">64</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">64</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">next</span><span class="p">))</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">valid_numbers</span> <span class="o">&amp;</span> <span class="mi">128</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">128</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">next</span><span class="p">))</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">valid_numbers</span> <span class="o">&amp;</span> <span class="mi">256</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">256</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="n">next</span><span class="p">))</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
 
-	<span class="k">return</span> <span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kt">void</span> <span class="nf">print_puzzle</span><span class="p">()</span> <span class="p">{</span>
-	<span class="kt">uint8_t</span> <span class="n">i</span><span class="p">;</span>
-	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">81</span><span class="p">;</span> <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">27</span><span class="p">))</span>
-			<span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">+-------+-------+-------+&quot;</span><span class="p">);</span>
-		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">9</span><span class="p">))</span>
-			<span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
-		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">3</span><span class="p">))</span>
-			<span class="n">printf</span><span class="p">(</span><span class="s">&quot;| &quot;</span><span class="p">);</span>
-		<span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-		<span class="k">while</span> <span class="p">(</span><span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
-			<span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
-			<span class="n">count</span><span class="o">++</span><span class="p">;</span>
-		<span class="p">}</span>
-		<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%i &quot;</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
-		<span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">9</span> <span class="o">==</span> <span class="mi">8</span><span class="p">)</span>
-			<span class="n">printf</span><span class="p">(</span><span class="s">&quot;|&quot;</span><span class="p">);</span>
-	<span class="p">}</span>
-	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">+-------+-------+-------+</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="kt">uint8_t</span> <span class="n">i</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">81</span><span class="p">;</span> <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">27</span><span class="p">))</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">+-------+-------+-------+&quot;</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">9</span><span class="p">))</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">3</span><span class="p">))</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;| &quot;</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">puzzle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%i &quot;</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">9</span> <span class="o">==</span> <span class="mi">8</span><span class="p">)</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">&quot;|&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">+-------+-------+-------+</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-		<span class="n">print_puzzle</span><span class="p">();</span>
-	<span class="k">else</span>
-	 	<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Did not solve puzzle. Check input...&quot;</span><span class="p">);</span>
-	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">solve</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="n">print_puzzle</span><span class="p">();</span>
+    <span class="k">else</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Did not solve puzzle. Check input...&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span></code></pre></div>
 
 </div>
