@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title>Understanding reduce / fold -  AntonFagerberg.com</title>
+    <meta name="description" content="">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://www.antonfagerberg.com/blog/understanding-reduce/">
+</head>
+
+  <body>
+    <div id="gradient"></div>
+    
+    
+    <div id="header">
+      <a href="/">
+        AntonFagerberg.com
+        <div id="punchline">
+          A programmer's field notes.
+        </div>
+      </a>
+    </div>
+    
+    
+    <div class="post full">
+	<h1>Understanding reduce / fold</h1>
+	
+	
+	<strong>12 Jun 2015</strong>
+	
+	
+	<p><em>Disclaimer: There are some differences in the definition of fold and reduce in different languages - I won&#39;t explore them here. Neither is the right / left variations of fold or reduce explained here.</em></p>
+
+<p>Fold or reduce, from now on I will only use fold, is one of those functions which can be a bit hard to grasp when you&#39;re new to functional programming but once you get it, it feels very natural and you end up using it all the time. A little while back I listened to a discussion about how to explain fold to novice programmers. Usually you end up drawing each iteration on a whiteboard and try to explain how the accumulator changes in each step.</p>
+
+<p>But yesterday I was reading the paper <a href="https://github.com/papers-we-love/papers-we-love/raw/master/functional_programming/why-functional-programming-matters.pdf">Why functional programming matters</a> and found that it explained fold in a way which I&#39;d never seen before - perhaps that&#39;s just me but it goes something like this:</p>
+
+<p>Suppose you want to use fold on a list. First we must acknowledge that a list simply consists of many <a href="https://en.wikipedia.org/wiki/Cons">cons cells</a>. In Scala, we can create the <code>cons cells</code> used in lists with the function <code>::</code>. The function will take a value on the left hand side of the operator and another <code>cons cell</code> or the &quot;empty&quot; <code>Nil</code> value on the right hand side, and return a new <code>cons cell</code>. </p>
+
+<p>This is how it looks like:</p>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="c1">// Nil is equal to the empty list.</span>
+<span class="nc">Nil</span> <span class="o">==</span> <span class="nc">List</span><span class="o">()</span>
+
+<span class="c1">// A cons cell consisting of 1 and Nil equals a</span>
+<span class="c1">// list with one element which has the value 1.</span>
+<span class="mi">1</span> <span class="o">::</span> <span class="nc">Nil</span> <span class="o">==</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+
+<span class="c1">// A list consisting of any number of elements can</span>
+<span class="c1">// be created by combining multiple cons cells.</span>
+<span class="mi">1</span> <span class="o">::</span> <span class="o">(</span><span class="mi">2</span> <span class="o">::</span> <span class="o">(</span><span class="mi">3</span> <span class="o">::</span> <span class="nc">Nil</span><span class="o">))</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">::</span> <span class="mi">2</span> <span class="o">::</span> <span class="mi">3</span> <span class="o">::</span> <span class="nc">Nil</span> <span class="o">==</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
+</code></pre></div>
+<p>Now we want explain fold by creating the function <code>sum</code> which sums up the elements of a list. In Scala, we can do it like this:</p>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="c1">// Add is a function that takes two integers, a and b</span>
+<span class="c1">// and returns the resulting a + b.</span>
+<span class="k">val</span> <span class="n">add</span> <span class="k">=</span> <span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="c1">// Sum is a function which takes a list of integers</span>
+<span class="c1">// and returns the sum of all the integers using fold.</span>
+<span class="k">val</span> <span class="n">sum</span> <span class="k">=</span> <span class="o">(</span><span class="n">l</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span> <span class="k">=&gt;</span> <span class="n">l</span><span class="o">.</span><span class="n">fold</span><span class="o">(</span><span class="mi">0</span><span class="o">)(</span><span class="n">add</span><span class="o">)</span>
+
+
+<span class="c1">// This is how it we can use it.</span>
+<span class="n">sum</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">))</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">6</span>
+</code></pre></div>
+<p>What the paper did, which I found interesting, is how it explains how the <code>fold</code> works. As seen in the example above, <code>fold</code> takes two arguments, an accumulator: <code>0</code>, and a function: <code>add</code>. By using <code>fold</code> on a list, we essentially replace the function <code>::</code>, which represents the <code>cons cells</code>, with our specified function <code>add</code> (or <code>a + b</code>), and the accumulator <code>0</code> replaces the Nil value.</p>
+
+<p>Or explained in code:</p>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="n">sum</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">))</span> <span class="o">==</span>
+<span class="n">sum</span><span class="o">(</span><span class="mi">1</span> <span class="o">::</span> <span class="o">(</span><span class="mi">2</span> <span class="o">::</span> <span class="o">(</span><span class="mi">3</span> <span class="o">::</span> <span class="nc">Nil</span><span class="o">)))</span> <span class="o">==</span>
+<span class="mi">1</span> <span class="o">+</span> <span class="o">(</span><span class="mi">2</span> <span class="o">+</span> <span class="o">(</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">0</span><span class="o">))</span>
+</code></pre></div>
+<p>A neat way to explain fold or reduce if you ask me. The paper continues and applies this concept to a tree, but you have to read that yourself if you want to know more - I highly recommend it!</p>
+
+</div>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-40700896-1', 'antonfagerberg.com');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
