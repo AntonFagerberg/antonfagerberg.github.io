@@ -5,9 +5,26 @@
     <description></description>
     <link>http://www.antonfagerberg.com/</link>
     <atom:link href="http://www.antonfagerberg.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 12 Jun 2015 16:58:45 +0200</pubDate>
-    <lastBuildDate>Fri, 12 Jun 2015 16:58:45 +0200</lastBuildDate>
+    <pubDate>Wed, 26 Aug 2015 09:10:22 +0200</pubDate>
+    <lastBuildDate>Wed, 26 Aug 2015 09:10:22 +0200</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Stop the Princess!</title>
+        <description>&lt;p&gt;Stop the Princess! is a turn based strategy game in which you hire monsters in order to stop the princess from saving the prince. It was made for &lt;a href=&quot;http://ludumdare.com/compo/ludum-dare-33/?action=preview&amp;amp;uid=56405&quot;&gt;Ludum Dare 33&lt;/a&gt; which had the theme &amp;quot;you are the monster&amp;quot;. I did the programming (using JavaScript and &lt;a href=&quot;http://www.phaser.io&quot;&gt;Phaser&lt;/a&gt;) and my friend Alex did the graphics.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/projects/stop-the-princess.gif&quot; alt=&quot;Stop the Princess&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/monster&quot;&gt;Play the game in your browser!&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 25 Aug 2015 00:00:00 +0200</pubDate>
+        <link>http://www.antonfagerberg.com/projects/stop-the-princess/</link>
+        <guid isPermaLink="true">http://www.antonfagerberg.com/projects/stop-the-princess/</guid>
+        
+        
+        <category>projects</category>
+        
+      </item>
     
       <item>
         <title>Understanding reduce / fold</title>
@@ -519,55 +536,6 @@ cd elixir&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
         
         
         <category>blog</category>
-        
-      </item>
-    
-      <item>
-        <title>Comparison operators in Elixir</title>
-        <description>&lt;p&gt;When I began learning &lt;a href=&quot;http://elixir-lang.org/&quot;&gt;Elixir&lt;/a&gt; and worked my way through &lt;a href=&quot;http://elixir-lang.org/getting_started/1.html&quot;&gt;the getting started guide&lt;/a&gt;, I found two things which felt a bit out of place. One of them was the comparison operators which got me thinking more around this topic.&lt;/p&gt;
-
-&lt;p&gt;In Elixir, there are two equals operators: &lt;code&gt;==&lt;/code&gt; and &lt;code&gt;===&lt;/code&gt;. The difference between them are similar to other languages whereas the latter is more strict than the former.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span class=&quot;n&quot;&gt;iex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1.0&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;iex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1.0&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;false&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;It can also be used in the same regard in nested structures:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span class=&quot;n&quot;&gt;iex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;iex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;3.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;false&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;iex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;2.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;iex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;2.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;false&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;To accompany the stricter &lt;code&gt;===&lt;/code&gt; operator, Elixir also has the negated version, &lt;code&gt;!==&lt;/code&gt;, but as in most other languages, there is no strict version of the other comparison operators: &lt;code&gt;&amp;lt;&lt;/code&gt;, &lt;code&gt;&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;=&lt;/code&gt;, &lt;code&gt;&amp;lt;=&lt;/code&gt;. While one could imagine that &lt;code&gt;&amp;lt;==&lt;/code&gt; and &lt;code&gt;&amp;gt;==&lt;/code&gt; easily could be created, there isn&amp;#39;t really one as intuitive syntactic version for &lt;code&gt;&amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;lt;&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;As a comparison, in Scala and Java to name two languages, there is no strict comparison operators. In these languages, if we compare integers and floating point numbers, the integer is converted to a floating point number since this conversion does not lead to any data loss (which would happen if &lt;code&gt;1.1&lt;/code&gt; would be converted to an integer). &lt;/p&gt;
-
-&lt;p&gt;The interesting thing to think about how is more how the less strict &lt;code&gt;==&lt;/code&gt; operator works in those languages that does have the strict version. In languages like PHP and JavaScript, the &lt;code&gt;==&lt;/code&gt; operator is much more relaxed than in Elixir and so numeric values can, to take one example, be compared with strings in this same regard as well:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;1.0&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; 
-&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;In JavaScript, the implementation of the less strict &lt;code&gt;==&lt;/code&gt; operator doesn&amp;#39;t only apply to comparing numeric types and strings but &lt;a href=&quot;http://stackoverflow.com/questions/359494/does-it-matter-which-equals-operator-vs-i-use-in-javascript-comparisons&quot;&gt;can also cause much wonder&lt;/a&gt;. These sometimes unexpected behaviours are however not possible in Elixir:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elixir&quot; data-lang=&quot;elixir&quot;&gt;&lt;span class=&quot;n&quot;&gt;iex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;1&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;false&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;So in Elixir, the &lt;code&gt;===&lt;/code&gt; operator only has one use which is to avoid comparing integers and floating point numbers which leads me to wonder if the &lt;code&gt;===&lt;/code&gt; operator really is necessary in Elixir? My guess is that it is an inherited behaviour from Erlang which has the &lt;code&gt;=:=&lt;/code&gt; operator (exactly equal to) and the corresponding &lt;code&gt;=/=&lt;/code&gt; operator &amp;quot;exactly not equal to&amp;quot;.&lt;/p&gt;
-
-&lt;p&gt;For me, the &lt;code&gt;===&lt;/code&gt; operator seems to be unnecessary in Elixir - I&amp;#39;ve never missed the &lt;code&gt;===&lt;/code&gt; operator in Scala and if it was removed from Elixir, the same behaviour could be recreated by combining the &lt;code&gt;is_integer/1&lt;/code&gt; or &lt;code&gt;is_float/1&lt;/code&gt; function with the &lt;code&gt;==&lt;/code&gt; operator.&lt;/p&gt;
-</description>
-        <pubDate>Sun, 28 Dec 2014 03:09:25 +0100</pubDate>
-        <link>http://www.antonfagerberg.com/comparison-operators-in-elixir/</link>
-        <guid isPermaLink="true">http://www.antonfagerberg.com/comparison-operators-in-elixir/</guid>
-        
-        <category>elixir</category>
-        
         
       </item>
     
