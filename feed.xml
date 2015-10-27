@@ -5,9 +5,64 @@
     <description></description>
     <link>http://www.antonfagerberg.com/</link>
     <atom:link href="http://www.antonfagerberg.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 26 Aug 2015 09:10:22 +0200</pubDate>
-    <lastBuildDate>Wed, 26 Aug 2015 09:10:22 +0200</lastBuildDate>
+    <pubDate>Tue, 27 Oct 2015 17:46:49 +0100</pubDate>
+    <lastBuildDate>Tue, 27 Oct 2015 17:46:49 +0100</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Eternity II Solver</title>
+        <description>&lt;p&gt;This is my second go at writing backtracking solver for Eternity II (my first, in poorly written Java, project can be found &lt;a href=&quot;https://github.com/AntonFagerberg/Eternity-II-Puzzle-Solver&quot;&gt;here&lt;/a&gt;). This one is written in Scala and should be much more optimized. The iteration approach is also different in this project.&lt;/p&gt;
+
+&lt;p&gt;In this project, the application attempts to solve the puzzle by starting from cell &lt;code&gt;A1&lt;/code&gt; and spiral in towards the given middle piece &lt;code&gt;I8&lt;/code&gt;. By doing so, all the corner and border pieces are consumed directly, no idea if this actually makes any difference.&lt;/p&gt;
+
+&lt;p&gt;When the application is started, it will spawn a &lt;code&gt;worker&lt;/code&gt; actor for each available core in your machine and each &lt;code&gt;worker&lt;/code&gt; will try to solve the puzzle on its own - the actors are all working independently of each other. The main application will also spawn an actor which will receive all the records and write the current best one to file (&lt;code&gt;output.txt&lt;/code&gt;) and render it in a GUI (the graphics was taken from the &lt;a href=&quot;http://sourceforge.net/projects/e2manual/?source=navbar&quot;&gt;E2_Manual project&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;Each worker will shuffle the pieces before attempting to solve the puzzle so each restart of the application will yield a different results. (The random seeds are written to the console when starting the application).&lt;/p&gt;
+
+&lt;h2&gt;Run&lt;/h2&gt;
+
+&lt;p&gt;Get &lt;a href=&quot;http://www.scala-sbt.org/index.html&quot;&gt;SBT&lt;/a&gt; and use the following command in the project root to to build &amp;amp; run it:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sbt run
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Output example (output.txt)&lt;/h2&gt;
+
+&lt;p&gt;The rotation is number of turns clockwise.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;Length: 21 (2015-10-27 13:30:20.220})
+Cell    Piece   Rotation    Data
+A  1    4       3           XQIX
+A  2    32      2           XQTQ
+A  3    41      2           XESQ
+A  4    14      2           XAUE
+A  5    15      2           XIJA
+A  6    31      2           XQOI
+A  7    16      2           XIRQ
+A  8    43      2           XEOI
+A  9    47      2           XEHE
+A 10    53      2           XMGE
+A 11    13      2           XAHM
+A 12    24      2           XITA
+A 13    26      2           XQBI
+A 14    27      2           XQBQ
+A 15    29      2           XQRQ
+A 16    3       2           XXIQ
+B 16    40      1           IXES
+C 16    21      1           EXID
+D 16    33      1           IXQH
+E 16    28      1           QXQJ
+I  8    139     2           RFFK
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;GUI&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.antonfagerberg.com/images/projects/eternity2solver.png&quot; alt=&quot;eternity2solver.png&quot;&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 27 Oct 2015 00:00:00 +0100</pubDate>
+        <link>http://www.antonfagerberg.com/projects/eternity-2-solver/</link>
+        <guid isPermaLink="true">http://www.antonfagerberg.com/projects/eternity-2-solver/</guid>
+        
+        
+        <category>projects</category>
+        
+      </item>
     
       <item>
         <title>Stop the Princess!</title>
@@ -477,65 +532,6 @@ along with this program.  If not, see &lt;a href=&quot;http://www.gnu.org/licens
         
         
         <category>projects</category>
-        
-      </item>
-    
-      <item>
-        <title>Install Elixir on a Raspberry Pi</title>
-        <description>&lt;p&gt;This is a tutorial of how to install Elixir (from source) on a Raspberry Pi using the distribution Raspbian.&lt;/p&gt;
-
-&lt;p&gt;The first thing we need to do is to add the Erlang Solutions repository to our system. Open the file /etc/apt/sources.list with your favorite editor and add the following line to it:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;deb http://packages.erlang-solutions.com/debian wheezy contrib&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;After saving the file, we need to add the repository&amp;#39;s public key to our systems keychain:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;wget http://packages.erlang-solutions.com/debian/erlang_solutions.asc
-sudo apt-key add erlang_solutions.asc&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;After this is done, we can remove the file erlang_solutions.asc if we want to.&lt;/p&gt;
-
-&lt;p&gt;Now we&amp;#39;re ready to update our systems repositories:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get update&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;After that has been done, we can begin install the needed packages:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo apt-get install git erlang&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Git is a version control system which we&amp;#39;ll use for fetching Elixir. Erlang-mini is a tiny Erlang package for small devices (no GUI related dependencies and so on). Erlang-eunit is not really required to build Elixir itself but it will fail the unit-tests after the compilation is done which means that we can&amp;#39;t know for sure that the system is working properly.&lt;/p&gt;
-
-&lt;p&gt;After the packages has been installed, we&amp;#39;re ready to get Elixir from GitHub:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git clone https://github.com/elixir-lang/elixir.git
-cd elixir&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Now, optionally, we can checkout a specific version of Elixir if we want to:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;git checkout tags/v1.0.3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;We&amp;#39;re now ready to compile Elixir:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;make clean test&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This will take several minutes so go get yourself a coffee or beverage of choice while the Raspberry Pi is chewing away.&lt;/p&gt;
-
-&lt;p&gt;After the compilation has completed and all unit-tests has passed, you&amp;#39;ve got yourself Elixir ready to use!&lt;/p&gt;
-
-&lt;p&gt;Now you probably want to add the bin folder for Elixir to your path. This can be done temporarily by executing the following command in the terminal - or permanently by adding it to the file .profile in your home folder reloading the shell.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;export PATH=&amp;quot;$PATH:/path/to/elixir/bin&amp;quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Be sure to change the path to the appropriate path where you cloned and compiled Elixir.&lt;/p&gt;
-
-&lt;p&gt;Now you&amp;#39;re all set - happy hacking!&lt;/p&gt;
-</description>
-        <pubDate>Sun, 01 Mar 2015 00:00:00 +0100</pubDate>
-        <link>http://www.antonfagerberg.com/blog/elixir-on-raspberry-pi/</link>
-        <guid isPermaLink="true">http://www.antonfagerberg.com/blog/elixir-on-raspberry-pi/</guid>
-        
-        
-        <category>blog</category>
         
       </item>
     
