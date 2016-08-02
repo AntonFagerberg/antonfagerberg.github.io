@@ -1,0 +1,45 @@
+---
+layout: post
+title: Reading list
+date: 2013-09-09 00:00:00
+permalink: /books
+skip_date: true
+---
+
+I started this reading list in 2016 as a way to keep track of the books I read and what I like (or dislike) about them.
+
+<div class="books">
+  <ul>
+    {% assign sorted_books = (site.book_posts | sort: 'date') | reverse %}
+    {% for book in sorted_books %}
+      {% capture mod %}{{ forloop.index0 | modulo:3 }}{% endcapture %}
+      {% if mod == "0" and forloop.index0 != 0 %}
+        </ul><ul>
+      {% endif %}
+      
+      <li>
+        <img src="{{ book.img }}" />
+        <p>
+          <strong>{{ book.title }}</strong>
+        </p>
+        <p>
+          <i>{{ book.date | date: "%B, %Y" }}</i>
+        </p>
+        <hr />
+        <p>
+          {{ book.content }}
+        </p>
+      </li>
+      
+      {% if book.previous == nil %}
+        {% if mod == "0" %}
+          <li></li>
+          <li></li>
+        {% elsif mod == "1" %}
+          <li></li>
+        {% endif %}
+      {% endif %}
+      
+    {% endfor %}
+  </ul>
+</div>

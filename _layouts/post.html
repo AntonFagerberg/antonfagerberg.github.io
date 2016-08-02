@@ -4,8 +4,8 @@ layout: default
 <div class="post full">
 	<h1>{{ page.title }}</h1>
 	
-	{% if page.title != 'Hello!' %}
-	<strong>{{ page.date | date_to_string }}</strong>
+	{% if page.skip_date != true %}
+	<p><strong>{{ page.date | date_to_string }}</strong></p>
 	{% endif %}
 	
 	{{ content }}

@@ -11,3 +11,6 @@ highlighter: rouge
 permalink: /:categories/:title/
 
 gems: []
+
+collections:
+- book_posts
