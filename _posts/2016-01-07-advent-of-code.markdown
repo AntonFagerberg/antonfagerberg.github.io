@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Advent of Code"
+title:  "Advent of Code in Elixir"
 categories: projects
 ---
 
