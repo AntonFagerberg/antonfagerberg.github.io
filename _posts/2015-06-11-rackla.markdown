@@ -1,0 +1,35 @@
+---
+layout: post
+title: "Rackla: API Gateway Framework"
+categories: projects
+---
+
+I investigated "API-gateways" for of my [master's thesis](https://lup.lub.lu.se/student-papers/search/publication/5469608). The hypothesis was that it is common that the APIs we are working with are not optimized for the clients - so we often have to do multiple requests from the client, take the responses and combine them in in some way to get the data that the client actually want.
+
+![API Gateway](http://www.antonfagerberg.com/images/projects/api-gateway.png)
+
+In some cases, we might not be able to change the actual API and that is where the API gateway can be used. The API gateway acts as a "translation layer" between the client and the back-end API. What we want to do is to move the complexity away from the client and let the API gateway do most of the heavy duty work instead. There are many performance benefits by doing so, especially with HTTP/1.1 and browsers which are bound by the 6 TCP connection limit (without domain sharding), no header compression etc - by placing the API-gateway close to the back-end API where the latency is low and the bandwidth high, it can do the heavy work and optimize the traffic to the client.
+
+You can also use API gateways to design entirely new APIs based on existing ones by combining and transforming them in any way you want. (And of course much much more...)
+
+Rackla is a framework which allows you to write your own API-gateways with Elixir. The goal is to define your own end-points in terms of a "pipeline" where each individual request can "flow" through the pipeline asynchronously but at the same be manipulated using well known functions such as map, flat_map and reduce. The framework is built to be used with Plug and internally I use Hackney and Poison.
+
+This is an example of what you can do with Rackla:
+
+```elixir
+get "/date" do
+  extract_date = fn(json) ->
+    date = Poison.decode!(json)["date"]
+    %{date: date}
+  end
+ 
+  "http://date.jsontest.com/"
+  |> request
+  |> map(extract_date)
+  |> response(json: true, compress: true)
+end
+```
+
+Here we use an existing API, send a request to it and transform the response by decoding the JSON string and extracting the date field. Then we put it in a new map, respond to the client with it by JSON encoding the response and compressing it using gzip if the client supports it. (Note that while this example only executes one HTTP request to one back-end API, we could have just as easily made an arbitrary amount of (potentially recursive) calls instead which would've been handled asynchronously/concurrently.)
+
+More information is available on [GitHub](https://github.com/AntonFagerberg/rackla) and [Rackla.org](http://rackla.org)!

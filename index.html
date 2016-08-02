@@ -1,28 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+---
+layout: post
+title: Hello!
+date: 2013-09-09 00:00:00
+---
 
-    <title>Hello! -  AntonFagerberg.com</title>
-    <meta name="description" content="">
-
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="canonical" href="http://www.antonfagerberg.com/">
-</head>
-
-  <body>
-    <div id="gradient"></div>
-    
-    
-    
-    <div class="post full">
-	<h1>Hello!</h1>
-	
-	
-	
-	<p>My name is Anton Fagerberg, this is my personal site where I collect some of the projects I've been working on and occasionally write down what's on my mind.</p>
+<p>My name is Anton Fagerberg, this is my personal site where I collect some of the projects I've been working on and occasionally write down what's on my mind.</p>
 
 <p>I'm working as a consultant at <a href="http://www.jayway.com">Jayway</a> in Malmö and has been there since 2014. Before that, I worked at <a href="http://www.bring.se/">Bring</a> for almost 10 years, full and part time. I got my MSc in Engineering (Computer Science and Engineering specialized in "Software in systems") from <a href="http://www.lunduniversity.lu.se/">Lund University</a> in 2015.</p>
 
@@ -63,167 +45,22 @@
 
 <h2>Blog posts</h2>
 <ul>
-
+{% for post in site.categories.blog %}
   <li>
-		<a href="/blog/understanding-reduce/">
-      Understanding reduce / fold (12 Jun 2015)
+		<a href="{{ post.url }}">
+      {{ post.title }} ({{ post.date | date_to_string }})
     </a>
   </li>
-
-  <li>
-		<a href="/blog/specific-tests-in-elixir/">
-      Run specific tests in Elixir (ExUnit) (28 Apr 2015)
-    </a>
-  </li>
-
-  <li>
-		<a href="/blog/function-debugging/">
-      Function debugging (20 Apr 2015)
-    </a>
-  </li>
-
-  <li>
-		<a href="/blog/elixir-on-raspberry-pi/">
-      Install Elixir on a Raspberry Pi (01 Mar 2015)
-    </a>
-  </li>
-
-  <li>
-		<a href="/blog/my-perfect-irssi-setup/">
-      My perfect Irssi setup (29 Mar 2006)
-    </a>
-  </li>
-
+{% endfor %}
 </ul>
 
 <h2>Projects</h2>
 <ul>
-
+{% for post in site.categories.projects %}
   <li>
-		<a href="/projects/eternity-2-solver/">
-      Eternity II Solver (27 Oct 2015)
+		<a href="{{ post.url }}">
+      {{ post.title }} ({{ post.date | date_to_string }})
     </a>
   </li>
-
-  <li>
-		<a href="/projects/stop-the-princess/">
-      Stop the Princess! (25 Aug 2015)
-    </a>
-  </li>
-
-  <li>
-		<a href="/projects/rackla/">
-      Rackla: API Gateway Framework (11 Jun 2015)
-    </a>
-  </li>
-
-  <li>
-		<a href="/projects/file-remover/">
-      File Remover (18 May 2015)
-    </a>
-  </li>
-
-  <li>
-		<a href="/projects/temperature-raspberry-pi/">
-      Temperature station on a Raspberry Pi (04 Mar 2015)
-    </a>
-  </li>
-
-  <li>
-		<a href="/projects/humble-download/">
-      Humble Download (03 Mar 2015)
-    </a>
-  </li>
-
-  <li>
-		<a href="/projects/duplicate-image/">
-      Duplicate image removal (02 Mar 2015)
-    </a>
-  </li>
-
-  <li>
-		<a href="/projects/bencode-elixir/">
-      Bencode in Elixir (07 Dec 2014)
-    </a>
-  </li>
-
-  <li>
-		<a href="/projects/comic-baker/">
-      Comic Baker (18 Nov 2014)
-    </a>
-  </li>
-
-  <li>
-		<a href="/projects/kinect-ware/">
-      KinectWare (01 Sep 2014)
-    </a>
-  </li>
-
-  <li>
-		<a href="/projects/travelling-salesman-problem/">
-      Traveling Salesman Problem in C++ (30 Aug 2014)
-    </a>
-  </li>
-
-  <li>
-		<a href="/projects/skip-list-java/">
-      Generic Skip List (map) in Java (18 May 2014)
-    </a>
-  </li>
-
-  <li>
-		<a href="/projects/temporal-information-extraction/">
-      Temporal Information Extraction (29 Nov 2013)
-    </a>
-  </li>
-
-  <li>
-		<a href="/projects/dlerss/">
-      Dlerss - RSS Downloader (28 Nov 2013)
-    </a>
-  </li>
-
-  <li>
-		<a href="/projects/instagram-api-scala/">
-      Instagram API Scala (14 May 2013)
-    </a>
-  </li>
-
-  <li>
-		<a href="/projects/bm-elite-force-2/">
-      BM Elite Force 2 (24 Dec 2012)
-    </a>
-  </li>
-
-  <li>
-		<a href="/projects/binary-(back-tracking)-sudoku-solver/">
-      Binary (back tracking) Sudoku solver (20 Aug 2012)
-    </a>
-  </li>
-
-  <li>
-		<a href="/projects/bm-elite-force/">
-      BM Elite Force (24 Dec 2011)
-    </a>
-  </li>
-
-  <li>
-		<a href="/projects/eternity-ii-puzzle-solver/">
-      Eternity II Puzzle Solver (21 Aug 2010)
-    </a>
-  </li>
-
+{% endfor %}
 </ul>
-</div>
-
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-40700896-1', 'antonfagerberg.com');
-      ga('send', 'pageview');
-    </script>
-  </body>
-</html>

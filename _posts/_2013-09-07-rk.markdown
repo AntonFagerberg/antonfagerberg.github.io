@@ -1,0 +1,7 @@
+---
+  layout: post
+  title: "RK"
+  categories: work
+---
+
+This first version of RK was written back in 2005 to help Pan Nordic Logistics track, manage and generate statistics & financial data about the parcels sent back in return from customers. It is a web application written in PHP with a MySQL database and it is still used today serving information about nearly two million parcels.
