@@ -44,9 +44,10 @@ Java 1.6+ is required. Everything else is distributed with the pre-compiled buil
 
 ### java.lang.UnsatisfiedLinkError: no lwjgl in java.library.path
 You must specify the native files, for OS X you should provide the following VM option:
-{% highlight java %}
+
+```text
 -Djava.library.path=lib/native/macosx
-{% endhighlight %}
+```
 
 ## BM Elite Force 1 (game from 2011)
 This was the previous game which I coded in Ruby with LibGosu.

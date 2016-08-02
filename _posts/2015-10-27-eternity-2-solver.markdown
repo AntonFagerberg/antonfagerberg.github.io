@@ -25,7 +25,7 @@ The rotation is number of turns clockwise.
 ```
 Length: 21 (2015-10-27 13:30:20.220})
 Cell	Piece	Rotation	Data
-A  1	4		3		    XQIX
+A  1	4		3		        XQIX
 A  2	32		2			XQTQ
 A  3	41		2			XESQ
 A  4	14		2			XAUE
@@ -40,12 +40,12 @@ A 12	24		2			XITA
 A 13	26		2			XQBI
 A 14	27		2			XQBQ
 A 15	29		2			XQRQ
-A 16	3       2			XXIQ
+A 16	3               2			XXIQ
 B 16	40		1			IXES
 C 16	21		1			EXID
 D 16	33		1			IXQH
 E 16	28		1			QXQJ
-I  8	139	    2			RFFK
+I  8	139	        2			RFFK
 ```
 
 ## GUI

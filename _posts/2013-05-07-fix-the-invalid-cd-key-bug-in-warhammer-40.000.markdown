@@ -26,7 +26,7 @@ For some reason these strings just contained zeros so what you have to do is to 
 
 Start the game again after you've entered your CD-keys (with the "-" between them). You will be prompted for you CD-keys in the game once more but they should report as valid. You can enter them directly in to you "Dawn of War - Dark Crusade" registry folder as well. The Dawn of War string is named `W40KCDKEY` and the Winter Assault is named `WXPCDKEY` (and the CDKEY-string in this folder is for the Dark Crusade game itself). I have heard that the Soul Storm has a similar problem but since I haven't bought it yet I cant tell you how to fix it. My guess is that it is pretty much the same deal.
 
-###Update:
+### Update:
 
 For Windows 7 64-bit: 
 

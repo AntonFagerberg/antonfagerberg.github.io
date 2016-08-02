@@ -18,7 +18,8 @@ Not to discourage you but please consider:
 The built in pattern will place the pieces from the middle piece in a spiral pattern towards the edges. I have solved different "areas" of the puzzle which works but there is no guarantee that it can actually solve the entire thing - and if you change the pattern in any way, the solution might not work. I have double checked all the pieces with another person so they should be correct but again, no guarantee. Whenever the algorithm successfully places a new piece (or finds a new solution with atleast equally many pieces as the record) it will output the solution to the terminal and to a file. Be ware that the code is pretty bad and not optimized at all.
 
 Wed Feb 01 22:42:26 CET 2012 - New Record or record variation!
-{% highlight bash %}
+
+```text
 [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0]
 [ 0(0] [189(2] [180(3] [107(0] [ 94(0] [204(0] [160(0] [ 80(2] [246(1] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0]
 [ 0(0] [147(1] [161(1] [127(2] [ 78(2] [202(2] [158(2] [250(0] [222(3] [146(0] [119(2] [154(0] [133(2] [184(3] [ 0(0] [ 0(0]
@@ -36,7 +37,7 @@ Wed Feb 01 22:42:26 CET 2012 - New Record or record variation!
 [ 0(0] [201(0] [186(2] [116(4] [ 72(4] [140(1] [141(4] [205(4] [ 70(3] [ 64(1] [ 82(1] [ 61(2] [ 99(1] [203(4] [ 0(0] [ 0(0]
 [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0] [ 0(0]
 Pieces: 176.
-{% endhighlight %}
+```
 
 The output shows the piece number and rotation so [189(2)] is piece 189 rotated 2 steps to the right.
 

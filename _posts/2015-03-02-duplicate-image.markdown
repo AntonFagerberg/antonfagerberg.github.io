@@ -17,22 +17,22 @@ All source is available on [my GitHub page](https://github.com/AntonFagerberg/du
 
 You need the tool [Compare](http://www.imagemagick.org/script/compare.php) from [ImageMagick](http://www.imagemagick.org/). If you are on OS X and have got brew installed, you can install it with:
 
-{% highlight text %}
+```text
 brew install imagemagick
-{% endhighlight %}
+```
 
 ### Compile the application to a binary
 
-{% highlight text %}
+```text
 mix escript.build
-{% endhighlight %}
+```
 
 This will create a binary called "duplicate_image" which you can run on all systems which has the Erlang-runtime installed.
 
 ### Launch the application
-{% highlight text %}
+```text
 ./duplicate_iamge /path/to/gallery /path/where/to/store/duplicates 0.1
-{% endhighlight %}
+```
 
 The threshold, 0.1 in the example, must be a floating-poing number. 0.0 is a perfect match and 1.0 is entirely different. Perfect matches will always be moved!
 

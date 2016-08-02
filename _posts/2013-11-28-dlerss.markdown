@@ -9,7 +9,7 @@ The only thing this application does is that it downloads files linked in RSS (X
 I've also [written a version in Elixir](https://github.com/AntonFagerberg/gimme).
 
 ### Example configuration
-{% highlight bash %}
+```bash
 # Names of all enabled feeds.
 names = [ "coolfeeds", "hotfeeds" ]
 
@@ -32,38 +32,39 @@ hotfeeds.scanTime = 5
 hotfeeds.regexTrue = "(KittyNews S\\d{2}E\\d{2}|DogTimes Season [1-5])"
 hotfeeds.regexFalse = "Fluffy"
 hotfeeds.saveFolder = "/my/hot/stuff"
-{% endhighlight %}
+```
 
 ### Build
 To build a "fat" self-contained executable, use the SBT assembly provided in this project.
 
-{% highlight bash %}
+```text
 sbt assembly
-{% endhighlight %}
+```
 
 This will generate a self-contained JAR-file, see command output for the location where it is saved.
 
 ### Run
 If assembly has been used to create the JAR-file, you can execute the file with either Java or Scala:
 
-{% highlight bash %}
+```text
 scala dlerss.jar
-{% endhighlight %}
+```
 
-{% highlight bash %}
+```text
 java -jar dlerss.jar
-{% endhighlight %}
+```
 
 By default, dlerss will look for a configuration file in the current directory called "application.conf". To specify another configuration file, simply specify it as the first argument:
 
-{% highlight bash %}
+```text
 scala Dlerss.jar ../folder/bad-ass.conf
-{% endhighlight %}
+```
 
 ### Dependencies
-{% highlight bash %}
+
+```scala
 "com.typesafe" % "config" % "1.0.2"
-{% endhighlight %}
+```
 
 ### Regular Expressions
 This is a good site to learn more:

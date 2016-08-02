@@ -19,26 +19,27 @@ A Response object is returned from all methods and it contains:
 ## Installation & Demo
 You can use SBT to download the required dependencies and run the Demo-file:
 
-{% highlight scala %}
+```text
 sbt run
-{% endhighlight %}
+```
 
 The demo-file contains all implemented methods but you need to uncomment some of them to try them (to avoid spamming the Instagram servers). You need to get a client id (and optionally an access token) before running the examples.
 
 ## Adding to your project
 Simply run:
 
-{% highlight scala %}
+```text
 sbt package
-{% endhighlight %}
+```
 
 To create a Jar-file. However, you need to add the dependencies below to your project manually!
 
 ### Dependencies
-{% highlight scala %}
+
+```scala
 "net.liftweb" %% "lift-json" % "2.5"
 "org.scalaj" %% "scalaj-http" % "0.3.15"
-{% endhighlight %}
+```
 
 ## Implementation status
 
@@ -79,7 +80,8 @@ To create a Jar-file. However, you need to add the dependencies below to your pr
  * Subscriptions.
 
 ## Example usage
-{% highlight scala %}
+
+```scala
 // You need to request these variables from Instagram: www.instagram.com/developer
 val clientId = "client-id"
 val clientSecret = "client-secret"
@@ -164,7 +166,7 @@ val instagram = new Instagram(accessTokenOrClientId = Left("Put-access-token-her
 // println(instagram.commentDelete("media-id", "comment-id"))
 
 // println(s"Search for images near a coordinate: ${instagram.mediaSearch("48.858844" -> "2.294351")}")
-{% endhighlight %}
+```
 
 ## Download
 [github.com/AntonFagerberg/InstagramScalaAPI](https://github.com/AntonFagerberg/InstagramScalaAPI)

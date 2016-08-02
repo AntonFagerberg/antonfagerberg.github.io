@@ -5,11 +5,11 @@
   alias: experiments/binary-(back-tracking)-sudoku-solver/
 ---
 
-Binary (back tracking) Sudoku solver meant to be really fast, written in C. Solves the worst-case scenario (according to Wikipedia) in 5 seconds on my machine.
+Binary (back tracking) Sudoku solver meant to be really fast, written in C.
 
 Code available on my [GitHub page](https://github.com/AntonFagerberg/Sudoku-C).
 
-{% highlight c++ %}
+```c++
 /*
  * Sudoku Solver (brute-force).
  * with the purpose of beeing fast as hell. It's pretty fast.
@@ -159,4 +159,4 @@ int main() {
 	 	printf("Did not solve puzzle. Check input...");
 	return 0;
 }
-{% endhighlight %}
+```

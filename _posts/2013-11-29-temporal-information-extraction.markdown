@@ -14,7 +14,7 @@ The code was evaluated against SemEval-2010.
 
 ### Test set:
 
-{% highlight text %}
+```text
 true positives:   165
 true negatives:   9336
 false positives:  8
@@ -30,11 +30,11 @@ accuracy    0.99
 
 attribute type       0.96
 attribute value      0.88
-{% endhighlight %}
+```
 
 ### Training set:
 
-{% highlight text %}
+```text
 true positives:   1053
 true negatives:   51246
 false positives:  87
@@ -50,7 +50,7 @@ accuracy    0.98
 
 attribute type       0.97
 attribute value      0.88
-{% endhighlight %}
+```
 
 Due to time constraints, I decided to quit when reaching 50% in the training set - but I believe that this could be greatly improved if I had more time to work on it. This is only a proof of concept but my belief is that this technique could work very well given enough time and dedication.
 

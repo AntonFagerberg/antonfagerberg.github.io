@@ -10,17 +10,17 @@ HumbleDownload is used for downloading / making a complete back-up of your libra
 First, [install Elixir](http://elixir-lang.org/install.html).
 
 Execute the following from the project root:
-{% highlight text %}
+
+```text
 mix deps.get
 mix escript.build
-{% endhighlight %}
-
+```
 
 This will create the executable file "humble_download" which can be run on any system which has the Erlang runtime installed.
 
-{% highlight text %}
+```text
 ./humble_download <input file> <download folder>
-{% endhighlight %}
+```
 
 ## Create the input file
 Copy-paste the code from [humbledownload.js](https://github.com/AntonFagerberg/humble_download/blob/master/humbledownload.js) in to the developer console in your browser when you're viewing your library on the Humble Bundle site. Copy-paste the result to a new text-file and use it as the input file as described above. The file should have three lines per item in your library: folder name, filename, link.

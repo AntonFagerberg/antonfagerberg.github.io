@@ -10,7 +10,7 @@ I was going through the [OCaml Code Examples](http://ocaml.org/learn/taste.html)
 
 It is a very short paragraph which only contain the line "To conclude, here is the simplest way of spying over functions" and a short code example:
 
-{% highlight ocaml %}
+```ocaml
 let rec fib x = if x <= 1 then 1 else fib (x - 1) + fib (x - 2);;
 # #trace fib;;
 fib is now traced.
@@ -26,6 +26,6 @@ fib --> 1
 fib --> 2
 fib --> 3
 - : int = 3
-{% endhighlight %}
+```
 
 This is a feature I think every programming language should have built in to it by default. You simply say which function you want to trace and the console will print each input value and each output value.

@@ -8,7 +8,7 @@ This is my implementation of [Bencode](http://en.wikipedia.org/wiki/Bencode) in 
 
 You can get the source code from this projects [GitHub page](https://github.com/AntonFagerberg/elixir_bencode).
 
-{% highlight elixir %}
+```elixir
 Bencode.encode("hello world")
 "11:hello world"
 
@@ -41,12 +41,12 @@ Bencode.decode!("li1ei2ei3ee")
 
 Bencode.decode!("d5:hello5:worlde")
 %{"hello" => "world"}
-{% endhighlight %}
+```
 
 You can also add it as a Mix dependency:
 
-{% highlight elixir %}
+```elixir
 defp deps do
   [{:elixir_bencode, "~> 1.0.0"}]
 end
-{% endhighlight %}
+```
