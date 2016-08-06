@@ -52,7 +52,7 @@ a:hover {
 }
 
 #header {
-  font-size: 48px;
+  font-size: 42px;
   text-align: center;
   font-weight: bold;
   margin: 50px 0 75px 0;
@@ -71,6 +71,7 @@ a:hover {
   line-height: 1.6em;
   text-align: justify;
   margin: 5px;
+  font-size: 14px;
 
   img {
     width: 100%;
@@ -80,7 +81,7 @@ a:hover {
 
 .books {
   line-height: 1.3em;
-  font-size: 16px;
+  font-size: 12px;
   text-align: left;
   
   hr {
@@ -110,13 +111,13 @@ a:hover {
 }
 
 @media (min-width: 750px) {
-  #menu {
-    font-size: 36px;
+  #header {
+    font-size: 56px;
   }
   
   #description {
     max-width: 725px;
-    font-size: 18px;
+    font-size: 16px;
     margin: 0 auto;
     padding: 0 20px;
     border-left: 3px solid #f0978b;
@@ -128,6 +129,10 @@ a:hover {
     margin: 0 auto;
     padding: 0 20px;
     border-left: 3px solid #f9d28b;
+  }
+  
+  .books {
+    font-size: 16px;
   }
 }
 
