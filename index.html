@@ -62,9 +62,8 @@ skip_date: true
 <ul>
 {% for post in site.categories.blog %}
   <li>
-		<a href="{{ post.url }}">
-      {{ post.title }} ({{ post.date | date_to_string }})
-    </a>
+		<a href="{{ post.url }}">{{ post.title }} ({{ post.date | date_to_string }})</a>
+    {% if post.star %}&#9733;{% endif %}
   </li>
 {% endfor %}
 </ul>
@@ -73,9 +72,8 @@ skip_date: true
 <ul>
 {% for post in site.categories.projects %}
   <li>
-		<a href="{{ post.url }}">
-      {{ post.title }} ({{ post.date | date_to_string }})
-    </a>
+		<a href="{{ post.url }}">{{ post.title }} ({{ post.date | date_to_string }})</a>
+    {% if post.star %}&#9733;{% endif %}
   </li>
 {% endfor %}
 </ul>
