@@ -49,7 +49,7 @@ File.stream!("path/to/some/file")
 |> Stream.flat_map(&String.split(&1, " "))
 |> Enum.reduce(%{}, fn word, acc ->
     Map.update(acc, word, 1, & &1 + 1)
-   end)
+  end)
 |> Enum.to_list()
 ```
 
@@ -67,8 +67,8 @@ File.stream!("path/to/some/file")
 |> Flow.flat_map(&String.split(&1, " "))
 |> Flow.partition()
 |> Flow.reduce(fn -> %{} end, fn word, acc ->
-  Map.update(acc, word, 1, & &1 + 1)
-end)
+    Map.update(acc, word, 1, & &1 + 1)
+  end)
 |> Enum.to_list()
 ```
 
