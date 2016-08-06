@@ -162,3 +162,6 @@ You can fill the database with fake data if you want to develop another web-clie
 ```elixir
 TempLog.FakeData.generate()
 ```
+
+## Source code
+[Source code on GitHub](https://github.com/AntonFagerberg/temp_log)

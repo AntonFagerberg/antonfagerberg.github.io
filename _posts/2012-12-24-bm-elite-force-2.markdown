@@ -6,6 +6,8 @@
 
 This is the second game in the BM Elite Force series (not much related to each other). BM Elite Force 2 has been my autumn/winter project of 2012. I started this "tradition" in 2011 where I create a new game in a new (for me) language every year and release it around christmas dedicated to my good old friends when we meet up. This year the game was written in Scala using the Java library Slick 2D (built on LWJGL).
 
+[Source code on GitHub](https://github.com/AntonFagerberg/BM-Elite-Force-II)
+
 <iframe src="//player.vimeo.com/video/56785260?portrait=0&amp;color=c9ff23" width="750" height="422" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 [Download binaries from Google Code](http://code.google.com/p/bm-elite-force-2/downloads/list)

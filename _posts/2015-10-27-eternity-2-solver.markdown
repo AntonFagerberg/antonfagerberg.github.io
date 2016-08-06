@@ -12,6 +12,8 @@ When the application is started, it will spawn a `worker` actor for each availab
 
 Each worker will shuffle the pieces before attempting to solve the puzzle so each restart of the application will yield a different results. (The random seeds are written to the console when starting the application).
 
+[Source code on GitHub](https://github.com/AntonFagerberg/Eternity-II-Solver)
+
 ## Run
 Get [SBT](http://www.scala-sbt.org/index.html) and use the following command in the project root to to build & run it:
 
