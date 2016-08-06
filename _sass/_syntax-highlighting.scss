@@ -12,7 +12,7 @@
 
   margin-bottom: 4px;
   border-radius: 4px;
-  font-size: 15px;
+  font-size: 12px;
   font-family: 'Source Code Pro';
   line-height: 1.5em;
   overflow: auto;
@@ -82,4 +82,10 @@
   .vg   { color: #8FA1B3 } /* Name.Variable.Global */
   .vi   { color: #8FA1B3 } /* Name.Variable.Instance */
   .il   { color: #d08770 } /* Literal.Number.Integer.Long */
+}
+
+@media (min-width: 750px) {
+  .highlight {
+    font-size: 15px;
+  }
 }
