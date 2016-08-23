@@ -178,7 +178,7 @@ myAge == someZipCode // ==> ERROR: type mismatch
 
 There are of course many more things to consider. Should the types be scoped or is it better if they are global? How can we convert a named type to another named type? Should we be able to compare two different named types in some scenarios? Does it make sense to [compare a persons age to the age of a dog](https://en.wikipedia.org/wiki/Aging_in_dogs#/media/File:Dog_and_human_year_graph.png) - how specific will your types be in the end?
 
-Nevertheless, I think it is an interesting concept to consider. It could be "overkill" for many applications but I believe certain areas, such as analytics and data processing, could benefit from it and I'm sure it would make certain code bases, at least a bit, less error prone.
+Nevertheless, I think it is an interesting concept to consider. It could be "overkill" for many applications but I believe certain areas, such as analytics and data processing, could benefit from it and I'm sure it would make certain code bases, at least a bit, [less error prone](https://en.wikipedia.org/wiki/Mars_Climate_Orbiter).
 
 ### Further reading
  * [Units of measure in F#](https://fsharpforfunandprofit.com/posts/units-of-measure/).
