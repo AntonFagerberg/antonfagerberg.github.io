@@ -150,7 +150,7 @@ isShoeInStock(WarehouseId(1), ShoeSize(44)) // ==> type mismatch
 But there are problems, for example, unless we define `>` on our `Age` type, we can't do this:
 
 ```scala
-person1.shoeSize > person2.shoeSize
+person1.age > person2.age
 ```
 
 We can solve this issue but I will stop here. Writing all this boiler plate code and setting up everything is annoying. So annoying that we most likely just won't do it.
