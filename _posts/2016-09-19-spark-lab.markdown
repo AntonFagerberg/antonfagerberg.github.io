@@ -1,0 +1,18 @@
+---
+layout: post
+title:  "Spark lab / workshop"
+categories: projects
+---
+
+I did a introduction to Spark lab for the employees of [Jayway](https://www.jayway.com). It contains method stubs which should be implemented as a way to learn the different parts of Spark. The goal was to minimize setup hassle and thus there's (almost) no installation / configuration needed and everything run locally.
+
+The workshop was divided into five parts:
+
+1. Basic RDD functions.
+2. Pair RDD functions.
+3. Shared variables - accumulator and broadcast variables.
+4. Partitioner.
+5. Iterative / recursive function.
+
+
+[Code on GitHub](https://github.com/AntonFagerberg/spark-lab) / [Slides](/files/spark_presentation.pdf)
