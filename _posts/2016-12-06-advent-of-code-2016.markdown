@@ -1,0 +1,9 @@
+---
+layout: post
+title:  "Advent of Code 2016 in Haskell"
+categories: projects
+---
+
+To my big joy there was another round of wonderful programming puzzles from [Advent of Code](http://adventofcode.com) in 2016.
+
+This year I've been solving them in Haskell to learn more about the language. You can find my collection of solutions [on GitHub](https://github.com/AntonFagerberg/advent_of_code_2016).
