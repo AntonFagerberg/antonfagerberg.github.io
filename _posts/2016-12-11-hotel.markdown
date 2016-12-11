@@ -6,6 +6,8 @@ categories: projects
 
 Hôtel was my submission for [Ludum Dare 37](http://ludumdare.com). This was the first time I competed in the compo category in which you make a game (code, art, animations, sound, music) by yourself in 48 hours. I spent about 26 hours on it.
 
+![Hotel](https://raw.githubusercontent.com/AntonFagerberg/hotel/master/gif/hotel_final2.gif)
+
 ### Pitch
 
 > _Which guest will you send to the only available room? The teleporting guy in the hat, the fast running ghost or the sluggish snail-creature? There is one fast and one slow elevator so make your pick wisely. Optimize the travel time as best as you can because there is only one room available at any time._
