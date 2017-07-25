@@ -25,4 +25,4 @@ I also did a live stream on [Twitch](https://www.twitch.tv/antonjf).
 
 [Ludum Dare entry](http://ludumdare.com/compo/ludum-dare-37/?action=preview&uid=56405)
 
-(Note: no audio in Safari, some Chrome users on Windows has experienced speed issues.)
+(Note: no audio in Safari, speed is too slow if you have a high hz monitor.)
