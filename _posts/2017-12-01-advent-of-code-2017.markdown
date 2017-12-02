@@ -1,0 +1,15 @@
+---
+layout: post
+title: "Advent of Code 2017 in Scala"
+categories: projects
+---
+
+Yet another year with [Advent of Code](http://adventofcode.com)! I just got a new born baby so time will be sparse this year so we'll see how much I'll lag behind.
+
+I decided to use [Scala](http://www.scala-lang.org) since time is sparse instead of trying out a new language (was initially thinking about trying out [Racket](http://racket-lang.org)).
+
+[My solutions!](https://github.com/AntonFagerberg/advent_of_code_2017)
+
+### Previous years
+ - [2016 in Haskell](/projects/advent-of-code-2016/)
+ - [2015 in Elixir](/projects/advent-of-code-in-elixir/)
