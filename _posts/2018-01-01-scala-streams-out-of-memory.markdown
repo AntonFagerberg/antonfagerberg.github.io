@@ -19,7 +19,7 @@ Stream.iterate(0)(_ + 1)
 or you can do it like this:
 
 ```scala
-lazy val stream: Stream[Int] = 1 #:: 2 #:: stream.tail.map(_ + 1)
+lazy val stream: Stream[Int] = 1 #:: stream.map(_ + 1)
 ```
 
 The plan was then to lazily generate 40 million numbers, filter out then ones I 
