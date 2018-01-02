@@ -97,7 +97,7 @@ object MemoryTest extends App {
 }
 ```
 
-With this in mind, many memory gotchas in Scala streams can be avoided. In the 
+With these two things in mind, many memory gotchas in Scala streams can be avoided. In the 
 end though, I realised that I didn't need `Stream` but rather `Iterator` for my
 [Advent of Code solution](https://github.com/AntonFagerberg/advent_of_code_2017/blob/master/src/main/scala/com/antonfagerberg/Day15.scala).
 
