@@ -79,7 +79,7 @@ and unlike `dropWhile`, isn't implemented in `Stream` but in `TraversableLike`.
 With `filter` you have to worry about how many elements that are going to be
 memoized in between the elements which the predicate returns true for.
 
-Running the following code with `-Xmx10m` will thrown `OutOfMemoryError`:
+Running the following code with `-Xmx10m` will throw an `OutOfMemoryError`:
 
 ```scala
 object MemoryTest extends App {
