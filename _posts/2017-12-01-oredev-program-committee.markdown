@@ -24,3 +24,6 @@ I was on the program committee for [Øredev](http://www.oredev.org) for the firs
 
 ### Claudio Ortolina - Practical Elixir Flow
 <iframe src="https://player.vimeo.com/video/242450155?color=ffffff" width="725" height="408" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+### Sean Grove - Finding joy in programming
+<iframe src="https://player.vimeo.com/video/242081961?color=ffffff" width="725" height="408" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
