@@ -26,11 +26,11 @@ def myMethod(/* parameters */) = { /* Some implementation */ }
 val localVariable = someThing;
 val messageDigest = MessageDigest.getInstance("MD5")
 val digestInputStream = new DigestInputStream(inputStream, messageDigest) {
-      override def read(b: Array[Byte], off: Int, len: Int) = {
-        myMethod(localVariable) // Yay!
-        super.read(b, off, len)
-      }
-    }
+  override def read(b: Array[Byte], off: Int, len: Int) = {
+    myMethod(localVariable) // Yay!
+    super.read(b, off, len)
+  }
+}
 ```
 
 Alternatively, you can put a break point in your overridden `read` method to get everything in scope and debug with your IDE.
