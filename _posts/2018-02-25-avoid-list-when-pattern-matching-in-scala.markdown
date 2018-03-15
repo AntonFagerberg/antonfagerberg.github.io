@@ -166,3 +166,5 @@ println(specialSum(ArrayBuffer.empty)) // -1
 ```
 
 I wouldn't recommend it though, I personally don't find it readable (and I'm actually surprised it works with `+: Nil`, I thought `+: Seq()` was required in order to not get a `List`).
+
+**Update:** It was pointed out to me that `+:` is slower than `::`. If you are recursively traversing a very long sequence, then `List` and `::` will give you much better performance.
