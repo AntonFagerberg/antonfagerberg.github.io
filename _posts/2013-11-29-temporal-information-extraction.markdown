@@ -2,7 +2,6 @@
   layout: post
   title: "Temporal Information Extraction"
   categories: projects
-  star: true
 ---
 
 This project uses mainly regular expressions with some additional tweaking functions to extract temporal information (dates, durations, time, etc) from news articles or any other text.

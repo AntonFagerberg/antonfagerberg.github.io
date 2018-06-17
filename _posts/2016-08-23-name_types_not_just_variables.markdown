@@ -2,7 +2,6 @@
   layout: post
   title: "Name types, not just variables"
   categories: blog
-  star: true
 ---
 
 A primitive data type can be defined as the most basic building block of a programming language. Typical primitive data types are integers, floats and booleans. Whether you differentiate between these types and objects in languages such as Java, or if they're all objects like in Scala, or if you language doesn't have objects at all doesn't matter in the following text. What does matter is that the language is statically typed.

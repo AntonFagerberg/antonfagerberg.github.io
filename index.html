@@ -5,13 +5,13 @@ date: 2013-09-09 00:00:00
 skip_date: true
 ---
 
-<img src="images/profile.png" style="width: 28%; float: right; margin-left: 15px; border: 1px solid #ddd;" />
+<!-- <img src="images/profile.png" style="width: 28%; float: right; margin-left: 15px; border: 1px solid #ddd;" /> -->
 
 <p>My name is Anton Fagerberg, this is my personal site where I show off some of the projects I've been working on and occasionally write down something that's on my mind.</p>
 
-<p>I'm working as a consultant at <a href="http://www.jayway.com">Jayway</a> in Malmö and has been there since 2014 (currently living in Lund, moved from Jönköping in 2010). Before that, I worked at <a href="http://www.bring.se/">Bring</a> for almost 10 years. I've got a MSc in Engineering (Computer Science and Engineering specialized in "Software in systems") from <a href="http://www.lunduniversity.lu.se/">Lund University</a>. I was also part of the 2017 program committee for <a href="http://oredev.org">Øredev</a>.</p>
+<p>I'm working as a consultant at <a href="http://www.jayway.com">Jayway</a> in Malmö and has been there since 2014 (currently living in Lund, moved from Jönköping in 2010). Before that, I worked at <a href="http://www.bring.se/">Bring</a> for almost 10 years. I've got a MSc in Engineering (Computer Science and Engineering specialized in "Software in systems") from <a href="http://www.lunduniversity.lu.se/">Lund University</a>. I was also part of the 2017 and 2018 program committee for <a href="http://oredev.org">Øredev</a>.</p>
 
-<p>I'm a functional programming enthusiast with <a href="http://www.scala-lang.org/">Scala</a> (professionally) and <a href="http://elixir-lang.org/">Elixir</a> / <a href="https://www.haskell.org">Haskell</a> (hobby) as my current languages of choice. I've been working with Scala for a many years using different frameworks such as <a href="https://www.playframework.com/">Play Framework</a>. Recently I've been getting more involved in distributed systems and I'm now working with <a href="http://spark.apache.org">Spark</a>, <a href="https://github.com/twitter/scalding">Scalding</a>, <a href="http://oozie.apache.org">Oozie</a>, <a href="https://kafka.apache.org">Kafka</a> & the <a href="http://hadoop.apache.org">Hadoop</a> eco system.</p>
+<p>I'm a functional programming enthusiast with <a href="http://www.scala-lang.org/">Scala</a> (professionally) and <a href="http://elixir-lang.org/">Elixir</a> (hobby) as my current languages of choice (with some occasional fooling around in <a href="https://www.haskell.org">Haskell</a>). I've been working with Scala for a many years using different frameworks such as <a href="https://www.playframework.com/">Play Framework</a>. Recently I've been getting more involved in distributed systems and I'm now working with <a href="http://spark.apache.org">Spark</a>, <a href="https://github.com/twitter/scalding">Scalding</a>, <a href="http://oozie.apache.org">Oozie</a>, <a href="https://kafka.apache.org">Kafka</a> & the <a href="http://hadoop.apache.org">Hadoop</a> eco system.</p>
 
 
 <h2>Contact</h2>
@@ -24,24 +24,10 @@ skip_date: true
   </li>
   <!-- <li>
     <strong>Twitter:</strong> <a href="https://twitter.com/AntonFagerberg">@AntonFagerberg</a>
-  </li> -->
+  </li> 
   <li>
     <strong>LinkedIn:</strong> <a href="https://linkedin.com/pub/anton-fagerberg/70/585/2b9">linkedin.com/pub/anton-fagerberg/70/585/2b9</a>
-  </li>
-</ul>
-
-<h2>Papers</h2>
-<ul>
-  <li>
-    <a href="https://lup.lub.lu.se/student-papers/search/publication/5469608">
-      Optimising clients with API gateways (08 Jun 2015)
-    </a>
-  </li>
-  <li>
-    <a href="/files/tempex_anton_fagerberg.pdf">
-      Temporal Information Extraction (13 Jan 2014)
-    </a>
-  </li>
+  </li> -->
 </ul>
 
 <h2>Collections</h2>
@@ -58,6 +44,32 @@ skip_date: true
   </li>-->
 </ul>
 
+<h2>Projects</h2>
+<ul>
+{% for post in site.categories.projects %}
+  <li>
+		<a href="{{ post.url }}">{{ post.title }} ({{ post.date | date_to_string }})</a>
+    {% if post.star %}&#9733;{% endif %}
+  </li>
+{% endfor %}
+</ul>
+
+<!--
+<h2>Papers</h2>
+<ul>
+  <li>
+    <a href="https://lup.lub.lu.se/student-papers/search/publication/5469608">
+      Optimising clients with API gateways (08 Jun 2015)
+    </a>
+  </li>
+  <li>
+    <a href="/files/tempex_anton_fagerberg.pdf">
+      Temporal Information Extraction (13 Jan 2014)
+    </a>
+  </li>
+</ul>
+-->
+
 <h2>Blog posts</h2>
 <ul>
 {% for post in site.categories.blog %}
@@ -67,6 +79,7 @@ skip_date: true
   </li>
 {% endfor %}
 </ul>
+
 <h2>Blog posts (on external sites)</h2>
 <ul>
   <li>
@@ -94,14 +107,4 @@ skip_date: true
   <li>
     <a href="files/spark_presentation.pdf">Apache Spark (2016)</a>
   </li>
-</ul>
-
-<h2>Projects</h2>
-<ul>
-{% for post in site.categories.projects %}
-  <li>
-		<a href="{{ post.url }}">{{ post.title }} ({{ post.date | date_to_string }})</a>
-    {% if post.star %}&#9733;{% endif %}
-  </li>
-{% endfor %}
 </ul>

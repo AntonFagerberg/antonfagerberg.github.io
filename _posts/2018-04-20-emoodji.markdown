@@ -1,0 +1,15 @@
+---
+layout: post
+title: "Emoodji"
+categories: projects
+---
+
+Emoodji was a one day project I created to try out the latest [Phoenix](http://phoenixframework.org) framework in [Elixir](https://elixir-lang.org).
+
+My plan was to create a small Twitter-like system in which you could share your emotions using emojis. The ambition was to create a simple log-in functionality and posting an emoji which was then saved to the database. It all went very smoothly. The documentation is excellent but it is spread out. Sometimes it's hard to know if you should look in the Phoenix documentation or in Plug or in any other place (since the design is very modular).
+
+I learned more about the database wrapper [Ecto](https://github.com/elixir-ecto/ecto) which I really liked and more about Phoenix which I hadn't touched in many years. 
+
+Overall it was a very pleasant experience. I would really like to write a larger "production system" in Elixir (and potentially Phoenix) one day.
+
+[Source code](https://github.com/AntonFagerberg/emoodji)

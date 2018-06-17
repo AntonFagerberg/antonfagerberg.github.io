@@ -2,7 +2,6 @@
   layout: post
   title: "Distributed collections in the standard library"
   categories: blog
-  star: true
 ---
 
 When working with sets of data, we usually work with strict (eager) collections. Sometimes we wish to work with lazy collections such as when we're dealing with infinite streams. If our data set is getting big enough, we may wish to use parallel collections in order to utilise our multi-core CPU to the fullest - but when we move towards huge amounts of data we must start thinking about distributed collections.

@@ -2,7 +2,6 @@
 layout: post
 title: "Temperature station on a Raspberry Pi"
 categories: projects
-star: true
 ---
 
 To begin with, I did a clean install of [Raspbian based on Debian Wheezy](http://raspbian.org/). I'm running it without a graphical user interface, no overclocking but I have reduced the GPU memory to 16 megabytes.

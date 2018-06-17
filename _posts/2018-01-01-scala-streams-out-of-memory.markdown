@@ -2,7 +2,6 @@
 layout: post
 title: "Scala streams - out of memory"
 categories: blog
-star: true
 ---
 
 I was doing [Advent of Code](http://adventofcode.com) and was working on generating
