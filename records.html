@@ -14,7 +14,7 @@ skip_date: true
 
 <div class="books">
   <ul>
-    {% assign sorted_records = (site.record_posts | sort: 'date') | reverse %}
+    {% assign sorted_records = site.record_posts | sort: 'date' | reverse %}
     {% for record in sorted_records %}
       {% capture mod %}{{ forloop.index0 | modulo:2 }}{% endcapture %}
       {% if mod == "0" and forloop.index0 != 0 %}

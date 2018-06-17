@@ -10,7 +10,7 @@ I started this reading list in 2016 as a way to keep track of the books I read a
 
 <div class="books">
   <ul>
-    {% assign sorted_books = (site.book_posts | sort: 'date') | reverse %}
+    {% assign sorted_books = site.book_posts | sort: 'date' | reverse %}
     {% for book in sorted_books %}
       {% capture mod %}{{ forloop.index0 | modulo:3 }}{% endcapture %}
       {% if mod == "0" and forloop.index0 != 0 %}
