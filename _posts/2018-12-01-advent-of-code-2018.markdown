@@ -1,0 +1,16 @@
+---
+layout: post
+title: "Advent of Code 2018 in Java"
+categories: projects
+---
+
+Yet another year with [Advent of Code](http://adventofcode.com), still a parent of a small child so practically no free time. I used this to fresh up my Java knowledge and compare the functional parts to what I was used to in Scala.
+
+I will most likely not finish everything this year either.
+
+[My solutions!](https://github.com/AntonFagerberg/advent-of-code-2018)
+
+### Previous years
+ - [2016 in Haskell](/projects/advent-of-code-2016/)
+ - [2015 in Elixir](/projects/advent-of-code-in-elixir/)
+ - [2017 in Scala](/projects/advent-of-code-2017/) (unfinished)
