@@ -1,6 +1,6 @@
 ---
 title: "The Restaurant at the End of the Universe"
-date: "April, 2018"
+date: "April 2, 2018"
 img: "/images/books/trateotu.jpg"
 ---
 Continued immediately with the part 2 in the The Hitchhiker's Guide to the Galaxy series. The name of the book is (for those of you who've read it) brilliant. I especially like the part with the animal that wants to be eaten.

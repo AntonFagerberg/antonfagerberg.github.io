@@ -1,6 +1,6 @@
 ---
 title: "The Joy of Less"
-date: "January, 2019"
+date: "January 6, 2019"
 img: "/images/books/the_joy_of_less.jpg"
 ---
 

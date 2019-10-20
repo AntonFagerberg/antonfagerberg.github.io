@@ -1,6 +1,6 @@
 ---
 title: "The 4 – Hour Body"
-date: "February, 2017"
+date: "February 2, 2017"
 img: "/images/books/4_hour_body.jpg"
 ---
 

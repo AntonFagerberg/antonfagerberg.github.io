@@ -1,6 +1,6 @@
 ---
 title: "Endurance"
-date: "January, 2019"
+date: "January 3, 2019"
 img: "/images/books/endurance.jpg"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "How to build a car"
-date: "February, 2019"
+date: "February 1, 2019"
 img: "/images/books/how_to_build_a_car.jpg"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Every tool's hammer"
-date: "September, 2019"
+date: "September 2, 2019"
 img: "/images/books/every_tools_a_hammer.jpg"
 ---
 

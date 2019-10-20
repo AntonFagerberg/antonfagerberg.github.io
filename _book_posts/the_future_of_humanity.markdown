@@ -1,6 +1,6 @@
 ---
 title: "The Future of Humanity"
-date: "February, 2019"
+date: "February 4, 2019"
 img: "/images/books/the_future_of_humanity.jpg"
 ---
 

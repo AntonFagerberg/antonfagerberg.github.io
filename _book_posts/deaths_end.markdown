@@ -1,6 +1,6 @@
 ---
 title: "Death's End"
-date: "June, 2019"
+date: "June 1, 2019"
 img: "/images/books/deaths_end.jpg"
 ---
 

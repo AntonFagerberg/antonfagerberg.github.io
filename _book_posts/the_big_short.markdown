@@ -1,6 +1,6 @@
 ---
 title: "The Big Short"
-date: "January, 2019"
+date: "January 5, 2019"
 img: "/images/books/the_big_short.jpg"
 ---
 

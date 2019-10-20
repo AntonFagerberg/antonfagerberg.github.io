@@ -1,6 +1,6 @@
 ---
 title: "Har jag en dålig dag kanske någon dör"
-date: "September, 2019"
+date: "September 1, 2019"
 img: "/images/books/har_jag_en_dalig_dag_kanske_nagon_dor.jpg"
 ---
 

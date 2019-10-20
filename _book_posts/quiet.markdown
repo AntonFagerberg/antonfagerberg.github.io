@@ -1,6 +1,6 @@
 ---
 title: "Quiet"
-date: "June, 2018"
+date: "June 1, 2018"
 img: "/images/books/quiet.jpg"
 ---
 Quiet is a book about introversion (and extroversion but mainly focused on introversion because that's needed). As an introvert myself I've read some about this topic but this book took it to a whole new level. It's very thorough, covers fascinating historical aspects, a lot of personal anecdotes but always tries to tie it to scientific research. 

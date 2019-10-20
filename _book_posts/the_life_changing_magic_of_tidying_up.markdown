@@ -1,6 +1,6 @@
 ---
 title: "The Life Changing Magic of Tidying Up"
-date: "September, 2019"
+date: "September 3, 2019"
 img: "/images/books/the_life_changing_magic_of_tidying_up.jpg"
 ---
 

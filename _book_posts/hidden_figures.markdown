@@ -1,6 +1,6 @@
 ---
 title: "Hidden Figures"
-date: "December, 2018"
+date: "December 2, 2018"
 img: "/images/books/hidden_figures.jpg"
 ---
 

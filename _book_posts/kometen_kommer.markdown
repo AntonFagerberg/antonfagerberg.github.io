@@ -1,6 +1,6 @@
 ---
 title: "Kometen kommer"
-date: "November, 2016"
+date: "November 1, 2016"
 img: "/images/books/kometen_kommer.jpg"
 ---
 Kometen kommer (Comet in Moominland) is the second Moomin book in the series but the first one I've read. 

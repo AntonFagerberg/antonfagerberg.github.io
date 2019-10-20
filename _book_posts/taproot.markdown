@@ -1,6 +1,6 @@
 ---
 title: "Taproot"
-date: "December, 2018"
+date: "December 4, 2018"
 img: "/images/books/taproot.jpg"
 ---
 

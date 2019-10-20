@@ -1,6 +1,6 @@
 ---
 title: "The Martian"
-date: "January, 2019"
+date: "January 7, 2019"
 img: "/images/books/the_martian.jpg"
 ---
 

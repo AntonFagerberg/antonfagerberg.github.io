@@ -1,6 +1,6 @@
 ---
 title: "Bli grymt rik på aktier!"
-date: "August, 2016"
+date: "August 1, 2016"
 img: "/images/books/bli_grymt_rik_pa_aktier.jpg"
 ---
 

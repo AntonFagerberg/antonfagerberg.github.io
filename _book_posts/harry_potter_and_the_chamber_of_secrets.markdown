@@ -1,6 +1,6 @@
 ---
 title: "Harry Potter & The chamber of secrets"
-date: "March, 2017"
+date: "March 2, 2017"
 img: "/images/books/chamber_of_secrets.png"
 ---
 

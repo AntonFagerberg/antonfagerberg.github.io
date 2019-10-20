@@ -1,6 +1,6 @@
 ---
 title: "It doesn't have to be crazy at work"
-date: "February, 2019"
+date: "February 2, 2019"
 img: "/images/books/it_doesnt_have_to_be_crazy_at_work.jpg"
 ---
 

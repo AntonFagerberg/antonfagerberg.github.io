@@ -1,6 +1,6 @@
 ---
 title: "American Kingpin"
-date: "June, 2017"
+date: "June 1, 2017"
 img: "/images/books/american_kingpin.jpg"
 ---
 

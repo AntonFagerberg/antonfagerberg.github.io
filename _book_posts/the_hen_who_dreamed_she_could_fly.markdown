@@ -1,6 +1,6 @@
 ---
 title: "The Hen Who Dreamed She Could Fly"
-date: "August, 2016"
+date: "August 3, 2016"
 img: "/images/books/the_hen_who_dreamed_she_could_fly.jpg"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Dark Matter"
-date: "December, 2018"
+date: "December 1, 2018"
 img: "/images/books/dark_matter.jpg"
 ---
 

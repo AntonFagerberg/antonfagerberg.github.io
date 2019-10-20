@@ -1,6 +1,6 @@
 ---
 title: "Scrum"
-date: "February, 2019"
+date: "February 3, 2019"
 img: "/images/books/scrum.jpg"
 ---
 

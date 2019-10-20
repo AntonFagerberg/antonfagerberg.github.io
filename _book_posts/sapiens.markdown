@@ -1,6 +1,6 @@
 ---
 title: "Sapiens"
-date: "December, 2018"
+date: "December 3, 2018"
 img: "/images/books/sapiens.jpg"
 ---
 

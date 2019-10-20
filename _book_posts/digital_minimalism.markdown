@@ -1,6 +1,6 @@
 ---
 title: "Digital Minimalism"
-date: "June, 2019"
+date: "June 2, 2019"
 img: "/images/books/digital_minimalism.jpg"
 ---
 

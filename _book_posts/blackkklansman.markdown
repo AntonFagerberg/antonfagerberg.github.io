@@ -1,6 +1,6 @@
 ---
 title: "Black Klansman"
-date: "January, 2019"
+date: "January 2, 2019"
 img: "/images/books/blackkklansman.jpg"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "The Three-Body Problem"
-date: "January, 2019"
+date: "January 1, 2019"
 img: "/images/books/three-body_problem.jpg"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "The Little Elixir and OTP Guidebook"
-date: "November, 2016"
+date: "November 2, 2016"
 img: "/images/books/the_little_elixir_and_otp_guidebook.jpg"
 ---
 

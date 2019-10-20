@@ -1,6 +1,6 @@
 ---
 title: "Saga, book 1"
-date: "April, 2018"
+date: "April 1, 2018"
 img: "/images/books/saga1.jpg"
 ---
 I try from time to time to read graphic novels. It's something I "should" like but rarely get into. I start many of them but almost never finish any. Saga on the other hand got me good! I plowed through this 500 page book and loved every second of it.

@@ -1,6 +1,6 @@
 ---
 title: "If Hemingway Wrote JavaScript"
-date: "August, 2016"
+date: "August 2, 2016"
 img: "/images/books/if_hemingway_wrote_javascript.png"
 ---
 

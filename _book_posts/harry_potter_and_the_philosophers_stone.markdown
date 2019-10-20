@@ -1,6 +1,6 @@
 ---
 title: "Harry Potter & The philosophers stone"
-date: "March, 2017"
+date: "March 1, 2017"
 img: "/images/books/philosophers_stone.jpg"
 ---
 

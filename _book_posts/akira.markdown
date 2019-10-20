@@ -1,6 +1,6 @@
 ---
 title: "Akira"
-date: "June, 2018"
+date: "June 2, 2018"
 img: "/images/books/akira.jpg"
 ---
 

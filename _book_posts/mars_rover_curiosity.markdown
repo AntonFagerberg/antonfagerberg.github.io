@@ -1,6 +1,6 @@
 ---
 title: "Mars Rover Curiosity"
-date: "January, 2019"
+date: "January 4, 2019"
 img: "/images/books/mars_rover_curiosity.png"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future"
-date: "February, 2017"
+date: "February 1, 2017"
 img: "/images/books/elon_musk.jpg"
 ---
 

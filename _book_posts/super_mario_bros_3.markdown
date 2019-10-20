@@ -1,6 +1,6 @@
 ---
 title: "Super Mario Bros. 3"
-date: "July, 2016"
+date: "July 2, 2016"
 img: "/images/books/super_mario_bros_3.jpg"
 ---
 

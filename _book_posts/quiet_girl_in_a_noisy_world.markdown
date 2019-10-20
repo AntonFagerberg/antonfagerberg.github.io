@@ -1,6 +1,6 @@
 ---
 title: "Quiet girl in a Noisy World"
-date: "June, 2018"
+date: "June 3, 2018"
 img: "/images/books/quiet_girl_in_a_noisy_world.jpg"
 ---
 
