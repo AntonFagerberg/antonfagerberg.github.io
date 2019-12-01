@@ -1,0 +1,24 @@
+---
+layout: post
+title: "Advent of Code 2019 in Kotlin"
+categories: projects
+---
+
+One more year with [Advent of Code](http://adventofcode.com), I've been doing it
+for so many years now that it makes me nostalgic and filled with Christmas spirit!
+
+I haven't finished the recent years due to lack of personal time and I probably 
+won't finish this year either - but it's a good opportunity to try out a new language.
+
+This year I decided to give [Kotlin](https://kotlinlang.org) a try. At first I 
+was thinking about using [Go](https://golang.org), but
+there is just not enough time (Kotlin will be much easier since I already
+know Java and Scala).
+
+[2019 in Kotlin](https://github.com/AntonFagerberg/advent-of-code-2019)
+
+### Previous years
+ - [2015 in Elixir](/projects/advent-of-code-in-elixir/)
+ - [2016 in Haskell](/projects/advent-of-code-2016/)
+ - [2017 in Scala](/projects/advent-of-code-2017/) (unfinished)
+ - [2018 in Java](/projects/advent-of-code-2018/) (unfinished)
