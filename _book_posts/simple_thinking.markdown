@@ -1,5 +1,5 @@
 ---
-title: "American Kingpin"
+title: "Simple Thinking"
 date: "August 1, 2020"
 img: "/images/books/simple_thinking.jpg"
 ---
