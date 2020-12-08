@@ -1,0 +1,20 @@
+---
+layout: post
+title: "Advent of Code 2020 in Clojure"
+categories: projects
+---
+
+Another year of [Advent of Code](http://adventofcode.com), I was going to stay away from it but I couldn't help myself to at least do a little.
+
+With two small kids and a house in need of renovations, I don't think I will solve many days, but I'll try to do a few.
+
+I've been wanting to try a Lisp for a few years and thought about either [Racket](https://racket-lang.org) or [Clojure](https://clojure.org). In the end I went with Clojure (so JVM language 4 years in a row). Perhaps next year I'll pick Racket (or at least something non-JVM).
+
+[2020 in Clojure](https://github.com/AntonFagerberg/Advent-of-Code-2020)
+
+### Previous years
+ - [2015 in Elixir](/projects/advent-of-code-in-elixir/)
+ - [2016 in Haskell](/projects/advent-of-code-2016/)
+ - [2017 in Scala](/projects/advent-of-code-2017/) (unfinished)
+ - [2018 in Java](/projects/advent-of-code-2018/) (unfinished)
+ - [2019 in Kotlin](https://github.com/AntonFagerberg/advent-of-code-2019)
