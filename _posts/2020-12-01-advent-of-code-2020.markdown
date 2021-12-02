@@ -17,4 +17,4 @@ I've been wanting to try a Lisp for a few years and thought about either [Racket
  - [2016 in Haskell](/projects/advent-of-code-2016/)
  - [2017 in Scala](/projects/advent-of-code-2017/)
  - [2018 in Java](/projects/advent-of-code-2018/)
- - [2019 in Kotlin](https://github.com/AntonFagerberg/advent-of-code-2019)
+ - [2019 in Kotlin](/projects/advent-of-code-2019/)
