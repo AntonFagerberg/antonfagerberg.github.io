@@ -1,0 +1,20 @@
+---
+layout: post
+title: "Advent of Code 2021 in Ruby"
+categories: projects
+---
+
+Another year of [Advent of Code](http://adventofcode.com), no tradition like it! 🎄
+
+I've probably got even less time than last year (it's a bad trend right now...), but I'll do a few just to keep the tradition alive.
+This year I'll use [Ruby](https://www.ruby-lang.org/en/). Don't have a good motivation why.
+
+[Advent of Code 2021 in Ruby](https://github.com/AntonFagerberg/advent-of-code-2021)
+
+### Previous years
+ - [2015 in Elixir](/projects/advent-of-code-in-elixir/)
+ - [2016 in Haskell](/projects/advent-of-code-2016/)
+ - [2017 in Scala](/projects/advent-of-code-2017/)
+ - [2018 in Java](/projects/advent-of-code-2018/)
+ - [2019 in Kotlin](/projects/advent-of-code-2019/)
+ - [2020 in Clojure](/projects/advent-of-code-2020/)
