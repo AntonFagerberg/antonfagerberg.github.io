@@ -9,7 +9,12 @@ Another year of [Advent of Code](http://adventofcode.com), no tradition like it!
 I've probably got even less time than last year (it's a bad trend right now...), but I'll do a few just to keep the tradition alive.
 This year I'll use [Ruby](https://www.ruby-lang.org/en/). Don't have a good motivation why.
 
-[Advent of Code 2021 in Ruby](https://github.com/AntonFagerberg/advent-of-code-2021)
+Update: after solving a few problems in Ruby, I started getting tired of using a language I'm not that familiar with. It was a great idea the first years and I learned a lot, especially when doing pure FP in Haskell and some actor based things in Elixir, but at this point I don't really dig deep into the languages - and to be honest, a lot of the languages I've chosen are very similar. Ruby and Java are considered different but they aren't fundamentally _that_ different.
+
+I decided to continue doing some of the problems this year in Java instead because I enjoy the problems and I mostly use Java professionally at this point in my career so there's no friction when using it. It's hard to give up a streak of using new languages, but I think it's a wise decision. When my kids are older and I have more time, I can see myself getting into a real challenge like doing them in APL or Prolog. But for now, I'll go ahead and enjoy the puzzles with a language I already know by heart.
+
+[Advent of Code 2021 in Ruby (problem 1-4)](https://github.com/AntonFagerberg/advent-of-code-2021)
+[Advent of Code 2021 in Java, problem 5+](https://github.com/AntonFagerberg/advent_of_code_2021)
 
 ### Previous years
  - [2015 in Elixir](/projects/advent-of-code-in-elixir/)
