@@ -14,6 +14,7 @@ Update: after solving a few problems in Ruby, I started getting tired of using a
 I decided to continue doing some of the problems this year in Java instead because I enjoy the problems and I mostly use Java professionally at this point in my career so there's no friction when using it. It's hard to give up a streak of using new languages, but I think it's a wise decision. When my kids are older and I have more time, I can see myself getting into a real challenge like doing them in APL or Prolog. But for now, I'll go ahead and enjoy the puzzles with a language I already know by heart.
 
 [Advent of Code 2021 in Ruby (problem 1-4)](https://github.com/AntonFagerberg/advent-of-code-2021)
+
 [Advent of Code 2021 in Java, problem 5+](https://github.com/AntonFagerberg/advent_of_code_2021)
 
 ### Previous years
