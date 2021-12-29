@@ -10,4 +10,5 @@ After having read it, I really wish I read it sooner because it's so good.
 Definitely one of my top 3 this year.
 
 Details such as that the protagonist is over 75 years old made the book something special.
-It's the first book in a trilogy and I'll start reading the other two books as soon as I can.
+
+I'm usually not a big fan of book series but I'll start reading the next one immediately.
