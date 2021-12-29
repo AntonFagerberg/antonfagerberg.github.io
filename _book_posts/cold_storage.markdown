@@ -1,6 +1,6 @@
 ---
 title: "Cold Storage"
-date: "Dev 10, 2021"
+date: "Dec 10, 2021"
 img: "/images/books/cold_storage.jpeg"
 ---
 
