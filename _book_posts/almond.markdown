@@ -1,5 +1,5 @@
 ---
-title: "A Closed and Common Orbit"
+title: "Almond"
 date: "November 13, 2022"
 img: "/images/books/almond.jpeg"
 ---
