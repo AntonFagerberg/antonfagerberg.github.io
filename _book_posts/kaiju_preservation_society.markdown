@@ -1,5 +1,5 @@
 ---
-title: "Kaiju preservation society"
+title: "The Kaiju Preservation Society"
 date: "September 8, 2023"
 img: "/images/books/kaiju_preservation_society.jpeg"
 ---
