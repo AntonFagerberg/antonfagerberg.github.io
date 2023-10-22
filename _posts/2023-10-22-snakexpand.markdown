@@ -13,6 +13,8 @@ Was it a good idea in theory? YES! In practice? It's not without problems. One o
 
 It was a fun weekend project, a few hours well spent.
 
+The game was created using Java (JDK 7 which felt old), and libGDX. I compiled a version for the web so it can be played online below.
+
 [Try it out online! 🕹🐍](http://www.antonfagerberg.com/snakexpand/)
 
 [Code on GitHub](https://github.com/AntonFagerberg/snakexpand)
