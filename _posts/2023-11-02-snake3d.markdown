@@ -1,0 +1,15 @@
+---
+layout: post
+title: "Snake3D"
+categories: projects
+---
+
+I was discussing Super Mario 3D vs 2D games with a friend who made the joke that I should make Snake in 3D (since I made [Snakespand](/projects/snakexpand/) and [RainbowSnake](/projects/rainbowsnake/) recently).
+
+So of course I had to do that. It's a super simple proof of concept lacking many of the proper game mechanics. I think it could be a fun project with proper camera support and other things, but I don't think I'll continue working on it. But you know what? It's super fun to make these micro-projects in an hour or two. This was my first attempt at doing 3D in LibGDX.
+
+(I haven't built it for the web either like my other games so you have to compile it from source to try it... sorry!)
+
+[Project on GitHub](https://github.com/AntonFagerberg/Snake3D)
+
+![snake3d](https://github.com/AntonFagerberg/Snake3D/raw/main/snake3d%20cut.gif)
