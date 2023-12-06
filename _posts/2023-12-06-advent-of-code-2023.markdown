@@ -1,0 +1,21 @@
+---
+layout: post
+title: "Advent of Code 2023"
+categories: projects
+---
+
+This year I had planned on using [OCaml](https://ocaml.org). It looked really nice when reading the docs and I used it for some old problems, but it was just a bit too tedious to do certain things (just printing a list of strings nested in another list required some work - unless I added a third-party "deriving" tool). That and the workflow of building / running / debugging was just too much for me this year.
+
+Instead, I decided to join the friendly competition at work (private leaderboard), so I'll try to do as many as I have time for using Java instead. Focus will be on refreshing my knowledge on algorithms instead of learning a new language.
+
+[Advent of Code 2023 on GitHub](https://github.com/AntonFagerberg/advent_of_code_2023)
+
+### Previous years
+ - [2015 in Elixir](/projects/advent-of-code-in-elixir/)
+ - [2016 in Haskell](/projects/advent-of-code-2016/)
+ - [2017 in Scala](/projects/advent-of-code-2017/)
+ - [2018 in Java](/projects/advent-of-code-2018/)
+ - [2019 in Kotlin](/projects/advent-of-code-2019/)
+ - [2020 in Clojure](/projects/advent-of-code-2020/)
+ - [2021 in Ruby (and some Java)](/projects/advent-of-code-2021/)
+ - [2022 in Go](/projects/advent-of-code-2022/)
