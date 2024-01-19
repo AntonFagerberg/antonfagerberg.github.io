@@ -2,6 +2,7 @@
 layout: post
 title: "Øredev Program Committee 2017"
 categories: blog
+tags: misc
 ---
 
 I was on the program committee for [Øredev](http://www.oredev.org) for the first time 2017. A lot of work but very fun to be able to influence the conference!

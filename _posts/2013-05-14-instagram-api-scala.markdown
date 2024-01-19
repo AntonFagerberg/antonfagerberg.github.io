@@ -2,6 +2,7 @@
   layout: post
   title: "Instagram API Scala"
   categories: projects
+  tags: code
 ---
 
 This is an Scala implementation of the Instagram API.

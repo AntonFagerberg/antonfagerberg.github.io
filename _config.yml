@@ -1,15 +1,14 @@
-# Site settings
 title: Anton Fagerberg
 email: anton@antonfagerberg.com
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://www.antonfagerberg.com" # the base hostname & protocol for your site
-twitter_username: antonfagerberg
-
-# Build settings
-markdown: kramdown
-highlighter: rouge
+description: >- # this means to ignore newlines until "baseurl:"
+  The personal website of Anton Fagerberg, it's about programming, reading books and other things I find interesting.
+baseurl: ""
+url: "http://www.antonfagerberg.com"
 permalink: /:categories/:title/
 
+
+plugins:
+  - jekyll-feed
+
 collections:
-- book_posts
-- record_posts
+  - books

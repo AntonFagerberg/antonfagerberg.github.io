@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html>
-  {% include head.html %}
+  <head>
+    <meta charset="utf-8">
+    <title>{% if page.title %}{{ page.title }} - {% endif %} Anton Fagerberg (.com)</title>
+    <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
+    <meta name="description" content="{{ site.description }}">
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1">
+  </head>
   <body>
-    <div id="gradient"></div>
-    
-    {% if page.url != '/index.html' %}
-    <div id="header">
-      <a href="/">
-        Anton Fagerberg
-        <div id="punchline">
-          Software development &amp; other things I like
-        </div>
-      </a>
-    </div>
-    {% endif %}
-    
+    {% include header.html %}
     {{ content }}
+    {% include footer.html %}
   </body>
 </html>

@@ -2,6 +2,7 @@
 layout: post
 title: "Item limited cache"
 categories: projects
+tags: code
 ---
 
 I've been meaning to start doing a couple of "micro-projects" just for fun.

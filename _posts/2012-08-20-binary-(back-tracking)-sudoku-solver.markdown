@@ -3,13 +3,14 @@
   title: "Binary (back tracking) Sudoku solver"
   categories: projects
   alias: experiments/binary-(back-tracking)-sudoku-solver/
+  tags: code
 ---
 
 Binary (back tracking) Sudoku solver meant to be really fast, written in C.
 
 Code available on my [GitHub page](https://github.com/AntonFagerberg/Sudoku-C).
 
-```c++
+```c
 /*
  * Sudoku Solver (brute-force).
  * with the purpose of beeing fast as hell. It's pretty fast.

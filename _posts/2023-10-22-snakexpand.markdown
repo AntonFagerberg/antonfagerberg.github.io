@@ -23,6 +23,4 @@ The game was created using Java (JDK 7 which felt old), and libGDX. I compiled a
 
 [Actual code](https://github.com/AntonFagerberg/snakexpand/blob/main/core/src/com/antonfagerberg/snaketon/SnakeTon.java)
 
-### GIF 🎉
-
 ![snakexpand](https://github.com/AntonFagerberg/snakexpand/raw/main/snakexpand.gif)

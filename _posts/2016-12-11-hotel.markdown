@@ -2,6 +2,7 @@
 layout: post
 title: "Hôtel"
 categories: projects
+tags: games
 ---
 
 Hôtel was my submission for [Ludum Dare 37](http://ludumdare.com). This was the first time I competed in the compo category in which you make a game (code, art, animations, sound, music) by yourself in 48 hours. I spent about 26 hours on it.
@@ -17,7 +18,11 @@ Hôtel was my submission for [Ludum Dare 37](http://ludumdare.com). This was the
 * Graphics: [Pixelmator](http://www.pixelmator.com/mac/)
 * Music: [Figure](https://itunes.apple.com/app/figure/id511269223)
 
-I also did a live stream on [Twitch](https://www.twitch.tv/antonjf).
+
+
+### Links
+
+(Note: no audio in Safari, speed is too slow if you have a high hz monitor.)
 
 [Play game](http://antonfagerberg.com/hotel/) 
 
@@ -25,4 +30,4 @@ I also did a live stream on [Twitch](https://www.twitch.tv/antonjf).
 
 [Ludum Dare entry](http://ludumdare.com/compo/ludum-dare-37/?action=preview&uid=56405)
 
-(Note: no audio in Safari, speed is too slow if you have a high hz monitor.)
+~~I also did a live stream on [Twitch](https://www.twitch.tv/antonjf) but it's no longer available~~.

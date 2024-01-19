@@ -1,139 +1,128 @@
 ---
-# Only the main Sass file needs front matter (the dashes are enough)
 ---
 
-@charset "utf-8";
-
-@import url(http://fonts.googleapis.com/css?family=Playfair+Display:400,700|Open+Sans:700|Source+Code+Pro);
-
 body {
-  margin: 0;
-  background-color: #f7f5f1;
+    margin: 0;
+    background-color: #29261f;
 }
 
+.content {
+    max-width: 800px;
+    margin: auto;
+    font-size: 22px;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    color: #e6d4c3;
+    line-height: 1.4;
+    padding: 0 10px;
+    text-align: justify;
+}
 
 a {
-  color: #000;
-  text-decoration: none;
-  border-bottom: 2px solid #4094aa;
+    color: #e6d4c3;
+    text-decoration: none;
+    border-bottom: 2px solid #4b75c3;
 }
+
+li p {
+    margin: 8px 0;
+}
+
+h1, h2 {
+    margin-bottom: 10px;
+}
+
+ul {
+    margin: 0;
+}
+
 
 a:hover {
-  border-bottom: 2px solid #EE978D;
+    border-bottom: 2px solid #c3774b;
 }
 
-#gradient {
-  background: url('../images/gradient.png');
-  background-position: center;
-  height: 10px;
+.header {
+    max-width: 800px;
+    margin: auto;
+    font-size: 16px;
+    font-family: Arial, Arial, Helvetica, sans-serif;
+    color: #524b44;
+    padding: 0 10px;
+    padding-top: 25px;
+
+    span {
+        float: right;
+        color: #918578;
+        a {
+            color: #918578;
+            border: 0;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    }
 }
 
-#menu {
-  margin: 45px 0 55px 0;
-  text-align: center;
-  color: #f9d28b;
 
-  a {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    border-bottom: 0;
-  }
-
-  a:hover {
-    border-bottom: 2px solid #4094aa;
-  }
+.footer {
+    max-width: 800px;
+    margin: auto;
+    font-size: 16px;
+    font-family: Arial, Arial, Helvetica, sans-serif;
+    color: #524b44;
+    padding: 25px 10px;
 }
 
-#description {
-  font-family: 'Playfair Display', serif;
-  line-height: 1.5em;
-  text-align: justify;
-  margin: 5px;
+.footer a {
+    color: #9f9284;
+    border: 0;
 }
 
-#header {
-  font-size: 42px;
-  text-align: center;
-  font-weight: bold;
-  margin: 50px 0 75px 0;
+.footer a:hover {
+    text-decoration: underline;
 }
 
-#punchline {
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
-  color: #666;
-  margin-top: 5px;
-}
-
-.post {
-  font-family: 'Playfair Display', serif;
-  line-height: 1.6em;
-  text-align: justify;
-  margin: 5px;
-  font-size: 14px;
-
-  img {
-    width: 100%;
-    border-radius: 4px;
-  }
+.content {
+    img {
+        width: 100%;
+        border-radius: 4px;
+    }
 }
 
 .books {
-  line-height: 1.3em;
-  font-size: 12px;
-  text-align: left;
-  
-  hr {
-    border: 0;
-    height: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-}
-  
-  ul {
-    width: 100%;
-    display: table;
-    table-layout: fixed;
-    border-collapse: collapse;
+    line-height: 1.3em;
+    font-size: 18px;
+    text-align: left;
+    
+    hr {
+      border: 0;
+      height: 0;
+      border-top: 1px solid #524b44;
+      border-bottom: 0;
   }
-  
-  li {
-    display: table-cell;
-    vertical-align: top;
-    padding: 5px;
-  }
-  
-  p {
-    margin: 0;
-    margin-bottom: 8px;
-  }
-}
+    
+    ul {
+      width: 100%;
+      display: table;
+      table-layout: fixed;
+      border-collapse: collapse;
+    }
+    
+    li {
+      display: table-cell;
+      vertical-align: top;
+      padding: 5px;
+    }
+    
+    p {
+      margin: 0;
+      margin-bottom: 8px;
+    }
 
-@media (min-width: 750px) {
-  #header {
-    font-size: 56px;
+    img {
+        border-radius: 4px;
+        border: 1px solid #524b44;
+    }
   }
-  
-  #description {
-    max-width: 725px;
-    font-size: 16px;
-    margin: 0 auto;
-    padding: 0 20px;
-    border-left: 3px solid #f0978b;
-  }
-  
-  .post {
-    font-size: 20px;
-    width: 725px;
-    margin: 0 auto;
-    padding: 0 20px;
-    border-left: 3px solid #f9d28b;
-  }
-  
-  .books {
-    font-size: 16px;
-  }
-}
 
 @import "syntax-highlighting";

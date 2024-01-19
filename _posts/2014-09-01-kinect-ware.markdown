@@ -2,6 +2,7 @@
   layout: post
   title: "KinectWare"
   categories: projects
+  tags: games
 ---
 
 KinectWare was a WarioWare inspired project I created as part of the Virtual Reality course at Lund University. I developed remakes of the classical games Pong, Arkanoid and Marble Blast which you control with your body in different ways using a Microsoft Kinect.

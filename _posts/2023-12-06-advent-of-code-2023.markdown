@@ -2,6 +2,7 @@
 layout: post
 title: "Advent of Code 2023"
 categories: projects
+tags: advent-of-code
 ---
 
 This year I had planned on using [OCaml](https://ocaml.org). It looked really nice when reading the docs and I used it for some old problems, but it was just a bit too tedious to do certain things (just printing a list of strings nested in another list required some work - unless I added a third-party "deriving" tool). That and the workflow of building / running / debugging was just too much for me this year.

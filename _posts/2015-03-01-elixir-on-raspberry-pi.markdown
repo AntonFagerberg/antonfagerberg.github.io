@@ -3,6 +3,7 @@
   title: "Install Elixir on a Raspberry Pi"
   categories: blog
   alias: /texts/elixir-on-raspberry-pi/
+  tags: misc
 ---
 
 This is a tutorial of how to install Elixir (from source) on a Raspberry Pi using the distribution Raspbian.

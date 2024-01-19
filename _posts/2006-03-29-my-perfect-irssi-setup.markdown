@@ -3,6 +3,7 @@
   title: "My perfect Irssi setup"
   alias: [/archive/my-perfect-irssi-setup, /texts/my-perfect-irssi-setup/]
   categories: blog
+  tags: misc
 ---
 
 ## Overview

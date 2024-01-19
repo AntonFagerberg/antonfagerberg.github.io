@@ -2,6 +2,7 @@
   layout: post
   title: "Dlerss - RSS Downloader"
   categories: projects
+  tags: code
 ---
 
 This project is inspired by RSSDler ([code.google.com/p/rssdler](https://code.google.com/p/rssdler/)), but this project does not have as many features.

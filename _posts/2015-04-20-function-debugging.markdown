@@ -3,7 +3,6 @@ layout: post
 title:  "Function debugging"
 date:   2015-04-20 09:09:09
 categories: blog
-tags: ocaml, haskell, println, debugging
 ---
 
 I was going through the [OCaml Code Examples](http://ocaml.org/learn/taste.html) the other day after listening to [Eric B. Merritt on the podcast Functional Geekery](http://www.functionalgeekery.com/episode-20-eric-b-merritt/). One thing that really stuck with me was the last paragraph called "Elementary debugging".

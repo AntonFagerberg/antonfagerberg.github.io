@@ -2,6 +2,7 @@
   layout: post
   title: "Generic Skip List (map) in Java"
   categories: projects
+  tags: code
 ---
 
 The skip list is a interesting probabilistic data structure which can be used as an alternative to trees. Below is a simple implementation in Java using generics to store key-value pairs and therefore works as a map.
@@ -93,6 +94,7 @@ public class SkipList<K extends Comparable<K>,V> {
     }
 }
 ```
+...
 
 ```java
 import java.util.NoSuchElementException;

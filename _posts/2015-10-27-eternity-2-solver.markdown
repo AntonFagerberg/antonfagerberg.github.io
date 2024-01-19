@@ -2,6 +2,7 @@
 layout: post
 title:  "Eternity II Solver"
 categories: projects
+tags: code
 ---
 
 This is my second go at writing backtracking solver for Eternity II (my first, in poorly written Java, project can be found [here](https://github.com/AntonFagerberg/Eternity-II-Puzzle-Solver)). This one is written in Scala and should be much more optimized. The iteration approach is also different in this project.

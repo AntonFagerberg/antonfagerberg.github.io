@@ -3,6 +3,7 @@
   title: "Eternity II Puzzle Solver"
   categories: projects
   alias: experiments/eternity-ii-puzzle-solver/
+  tags: code
 ---
 
 [Click to read about my new better solver!](/projects/eternity-2-solver/)

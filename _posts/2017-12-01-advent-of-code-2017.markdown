@@ -2,6 +2,7 @@
 layout: post
 title: "Advent of Code 2017 in Scala"
 categories: projects
+tags: advent-of-code
 ---
 
 Yet another year with [Advent of Code](http://adventofcode.com)! I just got a new born baby so time will be sparse this year so we'll see how much I'll lag behind.

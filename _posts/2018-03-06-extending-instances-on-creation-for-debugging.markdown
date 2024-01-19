@@ -2,6 +2,7 @@
 layout: post
 title: "Extending instances on creation for debugging"
 categories: blog
+tags: misc
 ---
 
 A neat trick you can do in Scala is extending an object (instance of an existing class) on the fly when you instantiate it. This comes in very handy when debugging code you do not own yourself.

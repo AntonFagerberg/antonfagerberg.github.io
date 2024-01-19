@@ -2,13 +2,14 @@
   layout: post
   title: "Distributed collections in the standard library"
   categories: blog
+  tags: misc
 ---
 
-When working with sets of data, we usually work with strict (eager) collections. Sometimes we wish to work with lazy collections such as when we're dealing with infinite streams. If our data set is getting big enough, we may wish to use parallel collections in order to utilise our multi-core CPU to the fullest - but when we move towards huge amounts of data we must start thinking about distributed collections.
+When working with sets of data, we usually work with strict (eager) collections. Sometimes we wish to work with lazy collections such as when we're dealing with infinite streams. If our data set is getting big enough, we may wish to use parallel collections in order to utilize our multi-core CPU to the fullest - but when we move towards huge amounts of data we must start thinking about distributed collections.
 
-There are many frameworks that specialise in dealing with this problem but as our languages have been adding support for lazy and parallel collections, could the next step be distributed collections built into the language's standard library?
+There are many frameworks that specialize in dealing with this problem but as our languages have been adding support for lazy and parallel collections, could the next step be distributed collections built into the language's standard library?
 
-In this blog post I look at two of my favourite programming languages, Scala and Elixir, and how they can start, and in some regards already has begun, evolving towards distributed collections.
+In this blog post I look at two of my favorite programming languages, Scala and Elixir, and how they can start, and in some regards already has begun, evolving towards distributed collections.
 
 ### Distributed collections
 When I talk about distributed collections in this post, I'm referring to two things:
@@ -32,9 +33,9 @@ xs.take(10).toString
 
 Spark RDDs are, and must be, lazy while (most) Scala collections are strict. In the most common Scala programs, you don't want lazy evaluation of collections. You want the `map` on line 1 to be evaluated once (strict) and not twice (lazy) - you can think of strict vs lazy in this example as whether the value of `xs` should be cached or not. 
 
-But, for when you do want the lazy behaviour, Scala already has [views](http://docs.scala-lang.org/overviews/collections/views.html) but what Odersky mentions in his talk is a new alignment of views to make them behave more like the RDDs in Spark - perhaps even adding [pair-wise operations](http://spark.apache.org/docs/latest/programming-guide.html#working-with-key-value-pairs). When Odersky talks about views, he says that they enable the Scala code to produce a "recipe" rather than eagerly evaluating the collection operations. This "recipe" is similar to the RDD operations Spark uses to schedule how a cluster of networked machines should do computations on the distributed collections.
+But, for when you do want the lazy behavior, Scala already has [views](http://docs.scala-lang.org/overviews/collections/views.html) but what Odersky mentions in his talk is a new alignment of views to make them behave more like the RDDs in Spark - perhaps even adding [pair-wise operations](http://spark.apache.org/docs/latest/programming-guide.html#working-with-key-value-pairs). When Odersky talks about views, he says that they enable the Scala code to produce a "recipe" rather than eagerly evaluating the collection operations. This "recipe" is similar to the RDD operations Spark uses to schedule how a cluster of networked machines should do computations on the distributed collections.
 
-Just like Scala has support for [parallel collections](http://docs.scala-lang.org/overviews/parallel-collections/overview.html) which can be used whenever the user wants to utilise several CPU cores, having a distributed collection for when the user wants to utilise a cluster of computers would be a really interesting language feature.
+Just like Scala has support for [parallel collections](http://docs.scala-lang.org/overviews/parallel-collections/overview.html) which can be used whenever the user wants to utilize several CPU cores, having a distributed collection for when the user wants to utilize a cluster of computers would be a really interesting language feature.
 
 Distributed collections do however require a way to actually schedule and execute the the computations on a cluster which is far from a trivial problem. On the other hand, Scala already have an official distributed actor system thanks to [Akka](http://akka.io) so we can at least play around with the though of this being possible.
 

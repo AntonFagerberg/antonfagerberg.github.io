@@ -2,6 +2,7 @@
 layout: post
 title: "Bencode in Elixir"
 categories: projects
+tags: code
 ---
 
 This is my implementation of [Bencode](http://en.wikipedia.org/wiki/Bencode) in Elixir. I felt that Elixir was a perfect fit for this task because of its use of pattern matching and bit strings. The implementation was a joy to write!
@@ -43,7 +44,7 @@ Bencode.decode!("d5:hello5:worlde")
 %{"hello" => "world"}
 ```
 
-You can also add it as a Mix dependency:
+You can also add it as a `mix` dependency:
 
 ```elixir
 defp deps do

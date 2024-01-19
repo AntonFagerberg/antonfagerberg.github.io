@@ -2,6 +2,7 @@
 layout: post
 title: "Advent of Code 2019 in Kotlin"
 categories: projects
+tags: advent-of-code
 ---
 
 One more year with [Advent of Code](http://adventofcode.com), I've been doing it

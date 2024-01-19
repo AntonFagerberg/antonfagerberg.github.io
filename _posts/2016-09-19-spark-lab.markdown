@@ -2,6 +2,7 @@
 layout: post
 title:  "Spark lab / workshop"
 categories: projects
+tags: code
 ---
 
 I did a introduction to Spark lab for the employees of [Jayway](https://www.jayway.com). It contains method stubs which should be implemented as a way to learn the different parts of Spark. The goal was to minimize setup hassle and thus there's (almost) no installation / configuration needed and everything run locally.

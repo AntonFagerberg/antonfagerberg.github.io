@@ -2,6 +2,7 @@
 layout: post
 title: "Advent of Code 2018 in Java"
 categories: projects
+tags: advent-of-code
 ---
 
 Yet another year with [Advent of Code](http://adventofcode.com), still a parent of a small child so practically no free time. I used this to fresh up my Java knowledge and compare the functional parts to what I was used to in Scala.

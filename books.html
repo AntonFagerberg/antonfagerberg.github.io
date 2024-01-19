@@ -6,11 +6,12 @@ permalink: /books
 skip_date: true
 ---
 
-I started this reading list in 2016 as a way to keep track of the books I read and what I like (or dislike) about them.
+<p>I started this reading list in 2016 as a way to keep track of the books I read and what I like (or dislike) about them.
+It has also been a motivation for me to keep reading and it has worked <i>really</i> well - I more or less went from never reading to reading a lot.</p>
 
 <div class="books">
   <ul>
-    {% assign sorted_books = site.book_posts | sort: 'date' | reverse %}
+    {% assign sorted_books = site.books | sort: 'date' | reverse %}
     {% for book in sorted_books %}
       {% capture mod %}{{ forloop.index0 | modulo:3 }}{% endcapture %}
       {% if mod == "0" and forloop.index0 != 0 %}

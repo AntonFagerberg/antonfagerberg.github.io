@@ -2,6 +2,7 @@
 layout: post
 title: "Emoodji"
 categories: projects
+tags: code
 ---
 
 Emoodji was a one day project I created to try out the latest [Phoenix](http://phoenixframework.org) framework in [Elixir](https://elixir-lang.org).

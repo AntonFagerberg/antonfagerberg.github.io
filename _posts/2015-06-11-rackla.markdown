@@ -2,6 +2,7 @@
 layout: post
 title: "Rackla: API Gateway Framework"
 categories: projects
+tags: code
 ---
 
 I investigated "API-gateways" for of my [master's thesis](https://lup.lub.lu.se/student-papers/search/publication/5469608). The hypothesis was that it is common that the APIs we are working with are not optimized for the clients - so we often have to do multiple requests from the client, take the responses and combine them in in some way to get the data that the client actually want.

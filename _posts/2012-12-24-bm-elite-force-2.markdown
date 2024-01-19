@@ -2,6 +2,7 @@
   layout: post
   title: "BM Elite Force 2"
   categories: projects
+  tags: games
 ---
 
 This is the second game in the BM Elite Force series (not much related to each other). BM Elite Force 2 has been my autumn/winter project of 2012. I started this "tradition" in 2011 where I create a new game in a new (for me) language every year and release it around christmas dedicated to my good old friends when we meet up. This year the game was written in Scala using the Java library Slick 2D (built on LWJGL).
@@ -16,7 +17,7 @@ This is the second game in the BM Elite Force series (not much related to each o
 Pre-compiled versions for OS X, Windows and Linux is found in the project root (in the folders named OS X, Windows and Linux). If you just want to download and play the game, use the link above (Google Code).
 
 ## Controls
-This game is meant to be played with and __Xbox 360 controller__. You really should use one to enjoy this game (analog precision makes all the difference) and it has the correct color coding. There is however keyboard bindings avaliable if you just want to try it out.
+This game is meant to be played with a __Xbox 360 controller__. You really should use one to enjoy this game (analog precision makes all the difference) and it has the correct color coding. There is however keyboard bindings avaliable if you just want to try it out.
 
 ### Xbox 360 controller
  * Steering: Left stick

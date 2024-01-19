@@ -2,6 +2,7 @@
 layout: post
 title: "Humble Download"
 categories: projects
+tags: code
 ---
 
 HumbleDownload is used for downloading / making a complete back-up of your library from [Humble Bundle](http://humblebundle.com/) to your computer. It will download everything: games, books, music etc and try to group them together in folders based on the names (which isn't perfect unfortunately).
