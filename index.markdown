@@ -1,8 +1,7 @@
 ---
 layout: post
+title: Hello & welcome!
 ---
-
-# Hello & welcome!
 
 You've reached the personal website for me - Anton Fagerberg! Here I collect some of my projects, the books I read and other things I find interesting.
 It's my contribution to the "the small web".
