@@ -40,6 +40,7 @@ It's kinda similar to what it was before, but I made some changes - I hope for t
 - Promoted the RSS-feed by putting a link in the top menu
 - More fine-tuned mobile experience (e.g. font size scaling)
 - Added a [/links](/links) page to share things I like from other places
+- Defaults to https
 - And the page you're now reading is new!
 
 A lot of this has to do with me really starting to enjoy "the small web".
