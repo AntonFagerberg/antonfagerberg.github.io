@@ -3,7 +3,7 @@ email: anton@antonfagerberg.com
 description: >- # this means to ignore newlines until "baseurl:"
   The personal website of Anton Fagerberg, it's about programming, reading books and other things I find interesting.
 baseurl: ""
-url: "http://www.antonfagerberg.com"
+url: "https://www.antonfagerberg.com"
 permalink: /:categories/:title/
 
 
