@@ -7,24 +7,19 @@ tags: code
 
 At the time of writing this, I've been doing [Advent of Code](https://adventofcode.com) for 9 years. 
 Or put another way, I've been doing Advent of Code every year since it started in 2015.
-
-Next year would be my 10 year anniversary, and though I *love* symmetry and even numbers, this year was probably the last of Advent of Code. I've been saying that for a few years now but I think this time it's for real - and I will try to explain why. In some ways I'm writing this mainly for myself, to make a statement and ensure that I actually stop...
-
-But first, to recap my Advent of Code history with something like a retrospective.
-
-## The story of my 287 stars
+Although, this may have been my last year. (I've been saying that for many years but I'll try to keep away.)
 
 ### 2015 - first year in Elixir
 I was working at a consultancy firm and heard about this new thing called Advent of Code.
 Having recently worked a lot with Elixir I decided that I was going to try to do it in that language.
 
 I don't remember much but I do remember that I finished all problems (in the end, probably not in December). 
-I also remember talking to an older colleague that it had ruined his Christmas since he couldn't "let go" of the problems when he should've spent time with his family - more on that later.
+I also remember talking to an older colleague that it had ruined his Christmas since he couldn't "let go" of the problems when he should've spent time with his family (I was able to relate to this later in life).
 
 It was other times back then, I ended up on ranking 410 with a solution that took over an hour - and even ranked 803 with a solution that took over 24 hours. That just doesn't happen anymore.
 
 ### 2016 - second year in Haskell
-This year I decided to challenge myself by establishing a new tradition: using a new programming language every year - I don't know why, I probably just wanted to brag  (eye-roll), or perhaps I fetishized difficult things.
+This year I decided to challenge myself by establishing a new tradition: using a new programming language every year - I don't know why, probably just to challenge myself.
 
 Being completely sold on functional programming, I decided to use Haskell.
 I had done some Haskell at University but it didn't click for me then.
@@ -87,17 +82,12 @@ I didn't try to compete globally as that is way out of my league, and wasn't try
 
 I learned a lot of new things about algorithms this year and a few new details about Java (like the iterator of a `PriorityQueue` will not return items in the sorted order... ugh...). 
 
-But... towards the end, just before Christmas eve I *really* hit the metaphorical wall hard. 
-Everything just felt like a waste of time and like I'd spoiled Christmas.
-And I was really tired in a weird way.
+But... towards the end, just before Christmas eve I got super tired of it. Mentally and physically.
 In hindsight, I wish I would've just ignored Advent of Code and spent more time in December watching holiday movies, listening to music, drinking [Glögg](https://en.wikipedia.org/wiki/Glögg) and enjoying life.
 
-I will definitely never compete in Advent of Code (or any programming competition) again.
-It's not for me, even if it's really fun.
+## Time to give up?
 
-## Why it's time to give up
-
-So here's the thing. Having a healthy relationship with Advent of Code is really hard (for me).
+So here's the thing. Having a healthy relationship with Advent of Code is really hard - for me (and many others as well).
 I think one of the main reasons is that you never know if you're *really* close to having the solution or if you're hours away.
 This makes it easy to stay up way to late and sacrifice sleep, time with family and so on.
 I also have a very strong tendency to be a completionist.
@@ -107,15 +97,9 @@ The problems in Advent of Code are very fun to do though.
 I think especially when working as a programmer, with unclear specifications, messy human interactions and weird tasks - getting clear solvable problems with solutions that either works or not is very a pleasant feeling. 
 
 But after a few years, it's also a lot of the same. It's graph problems, memoization, probably a Dijkstra's Algorithm and so on (and I guess that's how people compete globally, ready made solutions and a lot of automated plug 'n' play).
-Don't get me wrong, the problems are great and there's always new things to shake things up every year, but for me, I think I've had enough.
-
-In some ways, it can also be a bit demoralizing seeing thousands of other people solve problems in a few minutes that you spend hours on.
-Competition is not for everyone. It's not for me, not on private leaderboards (or globally for that matter).
-It's also a lot of stress, anxiety and a black hole that eats time, which in December with all its holiday preparations is enough on its own. There couldn't be a much worse month to have a programming competition in!
-
+Don't get me wrong, the problems are great and there's always new things to shake things up every year, but for me, I think I've had enough. It's also a lot of stress, anxiety and a black hole that eats time, which in December with all its holiday preparations is enough on its own. (There couldn't be a much worse month to have a programming competition in!)
 
 If I at some point want to learn a new language, I may do so using some Advent of Code problems - but right now I've had enough.
-It's time to spend my time doing something else, or just do nothing and enjoy life.
 
 ### Links to the pages I wrote every year
 {% for post in site.tags.advent-of-code %}
