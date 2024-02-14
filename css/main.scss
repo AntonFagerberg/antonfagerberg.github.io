@@ -123,6 +123,25 @@ a:hover {
         border-radius: 4px;
         border: 1px solid #524b44;
     }
-  }
+}
+
+@media screen and (max-width: 600px) {
+    .content {
+        font-size: 18px;
+    }
+
+    .books {
+        font-size: 14px;
+    }
+
+    .header {
+        font-size: 14px;
+    }
+
+
+    .footer {
+        font-size: 12px;
+    }
+}
 
 @import "syntax-highlighting";

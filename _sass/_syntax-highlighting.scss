@@ -323,3 +323,9 @@
 
   /* Literal.Number.Integer.Long */
 }
+
+@media screen and (max-width: 600px) {
+  .highlight {
+      font-size: 12px;
+  }
+}
