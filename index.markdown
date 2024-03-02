@@ -9,8 +9,10 @@ You can [learn more about me](/about), or [contact me by e-mail](mailto:anton@an
 Otherwise, check out everything below!
 
 ## Collections
- - [Reading list (books)](/books)
- - [Links (to things I like)](/links)
+<ul>
+    <li><p><a href="/books">Reading list (books)</a></p></li>
+    <li><p><a href="/links">Links (to things I like)</a></p></li>
+</ul>
 
 ## Code
 {% for post in site.tags.code %}
