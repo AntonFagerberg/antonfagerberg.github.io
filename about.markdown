@@ -41,7 +41,9 @@ It's kinda similar to what it was before, but I made some changes - I hope for t
 - And the page you're now reading is new!
 
 A lot of this has to do with me really starting to enjoy "the small web".
-Personal websites, more like it was back in the early 2000s before everything got swallowed up by Facebook and "walled gardens".
+Personal websites, more like it was back in the early 2000s (and even earlier). 
+Before everything got swallowed up by Facebook, "walled gardens" and everything got capitalized. 
+Before everything turned into a garbage dump by all the AI generated nonsense.
 Let's get back to that!
 
 Social media is not for me, so this is the place where I can express my thoughts and show off things I've been doing.
