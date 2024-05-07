@@ -48,3 +48,11 @@ Let's get back to that!
 
 Social media is not for me, so this is the place where I can express my thoughts and show off things I've been doing.
 My plan however for the rest of 2024 is to try to do less, just live life without having to be productive outside of work.
+
+## So who reads this anyway?
+
+Probably no one (as it turns out). Normally I host this site using Github pages and I don't run any analytics, but recently I did some self-hosting at home to get some insights into if anyone is visiting my site.
+
+For two weeks I self-hosted and I got 1,900 page views. 90% of those were hacking attempts, yikes. 8% were bots. In the end, I got 29 (probably) real and unique visitors. No one read this page, so if you're reading this, good on you for doing something different! Perhaps some people subscribe via RSS, but I doubt it.
+
+What did people read beside looking at the front page? Mainly a two decade old guide about [setting up Irssi](/blog/my-perfect-irssi-setup/) that's hidden but still accessible.
