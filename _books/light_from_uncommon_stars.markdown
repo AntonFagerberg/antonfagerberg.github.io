@@ -1,5 +1,5 @@
 ---
-title: "Light from Uncommon Stars"
+title: "Light from uncommon stars"
 date: "August 31, 2024"
 img: "/images/books/light_from_uncommon_stars.jpg"
 ---
