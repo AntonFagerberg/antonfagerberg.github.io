@@ -1,17 +1,11 @@
 ---
 layout: post
-title: Hello & welcome!
+title: 
 ---
-
-You've reached the personal website for me - Anton Fagerberg! Here I collect some of my projects, the books I read and other things I find interesting.
-It's my contribution to the "the small web".
-You can [learn more about me](/about), or [contact me by e-mail](mailto:anton@antonfagerberg.com).
-Otherwise, check out everything below!
 
 ## Collections
 <ul>
     <li><p><a href="/books">Reading list (books)</a></p></li>
-    <li><p><a href="/links">Links (to things I like)</a></p></li>
 </ul>
 
 ## Code
