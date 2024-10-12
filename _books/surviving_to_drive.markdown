@@ -1,5 +1,5 @@
 ---
-title: "The Kaiju Preservation Society"
+title: "Drive to survive"
 date: "March 22, 2024"
 img: "/images/books/surviving_to_drive.jpg"
 ---
