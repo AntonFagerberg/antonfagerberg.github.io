@@ -6,8 +6,10 @@ permalink: /books
 skip_date: true
 ---
 
-<p>I started this reading list in 2016 as a way to keep track of the books I read and what I like (or dislike) about them.
+<p>This reading list started in 2016 as a way to keep track of the books I read and what I like (or dislike) about them.
 It has also been a motivation for me to keep reading and it has worked <i>really</i> well - I more or less went from never reading to reading a lot.</p>
+
+<p>I started collecting quotes towards the end of 2024 that I found beautiful, interesting or somehow noteworthy. For some book you'll see a ¶-sign next to the title that you can click to view those quotes. I try to cover up all potential spoilers so you have to click and expand a section to read those particular quotes.</p>
 
 <div class="books">
   <ul>
@@ -22,6 +24,9 @@ It has also been a motivation for me to keep reading and it has worked <i>really
         <img src="{{ book.img }}" />
         <p>
           <strong>{{ book.title }}</strong>
+          {% if book.quote %}
+          <a href="{{ book.url }}">¶</a>
+          {% endif %}
         </p>
         <p>
           <i>{{ book.date | date: "%B, %Y" }}</i>

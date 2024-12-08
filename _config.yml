@@ -11,4 +11,5 @@ plugins:
   - jekyll-feed
 
 collections:
-  - books
+  books:
+    output: true
