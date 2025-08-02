@@ -35,3 +35,4 @@ gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 # Gems no longer part of standard library
 gem "csv", "~> 3.3"
 gem "base64", "~> 0.3"
+gem "logger", "~> 1.7"
