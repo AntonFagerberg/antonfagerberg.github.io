@@ -8,6 +8,11 @@ title: ""
     <li><p><a href="/books">Reading list (books)</a></p></li>
 </ul>
 
+## Writing
+{% for post in site.tags.writing %}
+- [{{ post.title }} ({{ post.date | date_to_string }})]({{ post.url }})
+{% endfor %}
+
 ## Code
 {% for post in site.tags.code %}
 - [{{ post.title }} ({{ post.date | date_to_string }})]({{ post.url }})
