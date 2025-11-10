@@ -102,3 +102,6 @@ If you're missing e-mails on iCloud, Apple support is actually good and can help
 CLI-tools are great, a common pattern seems to be that they work much better compared to trillion dollar companies' software. I haven't explored the different imap backup tools much but [offlineimap](https://www.offlineimap.org) seems to work fine and I'll add it to my backup server with some rsync for redundancy. Thunderbird seems fine as well if you do a manual copy and not an export.
 
 Take backups regularly. Verify that they actually work.
+
+### Update: 2025-10-10
+I don't know how the duplicates are created but it seems to be an increasing problem. Since the original writing of this post (less than a month ago), I've received about 100 new e-mails but I've also gotten 5,500 duplicates of old existing emails. No loss of e-mails though so I guess that's something...
