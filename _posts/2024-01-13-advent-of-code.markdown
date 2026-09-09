@@ -5,9 +5,7 @@ categories: projects
 tags: code
 ---
 
-At the time of writing this, I've been doing [Advent of Code](https://adventofcode.com) for 9 years. 
-Or put another way, I've been doing Advent of Code every year since it started in 2015.
-Although, this may have been my last year. (I've been saying that for many years but I'll try to keep away.)
+This is a short summary of my journey doing [Advent of Code](https://adventofcode.com) for a decade.
 
 ### 2015 - first year in Elixir
 I was working at a consultancy firm and heard about this new thing called Advent of Code.
@@ -81,6 +79,12 @@ In the end I collected 47 stars. I even got in the top 1000 for one problem (hey
 I didn't try to compete globally as that is way out of my league, and wasn't trying to be particularly fast - just a bit faster than everyone in my company.
 
 I learned a lot of new things about algorithms this year and a few new details about Java (like the iterator of a `PriorityQueue` will not return items in the sorted order... ugh...). 
+
+### 2024
+The 10 year anniversary. I actually skipped this year. I was tired of it and wanted to spend my christmas doing other things. My plan was to stop completely but that didn't pan out as you can see in the next year.
+
+### 2025
+I got excited again due to the announcement that it was only gonna be half as many problems to solve. I really appreciated this, it felt like a more reasonable amount of problems and, in addition, you wouldn't ruin the christmas eve / day or the days near to it with all its stress. I solved all the problems except the last one which was insanely hard. Didn't write a dedicated page about it but code is on [GitHub](https://github.com/AntonFagerberg/advent-of-code-2025).
 
 ### Links to the pages I wrote every year
 {% for post in site.tags.advent-of-code %}
