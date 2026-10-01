@@ -1,0 +1,12 @@
+---
+layout: post
+title: "Tube - YouTube player"
+categories: projects
+tags: code
+---
+
+Another step on my "bespoke software" journey. There's a lot of content that I enjoy on YouTube but I find it very difficult to have a healthy relationship with the normal YouTube app and website. It works for a while but eventually I drift away in weird directions because of the algorithm and start watching way too much YouTube shorts out of convenience.
+
+Having a dedicated desktop app that only do the very basics of what I want is golden for me. This little app lets me subscribe to channels (via the official RSS feed) and stream it (using [mpv](https://mpv.io)) or save it for later (with [yt-dlp](https://github.com/yt-dlp/yt-dlp)).
+
+![Tube main window](/images/projects/tube.png)
