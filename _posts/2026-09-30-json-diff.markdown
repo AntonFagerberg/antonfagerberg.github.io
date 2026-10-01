@@ -15,11 +15,11 @@ JsonDiff (clever name pending) is a MacOS app I created just for myself to compa
 - Synchronized scrolling between panes
 - Drag 'n' drop file support
 - Align blank lines or multi line diffs
-- Highlights row and individual characters (see 'ss' vs 'zz')
-- Support for VSCode themes
-- Font selection setting
+- Highlights row and individual character diffs
+- Support for importing VSCode themes
+- Font selection
 - `Cmd+Shift+1/2` clears pane 1/2 and pastes the current clipboard
 - `Cmd+1/2` switches to pane 1/2
-- Runs on Apple Silicon and Intel
+- Support for Apple Silicon and Intel
 
 ![JsonDiff icon at dock](/images/projects/jsondiff-dock.png)
