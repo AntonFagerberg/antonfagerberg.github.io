@@ -2,7 +2,7 @@
 layout: post
 title: "Duplicate image removal"
 categories: projects
-tags: code
+tags: tiny
 ---
 
 This application will search a folder and its sub-folders for duplicate files and move them to a specified location.

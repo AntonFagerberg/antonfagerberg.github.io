@@ -2,7 +2,7 @@
 layout: post
 title: "Snake games"
 categories: projects
-tags: games
+tags: tiny
 ---
 
 During a week I experimented with Java and LibGDX by making three Snake-game experiments.

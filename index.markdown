@@ -13,7 +13,7 @@ title: ""
 - [{{ post.title }} ({{ post.date | date_to_string }})]({{ post.url }})
 {% endfor %}
 
-## Code
+## Projects
 {% for post in site.tags.code %}
 - [{{ post.title }} ({{ post.date | date_to_string }})]({{ post.url }})
 {% endfor %}
@@ -31,3 +31,8 @@ title: ""
 ## Papers
 - [Optimising clients with API gateways (08 Jun 2015)](https://lup.lub.lu.se/student-papers/search/publication/5469608)
 - [Temporal Information Extraction (13 Jan 2014)](/files/tempex_anton_fagerberg.pdf)
+
+## POCs
+{% for post in site.tags.tiny %}
+- [{{ post.title }} ({{ post.date | date_to_string }})]({{ post.url }})
+{% endfor %}
